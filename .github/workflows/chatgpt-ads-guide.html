@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ChatGPT ads in India: the setting to turn off (Settings › Ad controls) and the step-by-step guide to run your own ad on ChatGPT from ₹725 a day.">
+<title>ChatGPT Ads Guide</title>
+<style>
+  img { max-width: 100%; }
+  @media print {
+    body { font-size: 12.5px; }
+    .wrap { max-width: 100%; padding: 0; }
+    pre { white-space: pre-wrap; word-break: break-word; }
+    section { break-inside: avoid; }
+    a { color: inherit; text-decoration: underline; }
+  }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #f6f7f5; --ink: #131a20; --muted: #5b6670; --line: #d9dee2; --panel: #ffffff;
+    --code-bg: #0f151b; --code-ink: #e6edf3; --accent: #1f5fbf; --accent-ink: #ffffff;
+    --amber: #d99400; --amber-soft: rgba(217, 148, 0, 0.14); --good: #1f8a5b; --bad: #c0392b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0f1418; --ink: #e9eef2; --muted: #97a3ad; --line: #27323b; --panel: #161d24;
+      --code-bg: #0a0e12; --code-ink: #e6edf3; --accent: #6ea3ff; --accent-ink: #0b1220;
+      --amber: #f0b429; --amber-soft: rgba(240, 180, 41, 0.16); --good: #4ccb8f; --bad: #ff7b6b;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0f1418; --ink: #e9eef2; --muted: #97a3ad; --line: #27323b; --panel: #161d24;
+    --code-bg: #0a0e12; --code-ink: #e6edf3; --accent: #6ea3ff; --accent-ink: #0b1220;
+    --amber: #f0b429; --amber-soft: rgba(240, 180, 41, 0.16); --good: #4ccb8f; --bad: #ff7b6b;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; font-size: 17px; line-height: 1.6; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 22px 80px; }
+  h1, h2, h3 { font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(38px, 7vw, 56px); font-weight: 800; line-height: 1.02; letter-spacing: -0.02em; }
+  h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; margin-top: 8px; }
+  h3 { font-size: 18px; font-weight: 700; }
+  p { margin: 0; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .lede { font-size: 19px; color: var(--muted); max-width: 60ch; }
+  header { display: grid; gap: 14px; padding-bottom: 28px; border-bottom: 2px solid var(--ink); }
+  .port { display: inline-grid; grid-auto-flow: column; align-items: center; gap: 10px; padding: 8px 14px; border: 1.5px solid var(--ink); border-radius: 999px; font-family: "IBM Plex Mono", monospace; font-size: 13px; width: max-content; }
+  .port i { display: block; width: 10px; height: 10px; border-radius: 50%; background: var(--amber); }
+  .part { margin-top: 40px; padding: 14px 18px; border-radius: 12px; background: var(--ink); color: var(--paper); display: grid; gap: 2px; }
+  .part .eyebrow { color: var(--paper); opacity: 0.7; }
+  .part h2 { margin: 0; color: inherit; }
+  section { display: grid; gap: 16px; padding: 30px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+  th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  td:first-child { color: var(--muted); width: 26%; }
+  .tablewrap { overflow-x: auto; }
+  .yes { color: var(--bad); font-weight: 600; }
+  .no { color: var(--good); font-weight: 600; }
+  .toggles { display: grid; gap: 10px; }
+  .toggle { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+  .toggle b { font-size: 16px; }
+  .toggle span { font-size: 13.5px; color: var(--muted); }
+  .toggle .sw { width: 52px; height: 30px; border-radius: 999px; background: #c9ced3; position: relative; }
+  .toggle .sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+  .toggle .off { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.1em; color: var(--good); font-weight: 600; }
+  .toggle.del b { color: var(--bad); }
+  .path { font-family: "IBM Plex Mono", monospace; font-size: 14px; background: var(--amber-soft); padding: 6px 10px; border-radius: 8px; display: inline-block; }
+  .callout { padding: 14px 18px; border-left: 4px solid var(--amber); background: var(--amber-soft); border-radius: 0 10px 10px 0; display: grid; gap: 6px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .stats > div { padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); display: grid; gap: 2px; }
+  .stats b { font-family: "Bricolage Grotesque", sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.01em; }
+  .stats span { font-size: 13.5px; color: var(--muted); }
+  ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; gap: 18px; }
+  ol.steps > li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; counter-increment: step; }
+  ol.steps > li::before { content: counter(step); font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 22px; color: var(--accent); line-height: 1.2; }
+  ol.steps > li > div { display: grid; gap: 8px; }
+  ol.steps ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 15.5px; }
+  pre { margin: 0; background: var(--code-bg); color: var(--code-ink); padding: 12px 14px; border-radius: 10px; overflow-x: auto; font-family: "IBM Plex Mono", Menlo, Consolas, monospace; font-size: 13.5px; line-height: 1.55; white-space: pre-wrap; }
+  code { font-family: "IBM Plex Mono", Menlo, Consolas, monospace; font-size: 0.92em; }
+  p code, li code, td code { background: var(--amber-soft); padding: 1px 6px; border-radius: 5px; }
+  .adcard { border: 1px solid var(--line); border-radius: 14px; background: var(--panel); padding: 14px 16px; display: grid; gap: 8px; max-width: 420px; }
+  .adcard .row { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 10px; font-size: 15px; }
+  .adcard .fav { width: 28px; height: 28px; border-radius: 8px; background: var(--accent); }
+  .adcard .lbl { font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; }
+  .adcard .t { font-weight: 600; }
+  .adcard .d { font-size: 14.5px; color: var(--muted); }
+  ul.check { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  ul.check li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  ul.check li::before { content: "✓"; color: var(--good); font-weight: 700; }
+  ul.cross { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  ul.cross li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  ul.cross li::before { content: "✕"; color: var(--bad); font-weight: 700; }
+  .links { display: grid; gap: 6px; font-size: 15.5px; }
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  footer { padding-top: 26px; color: var(--muted); font-size: 14px; display: grid; gap: 4px; }
+  @media (max-width: 560px) { .stats { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="port"><i></i> comment ADS · both things</span>
+    <h1>ChatGPT Ads: the setting + the ₹725 guide</h1>
+    <p class="lede">Reel dekh ke aaye ho? Ye wahi dono cheezein hain. Pehle wo setting jo abhi off karni hai, phir ChatGPT pe apna ad chalane ka pura tareeka. No fluff.</p>
+  </header>
+
+  <div class="part"><p class="eyebrow">Part 1</p><h2>The setting (2 minutes)</h2></div>
+
+  <section>
+    <p class="eyebrow">Who sees ads</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Plan</th><th>Price (India)</th><th>Ads?</th></tr></thead>
+        <tbody>
+          <tr><td>Free</td><td>₹0</td><td class="yes">Yes</td></tr>
+          <tr><td>Go</td><td>₹399 / month</td><td class="yes">Yes <span style="color:var(--muted);font-weight:400">("this plan may include ads")</span></td></tr>
+          <tr><td>Plus</td><td>₹1,999 / month</td><td class="no">No</td></tr>
+          <tr><td>Pro</td><td>₹10,699 / month</td><td class="no">No</td></tr>
+          <tr><td>Business / Enterprise / Edu</td><td>—</td><td class="no">No</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Ads show up <strong>below the answer</strong>, in a separate box marked <strong>Sponsored</strong>. ChatGPT ka jawab alag, ad alag. The ad does not change the answer.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">The popup</p>
+    <div class="callout">
+      <b>"Personalize ads?"</b>
+      <p>Pehli baar ad milne se pehle ye popup aayega. Yes bola toh tumhari <strong>purani chats aur memory</strong> bhi ads ke liye use hongi. <strong>Na bolo.</strong> Baad mein bhi change kar sakte ho.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Turn it off</p>
+    <p><span class="path">ChatGPT → Settings → Ad controls</span><br><span style="font-size:14px;color:var(--muted)">phone pe: profile icon → Settings → Ad controls</span></p>
+    <div class="toggles">
+      <div class="toggle"><div><b>Personalize ads</b><br><span>Use your ads history, interests, and past chats to make ads more relevant.</span></div><div style="display:grid;justify-items:center;gap:4px"><div class="sw"></div><span class="off">OFF</span></div></div>
+      <div class="toggle"><div><b>Past chats and memory</b><br><span>Use past conversations to make the ads you see more relevant.</span></div><div style="display:grid;justify-items:center;gap:4px"><div class="sw"></div><span class="off">OFF</span></div></div>
+      <div class="toggle del"><div><b>Delete ads data</b><br><span>Clears your ads History and Interests. Your chats stay untouched.</span></div><span class="off">TAP</span></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">What changes after this</p>
+    <ul class="check">
+      <li>Ads phir bhi dikhenge, but sirf <strong>current topic + rough location + device</strong> pe. Tumhari history pe nahi.</li>
+      <li>Advertisers ko sirf <strong>totals</strong> milte hain (views, clicks). Tumhari chats kabhi share nahi hoti.</li>
+      <li>Har ad tumhari history ka proof nahi hai. IRCTC wali kahani yaad rakho, but setting apni samjho.</li>
+    </ul>
+    <p><strong>Want zero ads?</strong> Plus, ₹1,999 / month, ya koi bhi paid plan Go se upar. Settings → <em>Change plan to go ad-free</em>.</p>
+  </section>
+
+  <div class="part"><p class="eyebrow">Part 2</p><h2>Run your own ad on ChatGPT (₹725 / day)</h2></div>
+
+  <section>
+    <p class="eyebrow">The basics</p>
+    <div class="stats">
+      <div><b>₹725</b><span>minimum per day · ≈ ₹22,000 a month</span></div>
+      <div><b>10 crore</b><span>weekly ChatGPT users in India (Feb 2026)</span></div>
+      <div><b>Sept 4</b><span>self-serve Ads Manager open in India, 2026</span></div>
+    </div>
+    <p><strong>Where:</strong> <a href="https://ads.openai.com">ads.openai.com</a> (OpenAI Ads Manager). Ads reach Free and Go users only.</p>
+    <p><strong>Who should try:</strong> dukaan, coaching, Instagram page, D2C brand, clinic, salon, SaaS. Anyone with a landing page and a clear answer to "when should my ad show?"</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">What a ChatGPT ad is made of</p>
+    <div class="adcard">
+      <div class="row"><div class="fav"></div><span>Your business name</span><span class="lbl">Sponsored</span></div>
+      <div class="t">Title, up to 50 characters</div>
+      <div class="d">Description, up to 100 characters. One benefit + one proof.</div>
+    </div>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Part</th><th>Limit</th><th>Tip</th></tr></thead>
+        <tbody>
+          <tr><td>Advertiser name</td><td>your business</td><td>as people know you</td></tr>
+          <tr><td>Favicon / logo</td><td>square</td><td>clean, readable at 24 px</td></tr>
+          <tr><td>Title</td><td>50 characters</td><td>write it like the answer's next sentence</td></tr>
+          <tr><td>Description</td><td>100 characters</td><td>one benefit + one proof</td></tr>
+          <tr><td>Landing page URL</td><td>—</td><td>page that matches the question, not your homepage</td></tr>
+          <tr><td>Image</td><td>1 square, ≥ 256×256 px</td><td>product or result, no text-heavy banners</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Step by step</p>
+    <ol class="steps">
+      <li><div><h3>Account</h3><p>Sign in at ads.openai.com with your OpenAI account → create an ad account → business name, country <strong>India</strong>, billing (card). Ads Manager shows <em>Overview, Campaigns, Tools, Billing, Settings</em>.</p></div></li>
+      <li><div><h3>Create campaign <span style="font-weight:400;color:var(--muted)">(Create → Create campaign)</span></h3>
+        <ul>
+          <li><strong>Campaign name:</strong> <code>Coaching – Class 10 Maths – Sept</code></li>
+          <li><strong>Objective:</strong> Reach / Clicks / Conversions. <strong>Start with Clicks.</strong> Conversions needs a conversion event set up first.</li>
+          <li><strong>Locations:</strong> include India, or just your city. Exclude nothing to begin.</li>
+          <li><strong>Eligible platforms:</strong> leave default.</li>
+          <li><strong>Daily budget:</strong> ₹725 minimum. Start there.</li>
+        </ul></div></li>
+      <li><div><h3>Ad group</h3>
+        <ul>
+          <li><strong>Ad group name:</strong> one per intent, e.g. <code>Board exam prep</code></li>
+          <li><strong>Bid strategy:</strong> Maximize results (default). Manual max bid only after you know your CPC.</li>
+          <li><strong>Default ad destination URL:</strong> your landing page.</li>
+          <li><strong>Landing page query parameters</strong> (optional): <code>campaign_id={campaign_id}&amp;ad_id={ad_id}</code> so your analytics shows which ad brought the click.</li>
+          <li><strong>Context hints:</strong> the important box. Describe in plain words <em>when</em> your ad should appear.</li>
+        </ul>
+<pre>CBSE class 10 maths coaching in Patna, board exam preparation, weak in algebra
+handmade jute bags, eco-friendly gifting, corporate gifts under ₹500
+IELTS preparation online, band 7, speaking practice</pre></div></li>
+      <li><div><h3>Ad</h3>
+        <ul>
+          <li><strong>Ad destination URL:</strong> same landing page, or a deeper one.</li>
+          <li><strong>Title (≤ 50):</strong> <code>Class 10 Maths: 90+ in boards, Patna batch</code></li>
+          <li><strong>Description (≤ 100):</strong> <code>Small batches, daily practice, first week free. 300+ students crossed 90 last year.</code></li>
+          <li><strong>Ad image:</strong> one square PNG/JPG.</li>
+          <li>Check the <strong>Preview creative</strong> panel on the right: favicon + name + label on one row, title and description under it. Padhne mein ek second lage, that's the test.</li>
+        </ul></div></li>
+      <li><div><h3>Review → launch</h3><p>Campaign summary → confirm budget → launch. Ads go through review before serving.</p></div></li>
+      <li><div><h3>Measure</h3><p>Overview → Performance trend: <strong>Spend · Impressions · Clicks · CPC</strong>. Set the range to 7d.</p></div></li>
+    </ol>
+  </section>
+
+  <section>
+    <p class="eyebrow">First-week playbook</p>
+    <ul class="check">
+      <li>Run <strong>7 days at ₹725/day</strong> (≈ ₹5,000). Don't touch it for 3 days.</li>
+      <li>Day 4: check <strong>CPC</strong> and the landing page's conversions (WhatsApp messages, calls, sign-ups).</li>
+      <li>CPC fine but no conversions → landing page problem, not ad problem.</li>
+      <li>Impressions low → context hints too narrow. Add 2–3 more ways people phrase the need.</li>
+      <li>Day 7: kill or scale. Scaling = a second ad group with a different intent, not a bigger budget on the same one.</li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="eyebrow">Common mistakes</p>
+    <ul class="cross">
+      <li>Sending clicks to the homepage.</li>
+      <li>Context hints written like keywords instead of like a real question.</li>
+      <li>One ad for five different customers. One intent per ad group.</li>
+      <li>Budget all-India for a Patna coaching. Location = where you can actually serve.</li>
+      <li>Forgetting to check ads weekly. Set a Monday reminder.</li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="eyebrow">Sources</p>
+    <div class="links">
+      <span>OpenAI Help Center — "Ads in ChatGPT" (Ad controls, Personalize ads, Past chats and memory, Delete ads data)</span>
+      <span>chatgpt.com/pricing (India): Free ₹0 · Go ₹399 · Plus ₹1,999 · Pro ₹10,699</span>
+      <span>TechCrunch, Aug 27, 2026 — ads on ChatGPT's Free and Go tiers in India</span>
+      <span>Storyboard18 — OpenAI's ₹725 entry ticket: Inside ChatGPT Ads bet on India</span>
+      <span>TechCrunch, Feb 15, 2026 — India has 100M weekly active ChatGPT users, Sam Altman says</span>
+      <span>OpenAI Ads Manager screens (campaign, ad group, ad, preview) as of September 2026</span>
+    </div>
+  </section>
+
+  <footer>
+    <p>Prices and limits are what OpenAI showed as of September 2026. Check ads.openai.com for the current numbers before you spend.</p>
+    <p>Sent to everyone who commented ADS on the reel.</p>
+  </footer>
+</div>
+</body>
+</html>
