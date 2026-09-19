@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Loop engineering playbook: the four loop stages, the five pieces (automations, worktrees, skills, connectors, subagents) and a first loop you can build tonight.">
+<title>Loop Engineering Playbook</title>
+<style>
+  img { max-width: 100%; }
+  @media print {
+    body { font-size: 12.5px; }
+    .wrap { max-width: 100%; padding: 0; }
+    pre { white-space: pre-wrap; word-break: break-word; }
+    section, ol.steps > li, .quote { break-inside: avoid; }
+    a { color: inherit; text-decoration: underline; }
+  }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #f6f7f5; --ink: #131a20; --muted: #5b6670; --line: #d9dee2; --panel: #ffffff;
+    --code-bg: #0f151b; --code-ink: #e6edf3; --accent: #1f5fbf; --accent-ink: #ffffff;
+    --amber: #d99400; --amber-soft: rgba(217, 148, 0, 0.14); --good: #1f8a5b; --bad: #c0392b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0f1418; --ink: #e9eef2; --muted: #97a3ad; --line: #27323b; --panel: #161d24;
+      --code-bg: #0a0e12; --code-ink: #e6edf3; --accent: #6ea3ff; --accent-ink: #0b1220;
+      --amber: #f0b429; --amber-soft: rgba(240, 180, 41, 0.16); --good: #4ccb8f; --bad: #ff7b6b;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0f1418; --ink: #e9eef2; --muted: #97a3ad; --line: #27323b; --panel: #161d24;
+    --code-bg: #0a0e12; --code-ink: #e6edf3; --accent: #6ea3ff; --accent-ink: #0b1220;
+    --amber: #f0b429; --amber-soft: rgba(240, 180, 41, 0.16); --good: #4ccb8f; --bad: #ff7b6b;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; font-size: 17px; line-height: 1.6; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 22px 80px; }
+  h1, h2, h3 { font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(38px, 7vw, 56px); font-weight: 800; line-height: 1.02; letter-spacing: -0.02em; }
+  h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; margin-top: 8px; }
+  h3 { font-size: 18px; font-weight: 700; }
+  p { margin: 0; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .lede { font-size: 19px; color: var(--muted); max-width: 60ch; }
+  header { display: grid; gap: 14px; padding-bottom: 28px; border-bottom: 2px solid var(--ink); }
+  .port { display: inline-grid; grid-auto-flow: column; align-items: center; gap: 10px; padding: 8px 14px; border: 1.5px solid var(--ink); border-radius: 999px; font-family: "IBM Plex Mono", monospace; font-size: 13px; width: max-content; }
+  .port i { display: block; width: 10px; height: 10px; border-radius: 50%; background: var(--amber); }
+  .quote { padding: 14px 18px; border-left: 4px solid var(--accent); background: var(--panel); border-radius: 0 10px 10px 0; display: grid; gap: 6px; }
+  .quote p { font-size: 17.5px; font-weight: 500; }
+  .quote span { font-size: 13.5px; color: var(--muted); }
+  .part { margin-top: 40px; padding: 14px 18px; border-radius: 12px; background: var(--ink); color: var(--paper); display: grid; gap: 2px; }
+  .part .eyebrow { color: var(--paper); opacity: 0.7; }
+  .part h2 { margin: 0; color: inherit; }
+  section { display: grid; gap: 16px; padding: 30px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 15px; }
+  th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  td:first-child { color: var(--ink); font-weight: 600; width: 22%; }
+  .tablewrap { overflow-x: auto; }
+  .tablewrap table { min-width: 560px; }
+  .callout { padding: 14px 18px; border-left: 4px solid var(--amber); background: var(--amber-soft); border-radius: 0 10px 10px 0; display: grid; gap: 6px; }
+  .stages { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .stages > div { padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); display: grid; gap: 4px; align-content: start; }
+  .stages i { font-style: normal; font-family: "IBM Plex Mono", monospace; font-size: 12px; color: var(--accent); }
+  .stages b { font-family: "Bricolage Grotesque", sans-serif; font-size: 20px; font-weight: 800; letter-spacing: -0.01em; }
+  .stages span { font-size: 13.5px; color: var(--muted); line-height: 1.45; }
+  .stages > div:last-child b { color: var(--amber); }
+  ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; gap: 22px; }
+  ol.steps > li { display: grid; grid-template-columns: 40px minmax(0, 1fr); gap: 12px; counter-increment: step; }
+  ol.steps > li::before { content: counter(step); font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 22px; color: var(--accent); line-height: 1.2; }
+  ol.steps > li > div { display: grid; gap: 8px; min-width: 0; }
+  ol.steps ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 15.5px; }
+  .file { font-family: "IBM Plex Mono", monospace; font-size: 13px; color: var(--muted); }
+  pre { margin: 0; background: var(--code-bg); color: var(--code-ink); padding: 12px 14px; border-radius: 10px; overflow-x: auto; font-family: "IBM Plex Mono", Menlo, Consolas, monospace; font-size: 13px; line-height: 1.55; white-space: pre-wrap; }
+  code { font-family: "IBM Plex Mono", Menlo, Consolas, monospace; font-size: 0.92em; }
+  p code, li code, td code { background: var(--amber-soft); padding: 1px 6px; border-radius: 5px; }
+  ul.check, ul.cross, ul.box { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  ul.check li, ul.cross li, ul.box li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  ul.check li::before { content: "✓"; color: var(--good); font-weight: 700; }
+  ul.cross li::before { content: "✕"; color: var(--bad); font-weight: 700; }
+  ul.box li::before { content: ""; width: 16px; height: 16px; margin-top: 5px; border: 1.5px solid var(--ink); border-radius: 4px; }
+  .links { display: grid; gap: 6px; font-size: 15.5px; }
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  footer { padding-top: 26px; color: var(--muted); font-size: 14px; display: grid; gap: 4px; }
+  @media (max-width: 560px) { .stages { grid-template-columns: 1fr 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="port"><i></i> comment LOOP · the playbook</span>
+    <h1>Loop Engineering: the playbook</h1>
+    <p class="lede">You commented LOOP, so here it is. What loop engineering actually is, the five pieces you build a loop from, and a first loop you can set up tonight. No fluff.</p>
+    <div class="quote"><p>"You shouldn't be prompting coding agents anymore. You should be designing loops that prompt your agents."</p><span>Peter Steinberger, creator of OpenClaw</span></div>
+    <div class="quote"><p>"I don't prompt Claude anymore. I have loops running that prompt Claude and figuring out what to do. My job is to write loops."</p><span>Boris Cherny, head of Claude Code</span></div>
+  </header>
+
+  <div class="part"><p class="eyebrow">Part 1</p><h2>The idea (3 minutes)</h2></div>
+
+  <section>
+    <p class="eyebrow">Prompting vs looping</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th></th><th>Prompt engineering</th><th>Loop engineering</th></tr></thead>
+        <tbody>
+          <tr><td>You write</td><td>the one best instruction</td><td>the system that keeps instructing</td></tr>
+          <tr><td>Who checks</td><td>you, every time</td><td>a separate checker agent, then you</td></tr>
+          <tr><td>When it runs</td><td>when you are at the keyboard</td><td>on a schedule, until the goal is met</td></tr>
+          <tr><td>Your job</td><td>typing</td><td>designing, reviewing, deciding</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>IBM's definition: <em>"Loop engineering is the practice of designing agentic workflows, or loops, that iteratively guide AI agents toward completing user-defined goals with minimal human intervention."</em></p>
+  </section>
+
+  <section>
+    <p class="eyebrow">The loop itself: four stages</p>
+    <div class="stages">
+      <div><i>01</i><b>Goal</b><span>One specific, testable target with a clear stop condition.</span></div>
+      <div><i>02</i><b>Action</b><span>The agent does one thing: writes code, runs tests, fixes a bug.</span></div>
+      <div><i>03</i><b>Observe</b><span>The system checks what happened. Did CI pass?</span></div>
+      <div><i>04</i><b>Adjust</b><span>Feedback goes back in. The loop starts again.</span></div>
+    </div>
+    <p>Good goal: "all tests in <code>test/auth</code> pass and lint is clean". Bad goal: "improve auth".</p>
+    <div class="callout"><b>A goal without a stop condition is just a bill.</b></div>
+  </section>
+
+  <div class="part"><p class="eyebrow">Part 2</p><h2>The five pieces (plus one)</h2></div>
+
+  <section>
+    <p class="eyebrow">From Addy Osmani's essay · same pieces, whichever tool you use</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Piece</th><th>Job in the loop</th><th>Codex app</th><th>Claude Code</th></tr></thead>
+        <tbody>
+          <tr><td>Automations</td><td>Discovery + triage on a schedule. "This is the heartbeat."</td><td>Automations tab: project, prompt, cadence; Triage inbox; <code>/goal</code></td><td>Scheduled tasks and cron, <code>/loop</code>, <code>/goal</code>, hooks, GitHub Actions</td></tr>
+          <tr><td>Worktrees</td><td>Parallel agents that cannot collide</td><td>Built-in worktree per thread</td><td><code>git worktree</code>, <code>--worktree</code>, <code>isolation: worktree</code> on a subagent</td></tr>
+          <tr><td>Skills</td><td>Project knowledge written down once</td><td>Agent Skills (<code>SKILL.md</code>), invoked with <code>$name</code></td><td>Agent Skills (<code>SKILL.md</code>)</td></tr>
+          <tr><td>Plugins and connectors</td><td>The loop touches your real tools</td><td>Connectors (MCP) plus plugins</td><td>MCP servers plus plugins</td></tr>
+          <tr><td>Subagents</td><td>Keep the maker away from the checker</td><td>TOML in <code>.codex/agents/</code></td><td>Subagents in <code>.claude/agents/</code>, agent teams</td></tr>
+          <tr><td>State <span style="font-weight:400;color:var(--muted)">(the plus one)</span></td><td>Track what's done</td><td>Markdown, or Linear via connector</td><td>Markdown (<code>AGENTS.md</code>, progress files), or Linear via MCP</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">What each one buys you</p>
+    <ul class="check">
+      <li><span><strong>Automations.</strong> Runs that find something land in a triage inbox. Runs that find nothing archive themselves. You only look when there is something to look at.</span></li>
+      <li><span><strong>Worktrees.</strong> "One agent's edits literally cannot touch the other one's checkout." They fix file collisions. They do not fix your bandwidth: your review capacity is still the ceiling.</span></li>
+      <li><span><strong>Skills.</strong> Without them the loop "rederives your whole project from zero every cycle". With them, you explain your project once.</span></li>
+      <li><span><strong>Connectors.</strong> The difference between an agent that says "here is the fix" and a loop that opens the PR, links the ticket, and pings the channel once CI is green.</span></li>
+      <li><span><strong>Subagents.</strong> "The model that wrote the code is way too nice grading its own homework." A second agent, with fresh context, does the grading. Costs more tokens. Spend them where verification matters.</span></li>
+      <li><span><strong>State.</strong> A loop with no memory repeats its own mistakes. One markdown file fixes that.</span></li>
+    </ul>
+  </section>
+
+  <div class="part"><p class="eyebrow">Part 3</p><h2>Build your first loop tonight</h2></div>
+
+  <section>
+    <p>The example uses Claude Code. The same shape works in the Codex app with the equivalents from the table above.</p>
+    <div class="callout"><b>Pick a boring job first.</b><p>Flaky tests, lint errors, dependency bumps, stale TODOs. Something with a yes/no finish line.</p></div>
+    <ol class="steps">
+      <li><div><h3>Write the goal with a stop condition</h3>
+<pre>GOAL: every test in test/auth passes and lint is clean.
+STOP when: both are true, OR 5 attempts are used, OR the same error shows up twice.
+NEVER: touch files outside src/auth and test/auth. Never push to main.</pre>
+        <p>Three parts, always: <strong>done condition, give-up condition, off-limits list.</strong></p></div></li>
+
+      <li><div><h3>Write the skill <span style="font-weight:400;color:var(--muted)">(project knowledge, once)</span></h3>
+        <span class="file">.claude/skills/fix-tests/SKILL.md</span>
+<pre>---
+name: fix-tests
+description: How to run, read and fix failing tests in this repo. Use whenever tests fail.
+---
+
+- Run tests with: npm test -- --runInBand
+- Lint with: npm run lint
+- Auth code lives in src/auth. Fixtures live in test/fixtures. Do not edit fixtures.
+- Fix the code, not the test, unless the test itself is provably wrong. Say why.
+- One fix per attempt. Re-run the tests after every change.
+- Append one line to PROGRESS.md after every attempt: what you tried, what happened.</pre></div></li>
+
+      <li><div><h3>Write the checker <span style="font-weight:400;color:var(--muted)">(the maker never grades itself)</span></h3>
+        <span class="file">.claude/agents/checker.md</span>
+<pre>---
+name: checker
+description: Verifies a change after the maker finishes. Use after every fix attempt.
+tools: Read, Grep, Glob, Bash
+---
+
+You did not write this code. Do not trust the maker's summary.
+
+1. Run the tests and the linter yourself. Paste the real output.
+2. Read the diff. Flag: deleted or skipped tests, weakened assertions,
+   hard-coded expected values, edits outside src/auth and test/auth.
+3. Answer PASS or FAIL on the first line, then the reasons.
+
+You cannot edit files. You only report.</pre>
+        <p>Read-only tools on purpose. A checker that can edit becomes a second maker.</p></div></li>
+
+      <li><div><h3>Add the state file</h3>
+        <span class="file">PROGRESS.md</span>
+<pre># Goal: test/auth green + lint clean
+## Attempts
+- (the loop appends here: attempt number, what changed, result)
+## Known dead ends
+- (things that were tried and did not work, so they are not tried again)</pre></div></li>
+
+      <li><div><h3>Isolate it</h3>
+<pre>git worktree add ../myapp-loop -b loop/fix-auth-tests
+cd ../myapp-loop</pre>
+        <p>The loop works in its own checkout on its own branch. Your main checkout stays untouched while it runs.</p></div></li>
+
+      <li><div><h3>Run it by hand once</h3>
+        <p>Open Claude Code in the worktree and give it the goal from step 1, plus: <em>"Use the fix-tests skill. After each attempt, have the checker subagent verify. Log to PROGRESS.md."</em></p>
+        <p>Watch the whole first run. You are not checking the code yet. You are checking the <strong>loop</strong>: did it stop when it should, did the checker actually run the tests, did the log get written?</p></div></li>
+
+      <li><div><h3>Put it on a heartbeat</h3>
+        <p>Only after a clean manual run.</p>
+        <ul>
+          <li>Inside a session: <code>/loop</code> with an interval re-runs a prompt on a cadence.</li>
+          <li>Unattended: a cron job or a GitHub Actions schedule that runs Claude Code headless (<code>claude -p "..."</code>) in the worktree.</li>
+          <li>In the Codex app: the Automations tab, with a cadence and the Triage inbox.</li>
+        </ul>
+        <p>Start with a slow cadence. Once a night is plenty for a first loop.</p></div></li>
+
+      <li><div><h3>Review like an engineer</h3>
+        <p>Every morning: read <code>PROGRESS.md</code>, read the diff, merge or reject. The loop opens the PR. You still own the merge button.</p></div></li>
+    </ol>
+  </section>
+
+  <div class="part"><p class="eyebrow">Part 4</p><h2>The money rule</h2></div>
+
+  <section>
+    <div class="quote"><p>"it's still early; I'm skeptical, and you absolutely have to be careful about token costs."</p><span>Addy Osmani, in the same essay</span></div>
+    <p>A loop that runs while you sleep, spends while you sleep. So:</p>
+    <ul class="check">
+      <li><span><strong>Cap the attempts.</strong> Every goal carries a give-up condition (step 1).</span></li>
+      <li><span><strong>Cap the spend.</strong> Set a monthly usage limit in your provider's console before the first unattended run.</span></li>
+      <li><span><strong>Slow the cadence.</strong> Nightly before hourly. Hourly before "every 5 minutes".</span></li>
+      <li><span><strong>Exit early on nothing.</strong> If discovery finds no work, the run should end in one step.</span></li>
+      <li><span><strong>Use the checker where it counts.</strong> Subagents burn extra tokens, each one does its own model and tool work. Use them on code that ships, skip them on throwaway work.</span></li>
+      <li><span><strong>Check the bill after night one</strong>, not after month one.</span></li>
+    </ul>
+  </section>
+
+  <div class="part"><p class="eyebrow">Part 5</p><h2>Three ways loops go wrong</h2></div>
+
+  <section>
+    <p class="eyebrow">All three are named in the essay and echoed by IBM</p>
+    <ul class="cross">
+      <li><span><strong>Unattended mistakes.</strong> "A loop running unattended is also a loop making mistakes unattended." Verification stays your job.</span></li>
+      <li><span><strong>Comprehension debt.</strong> "The faster the loop ships code you did not write, the bigger the gap between what exists and what you actually get." Stop reading the diffs and you stop understanding your own codebase.</span></li>
+      <li><span><strong>Cognitive surrender.</strong> "When the loop runs itself, it's very tempting to stop having an opinion." The loop amplifies whoever built it. "The loop doesn't know the difference. You do."</span></li>
+    </ul>
+    <p>The honest footnote: direct prompting still works. Not everything needs a loop. <strong>Loop the repeatable, prompt the one-off.</strong></p>
+  </section>
+
+  <div class="part"><p class="eyebrow">Part 6</p><h2>Five starter loops</h2></div>
+
+  <section>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Loop</th><th>Goal / stop condition</th><th>Cadence</th></tr></thead>
+        <tbody>
+          <tr><td>Test fixer</td><td>failing tests in one folder go green, max 5 attempts</td><td>nightly</td></tr>
+          <tr><td>Lint + type cleaner</td><td>zero lint and type errors in one package</td><td>nightly</td></tr>
+          <tr><td>Dependency bumper</td><td>one minor bump per run, tests still green, PR opened</td><td>weekly</td></tr>
+          <tr><td>Bug triager</td><td>new issues labelled, duplicates linked, repro steps requested</td><td>every few hours</td></tr>
+          <tr><td>Docs drift checker</td><td>README commands actually run; open a PR when they don't</td><td>weekly</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Same rule for all five: small scope, testable finish line, checker before PR, human before merge.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">One-page checklist</p>
+    <ul class="box">
+      <li><span>Goal has a <strong>done</strong> condition, a <strong>give-up</strong> condition, an <strong>off-limits</strong> list</span></li>
+      <li><span>Project knowledge lives in a <code>SKILL.md</code>, not in your head</span></li>
+      <li><span>Checker is a <strong>separate</strong> agent with <strong>read-only</strong> tools</span></li>
+      <li><span>State file exists and the loop appends to it</span></li>
+      <li><span>Loop runs in its <strong>own worktree and branch</strong></span></li>
+      <li><span>One full manual run watched start to finish</span></li>
+      <li><span>Spend limit set <strong>before</strong> the first unattended run</span></li>
+      <li><span>A human reads the diff and owns the merge</span></li>
+    </ul>
+    <div class="quote"><p>"Build the loop. But build it like someone who intends to stay the engineer, not just the person who presses go."</p><span>Addy Osmani</span></div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Sources</p>
+    <div class="links">
+      <span>Addy Osmani — <a href="https://www.oreilly.com/radar/loop-engineering/">"Loop Engineering"</a>, O'Reilly Radar, June 22, 2026 (14 minute read)</span>
+      <span>IBM Think — <a href="https://www.ibm.com/think/topics/loop-engineering">"What is loop engineering?"</a>, Ivan Belcic and Cole Stryker, published 17 July 2026</span>
+      <span>Peter Steinberger and Boris Cherny quotes as printed in the O'Reilly essay</span>
+    </div>
+  </section>
+
+  <footer>
+    <p>Tool features (Codex app, Claude Code) are as described in the essay, mid-2026. Both move fast, so check the current docs before you wire up a schedule. The file examples in Part 3 are a starting template: change the commands and paths to match your repo.</p>
+    <p>Sent to everyone who commented LOOP on the reel.</p>
+  </footer>
+</div>
+</body>
+</html>
