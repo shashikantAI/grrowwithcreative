@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The GitHub URL trick: replace github.com with gitdiagram.com, deepwiki.com or gitmcp.io to get an architecture diagram, AI docs with Q&A, or an MCP server for any public repo. Links + setup.">
+<title>MarkItDown setup guide</title>
+<style>
+  img { max-width: 100%; }
+  @media print {
+    body { font-size: 12.5px; }
+    .wrap { max-width: 100%; padding: 0; }
+    pre { white-space: pre-wrap; word-break: break-word; }
+    section { break-inside: avoid; }
+    a { color: inherit; text-decoration: underline; }
+  }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #f6f7f5; --ink: #131a20; --muted: #5b6670; --line: #d9dee2; --panel: #ffffff;
+    --code-bg: #0f151b; --code-ink: #e6edf3; --accent: #1f5fbf; --accent-ink: #ffffff;
+    --amber: #d99400; --amber-soft: rgba(217, 148, 0, 0.14); --good: #1f8a5b; --bad: #c0392b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0f1418; --ink: #e9eef2; --muted: #97a3ad; --line: #27323b; --panel: #161d24;
+      --code-bg: #0a0e12; --code-ink: #e6edf3; --accent: #6ea3ff; --accent-ink: #0b1220;
+      --amber: #f0b429; --amber-soft: rgba(240, 180, 41, 0.16); --good: #4ccb8f; --bad: #ff7b6b;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0f1418; --ink: #e9eef2; --muted: #97a3ad; --line: #27323b; --panel: #161d24;
+    --code-bg: #0a0e12; --code-ink: #e6edf3; --accent: #6ea3ff; --accent-ink: #0b1220;
+    --amber: #f0b429; --amber-soft: rgba(240, 180, 41, 0.16); --good: #4ccb8f; --bad: #ff7b6b;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; font-size: 17px; line-height: 1.6; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 22px 80px; }
+  h1, h2, h3 { font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(38px, 7vw, 56px); font-weight: 800; line-height: 1.02; letter-spacing: -0.02em; }
+  h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; margin-top: 8px; }
+  h3 { font-size: 18px; font-weight: 700; }
+  p { margin: 0; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .lede { font-size: 19px; color: var(--muted); max-width: 60ch; }
+  header { display: grid; gap: 14px; padding-bottom: 28px; border-bottom: 2px solid var(--ink); }
+  .port { display: inline-grid; grid-auto-flow: column; align-items: center; gap: 10px; padding: 8px 14px; border: 1.5px solid var(--ink); border-radius: 999px; font-family: "IBM Plex Mono", monospace; font-size: 13px; width: max-content; }
+  .port i { display: block; width: 10px; height: 10px; border-radius: 50%; background: var(--amber); }
+  .part { margin-top: 40px; padding: 14px 18px; border-radius: 12px; background: var(--ink); color: var(--paper); display: grid; gap: 2px; }
+  .part .eyebrow { color: var(--paper); opacity: 0.7; }
+  .part h2 { margin: 0; color: inherit; }
+  section { display: grid; gap: 16px; padding: 30px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+  th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  td:first-child { color: var(--muted); width: 26%; }
+  .tablewrap { overflow-x: auto; }
+  .yes { color: var(--bad); font-weight: 600; }
+  .no { color: var(--good); font-weight: 600; }
+  .toggles { display: grid; gap: 10px; }
+  .toggle { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+  .toggle b { font-size: 16px; }
+  .toggle span { font-size: 13.5px; color: var(--muted); }
+  .toggle .sw { width: 52px; height: 30px; border-radius: 999px; background: #c9ced3; position: relative; }
+  .toggle .sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+  .toggle .off { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.1em; color: var(--good); font-weight: 600; }
+  .toggle.del b { color: var(--bad); }
+  .path { font-family: "IBM Plex Mono", monospace; font-size: 14px; background: var(--amber-soft); padding: 6px 10px; border-radius: 8px; display: inline-block; }
+  .callout { padding: 14px 18px; border-left: 4px solid var(--amber); background: var(--amber-soft); border-radius: 0 10px 10px 0; display: grid; gap: 6px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .stats > div { padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); display: grid; gap: 2px; }
+  .stats b { font-family: "Bricolage Grotesque", sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.01em; }
+  .stats span { font-size: 13.5px; color: var(--muted); }
+  ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; gap: 18px; }
+  ol.steps > li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; counter-increment: step; }
+  ol.steps > li::before { content: counter(step); font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 22px; color: var(--accent); line-height: 1.2; }
+  ol.steps > li > div { display: grid; gap: 8px; }
+  ol.steps ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 15.5px; }
+  pre { margin: 0; background: var(--code-bg); color: var(--code-ink); padding: 12px 14px; border-radius: 10px; overflow-x: auto; font-family: "IBM Plex Mono", Menlo, Consolas, monospace; font-size: 13.5px; line-height: 1.55; white-space: pre-wrap; }
+  code { font-family: "IBM Plex Mono", Menlo, Consolas, monospace; font-size: 0.92em; }
+  p code, li code, td code { background: var(--amber-soft); padding: 1px 6px; border-radius: 5px; }
+  .adcard { border: 1px solid var(--line); border-radius: 14px; background: var(--panel); padding: 14px 16px; display: grid; gap: 8px; max-width: 420px; }
+  .adcard .row { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 10px; font-size: 15px; }
+  .adcard .fav { width: 28px; height: 28px; border-radius: 8px; background: var(--accent); }
+  .adcard .lbl { font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; }
+  .adcard .t { font-weight: 600; }
+  .adcard .d { font-size: 14.5px; color: var(--muted); }
+  ul.check { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  ul.check li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  ul.check li::before { content: "✓"; color: var(--good); font-weight: 700; }
+  ul.cross { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  ul.cross li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  ul.cross li::before { content: "✕"; color: var(--bad); font-weight: 700; }
+  .links { display: grid; gap: 6px; font-size: 15.5px; }
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  footer { padding-top: 26px; color: var(--muted); font-size: 14px; display: grid; gap: 4px; }
+  @media (max-width: 560px) { .stats { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">PDF giveaway · from the reel</p>
+    <h1>MarkItDown setup guide</h1>
+    <p class="lede">Claude har PDF page ko <b>text + ek image</b> bana kar padhta hai (Anthropic ke PDF-support docs). Isliye bade PDF limit jaldi kha jaate hain. Fix: file ko pehle Markdown mein badlo — sirf text jaata hai. Tool: <b>MarkItDown</b> by Microsoft, free, open source, 186K+ stars — <a href="https://github.com/microsoft/markitdown">github.com/microsoft/markitdown</a></p>
+  </header>
+
+  <div class="part"><p class="eyebrow">Step 0 · ek baar</p><h2>Python chahiye</h2></div>
+  <section>
+    <p>Python 3.10 ya upar. Check karo:</p>
+<pre><code>python --version</code></pre>
+    <p>Nahi hai to <a href="https://www.python.org/downloads/">python.org/downloads</a> se install karo (Windows par <b>Add python.exe to PATH</b> tick karna).</p>
+  </section>
+
+  <div class="part"><p class="eyebrow">Step 1</p><h2>Install</h2></div>
+  <section>
+<pre><code>pip install "markitdown[all]"</code></pre>
+    <p><span class="path">[all]</span> se PDF, Word, Excel, PowerPoint sab formats aa jaate hain.</p>
+  </section>
+
+  <div class="part"><p class="eyebrow">Step 2</p><h2>Convert</h2></div>
+  <section>
+<pre><code>markitdown budget.pdf -o budget.md</code></pre>
+    <p>Hamara real test: Union Budget 2026-27 speech, <b>65 pages → Markdown in 2.1 seconds</b> (command start-to-finish ~3 s, Python load time mila ke). File 662 KB se 112 KB.</p>
+  </section>
+
+  <div class="part"><p class="eyebrow">Step 3</p><h2>Yahi .md file Claude ko do</h2></div>
+  <section>
+    <p>PDF ki jagah <span class="path">.md</span> file upload karo (ya text paste karo). Same content, koi page image nahi.</p>
+    <div class="tablewrap"><table>
+      <tr><th>Input</th><th>Command</th></tr>
+      <tr><td>Word</td><td><code>markitdown report.docx -o report.md</code></td></tr>
+      <tr><td>Excel</td><td><code>markitdown data.xlsx -o data.md</code></td></tr>
+      <tr><td>PowerPoint</td><td><code>markitdown deck.pptx -o deck.md</code></td></tr>
+      <tr><td>HTML / CSV / JSON / ZIP</td><td>same pattern</td></tr>
+    </table></div>
+    <ul>
+      <li>Word files sabse saaf aate hain — headings aur tables dono bache rehte hain (tested).</li>
+      <li>YouTube link ka feature repo mein likha hai, lekin hamare test mein transcript nahi aaya — us par bharosa mat karo.</li>
+    </ul>
+  </section>
+
+  <div class="part"><p class="eyebrow">The setting</p><h2>Claude Desktop ke andar — no terminal after setup</h2></div>
+  <section>
+    <p>MarkItDown ka apna official <b>MCP server</b> hai. Ek baar connect karo, phir Claude khud convert karke padh leta hai.</p>
+    <p><b>1. Install:</b></p>
+<pre><code>pip install markitdown-mcp</code></pre>
+    <p><b>2.</b> Claude Desktop → Settings → Developer → <b>Edit Config</b>. <span class="path">claude_desktop_config.json</span> mein ye add karo:</p>
+<pre><code>{
+  "mcpServers": {
+    "markitdown": {
+      "command": "markitdown-mcp"
+    }
+  }
+}</code></pre>
+    <p>Agar "command not found" aaye to poora path do. Path nikalne ke liye: Windows <span class="path">where markitdown-mcp</span>, Mac/Linux <span class="path">which markitdown-mcp</span>.</p>
+    <p><b>3.</b> Claude Desktop band karke dobara kholo. Tools mein <span class="path">convert_to_markdown</span> dikhega.</p>
+    <p><b>4. Use</b> — chat mein likho:</p>
+<pre><code>Convert C:\Users\me\Documents\budget.pdf to markdown and summarise it.</code></pre>
+    <ul>
+      <li>Claude tool call karega, file Markdown mein badlegi, aur wahi padhega. Hamara test: same 65-page PDF, 2.3 s.</li>
+      <li>Ye tool <b>file path ya URL</b> leta hai. Chat mein drag-drop ki hui file par ye apne aap nahi chalta — path do.</li>
+    </ul>
+  </section>
+
+  <div class="part"><p class="eyebrow">Sach</p><h2>Limits</h2></div>
+  <section>
+    <ul>
+      <li><b>Scanned PDF</b> (photo jaisi pages): text nikalta hi nahi — OCR nahi hai. (Hamara test: scanned page → khaali .md file.)</li>
+      <li><b>2-column kitaabein</b> (jaise NCERT chapters): dono columns ki lines mix ho jaati hain.</li>
+      <li>Kuch PDFs mein words ke beech ke spaces gayab ho jaate hain. <b>Convert ke baad .md file ek baar khol kar dekh lo.</b></li>
+      <li>Charts / diagrams ka matlab chahiye? Tab original PDF hi do — Claude image se hi unhe samajhta hai.</li>
+      <li>Best: normal text PDFs (reports, speeches, contracts, Word se bane PDFs), aur Word / Excel / PowerPoint files.</li>
+    </ul>
+    <p>— Shashikant · @shashikantai</p>
+  </section>
+</div>
+</body>
+</html>
