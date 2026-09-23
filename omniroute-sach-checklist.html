@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="The GitHub URL trick: replace github.com with gitdiagram.com, deepwiki.com or gitmcp.io to get an architecture diagram, AI docs with Q&A, or an MCP server for any public repo. Links + setup.">
+<title>OmniRoute sach-checklist</title>
+<style>
+  img { max-width: 100%; }
+  @media print {
+    body { font-size: 12.5px; }
+    .wrap { max-width: 100%; padding: 0; }
+    pre { white-space: pre-wrap; word-break: break-word; }
+    section { break-inside: avoid; }
+    a { color: inherit; text-decoration: underline; }
+  }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #f6f7f5; --ink: #131a20; --muted: #5b6670; --line: #d9dee2; --panel: #ffffff;
+    --code-bg: #0f151b; --code-ink: #e6edf3; --accent: #1f5fbf; --accent-ink: #ffffff;
+    --amber: #d99400; --amber-soft: rgba(217, 148, 0, 0.14); --good: #1f8a5b; --bad: #c0392b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0f1418; --ink: #e9eef2; --muted: #97a3ad; --line: #27323b; --panel: #161d24;
+      --code-bg: #0a0e12; --code-ink: #e6edf3; --accent: #6ea3ff; --accent-ink: #0b1220;
+      --amber: #f0b429; --amber-soft: rgba(240, 180, 41, 0.16); --good: #4ccb8f; --bad: #ff7b6b;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0f1418; --ink: #e9eef2; --muted: #97a3ad; --line: #27323b; --panel: #161d24;
+    --code-bg: #0a0e12; --code-ink: #e6edf3; --accent: #6ea3ff; --accent-ink: #0b1220;
+    --amber: #f0b429; --amber-soft: rgba(240, 180, 41, 0.16); --good: #4ccb8f; --bad: #ff7b6b;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; font-size: 17px; line-height: 1.6; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 22px 80px; }
+  h1, h2, h3 { font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(38px, 7vw, 56px); font-weight: 800; line-height: 1.02; letter-spacing: -0.02em; }
+  h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; margin-top: 8px; }
+  h3 { font-size: 18px; font-weight: 700; }
+  p { margin: 0; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .lede { font-size: 19px; color: var(--muted); max-width: 60ch; }
+  header { display: grid; gap: 14px; padding-bottom: 28px; border-bottom: 2px solid var(--ink); }
+  .port { display: inline-grid; grid-auto-flow: column; align-items: center; gap: 10px; padding: 8px 14px; border: 1.5px solid var(--ink); border-radius: 999px; font-family: "IBM Plex Mono", monospace; font-size: 13px; width: max-content; }
+  .port i { display: block; width: 10px; height: 10px; border-radius: 50%; background: var(--amber); }
+  .part { margin-top: 40px; padding: 14px 18px; border-radius: 12px; background: var(--ink); color: var(--paper); display: grid; gap: 2px; }
+  .part .eyebrow { color: var(--paper); opacity: 0.7; }
+  .part h2 { margin: 0; color: inherit; }
+  section { display: grid; gap: 16px; padding: 30px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+  th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  td:first-child { color: var(--muted); width: 26%; }
+  .tablewrap { overflow-x: auto; }
+  .yes { color: var(--bad); font-weight: 600; }
+  .no { color: var(--good); font-weight: 600; }
+  .toggles { display: grid; gap: 10px; }
+  .toggle { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+  .toggle b { font-size: 16px; }
+  .toggle span { font-size: 13.5px; color: var(--muted); }
+  .toggle .sw { width: 52px; height: 30px; border-radius: 999px; background: #c9ced3; position: relative; }
+  .toggle .sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+  .toggle .off { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.1em; color: var(--good); font-weight: 600; }
+  .toggle.del b { color: var(--bad); }
+  .path { font-family: "IBM Plex Mono", monospace; font-size: 14px; background: var(--amber-soft); padding: 6px 10px; border-radius: 8px; display: inline-block; }
+  .callout { padding: 14px 18px; border-left: 4px solid var(--amber); background: var(--amber-soft); border-radius: 0 10px 10px 0; display: grid; gap: 6px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .stats > div { padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); display: grid; gap: 2px; }
+  .stats b { font-family: "Bricolage Grotesque", sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.01em; }
+  .stats span { font-size: 13.5px; color: var(--muted); }
+  ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; gap: 18px; }
+  ol.steps > li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; counter-increment: step; }
+  ol.steps > li::before { content: counter(step); font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 22px; color: var(--accent); line-height: 1.2; }
+  ol.steps > li > div { display: grid; gap: 8px; }
+  ol.steps ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 15.5px; }
+  pre { margin: 0; background: var(--code-bg); color: var(--code-ink); padding: 12px 14px; border-radius: 10px; overflow-x: auto; font-family: "IBM Plex Mono", Menlo, Consolas, monospace; font-size: 13.5px; line-height: 1.55; white-space: pre-wrap; }
+  code { font-family: "IBM Plex Mono", Menlo, Consolas, monospace; font-size: 0.92em; }
+  p code, li code, td code { background: var(--amber-soft); padding: 1px 6px; border-radius: 5px; }
+  .adcard { border: 1px solid var(--line); border-radius: 14px; background: var(--panel); padding: 14px 16px; display: grid; gap: 8px; max-width: 420px; }
+  .adcard .row { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 10px; font-size: 15px; }
+  .adcard .fav { width: 28px; height: 28px; border-radius: 8px; background: var(--accent); }
+  .adcard .lbl { font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; }
+  .adcard .t { font-weight: 600; }
+  .adcard .d { font-size: 14.5px; color: var(--muted); }
+  ul.check { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  ul.check li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  ul.check li::before { content: "✓"; color: var(--good); font-weight: 700; }
+  ul.cross { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  ul.cross li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  ul.cross li::before { content: "✕"; color: var(--bad); font-weight: 700; }
+  .links { display: grid; gap: 6px; font-size: 15.5px; }
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  footer { padding-top: 26px; color: var(--muted); font-size: 14px; display: grid; gap: 4px; }
+  @media (max-width: 560px) { .stats { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>OmniRoute sach-checklist (SACH giveaway)</h1>
+<p>Reel dekh ke aaye ho? Yeh woh sab hai jo maine khud test kiya — 22-23 September 2026, apne PC par.</p>
+<p><b>Claim:</b> "Free unlimited Claude". <b>Sach:</b> limit khatam hone ke baad aapko Claude nahi, dusra AI milta hai.</p>
+<hr>
+<div class="part"><h2>Maine kya test kiya (aur kya mila)</h2></div>
+<table><tr><th>Test</th><th>Result</th></tr><tr><td><code>model: anthropic/claude-sonnet-4-5</code> with a dead Claude key</td><td><code>401 API key is invalid</code> — kuch free nahi mila</td></tr><tr><td><code>model: auto</code> (same setup)</td><td><code>200 OK</code> — <b>served by <code>gemini-flash-lite-latest</code></b></td></tr><tr><td>Short reply ka token usage</td><td>36 completion tokens, <b>34-35 reasoning (hidden)</b></td></tr><tr><td>Gateway models list</td><td>522 model ids</td></tr></table>
+<p>Matlab: kaam rukta nahi, par woh Claude ka jawab nahi hota. Quality alag hoti hai.</p>
+<div class="part"><h2>"Free" kitna free hai</h2></div>
+<ul><li><b>OpenRouter free models</b> (<code>:free</code>): <b>20 requests/minute, 50 requests/day</b> agar aapne kabhi $10 se kam credits kharide hain (docs: openrouter.ai/docs/api-reference/limits). $10+ par 1000/day.</li><li><b>Gemini API free tier:</b> Google ke apne pricing page par likha hai — <b>"Content used to improve our products: Yes"</b>. Paid tier par nahi. (ai.google.dev/gemini-api/docs/pricing)</li><li>Models retire bhi hote hain: mere test mein <code>gemini-2.5-flash</code> ne bola <i>"no longer available to new users"</i>.</li></ul>
+<div class="part"><h2>Security — yeh zaroor karo</h2></div>
+<p>OmniRoute start hone par khud warning deta hai:</p>
+<pre><code>SECURITY: listening on 0.0.0.0 with NO API-key requirement — the inference plane (/v1/*)
+is reachable by ANY device that can route to this host, and requests are billed to your
+configured providers.</code></pre>
+<p>Aur dashboard ka <b>default password <code>CHANGEME</code></b> hota hai.</p>
+<p><b>Do kaam abhi karo:</b></p>
+<ol><li>Password badlo (dashboard → settings → security).</li><li>Server ko sirf apne PC tak rakho:</li></ol>
+<pre><code>OMNIROUTE_SERVER_HOST=127.0.0.1
+REQUIRE_API_KEY=true</code></pre>
+<p>Windows par ek line mein:</p>
+<pre><code>set OMNIROUTE_SERVER_HOST=127.0.0.1 &amp;&amp; set REQUIRE_API_KEY=true &amp;&amp; npx omniroute</code></pre>
+<div class="part"><h2>Kab use karna chahiye</h2></div>
+<ul><li><b>Haan:</b> personal projects, learning, side projects, jahan code public ho sakta hai.</li><li><b>Nahi:</b> office ka code, client ka data, kisi NDA wala project. Aapke prompts dusri companies ke servers par jaate hain, aur free tiers par training ke liye use ho sakte hain.</li></ul>
+<div class="part"><h2>Install (agar phir bhi try karna hai)</h2></div>
+<pre><code>npm install -g omniroute
+omniroute</code></pre>
+<p>Dashboard: <a href="http://localhost:20128">http://localhost:20128</a> · API: <a href="http://localhost:20128/v1">http://localhost:20128/v1</a></p>
+<p>Repo: <a href="https://github.com/diegosouzapw/OmniRoute">https://github.com/diegosouzapw/OmniRoute</a> (MIT, free)</p>
+<p>Claude Code ko isse jodne ke liye:</p>
+<pre><code>set ANTHROPIC_BASE_URL=http://localhost:20128/v1
+set ANTHROPIC_AUTH_TOKEN=&lt;your omniroute key&gt;</code></pre>
+<hr>
+<p><b>Sach yeh hai:</b> tool bura nahi hai. Bas "free unlimited Claude" nahi hai — free doosra AI hai, apni limits ke saath.</p>
+<p>— Shashikant · @shashikantai</p>
+</div>
+</body>
+</html>
