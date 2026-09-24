@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Ponytail kit: install commands, a copy-paste CLAUDE.md / AGENTS.md rule and a Claude skill file that make your AI write less, cleaner code.">
+<title>Ponytail kit</title>
+<style>
+  img { max-width: 100%; }
+  @media print {
+    body { font-size: 12.5px; }
+    .wrap { max-width: 100%; padding: 0; }
+    pre { white-space: pre-wrap; word-break: break-word; }
+    section { break-inside: avoid; }
+    a { color: inherit; text-decoration: underline; }
+  }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #f6f7f5; --ink: #131a20; --muted: #5b6670; --line: #d9dee2; --panel: #ffffff;
+    --code-bg: #0f151b; --code-ink: #e6edf3; --accent: #1f5fbf; --accent-ink: #ffffff;
+    --amber: #d99400; --amber-soft: rgba(217, 148, 0, 0.14); --good: #1f8a5b; --bad: #c0392b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0f1418; --ink: #e9eef2; --muted: #97a3ad; --line: #27323b; --panel: #161d24;
+      --code-bg: #0a0e12; --code-ink: #e6edf3; --accent: #6ea3ff; --accent-ink: #0b1220;
+      --amber: #f0b429; --amber-soft: rgba(240, 180, 41, 0.16); --good: #4ccb8f; --bad: #ff7b6b;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0f1418; --ink: #e9eef2; --muted: #97a3ad; --line: #27323b; --panel: #161d24;
+    --code-bg: #0a0e12; --code-ink: #e6edf3; --accent: #6ea3ff; --accent-ink: #0b1220;
+    --amber: #f0b429; --amber-soft: rgba(240, 180, 41, 0.16); --good: #4ccb8f; --bad: #ff7b6b;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif; font-size: 17px; line-height: 1.6; }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 22px 80px; }
+  h1, h2, h3 { font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(38px, 7vw, 56px); font-weight: 800; line-height: 1.02; letter-spacing: -0.02em; }
+  h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; margin-top: 8px; }
+  h3 { font-size: 18px; font-weight: 700; }
+  p { margin: 0; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .lede { font-size: 19px; color: var(--muted); max-width: 60ch; }
+  header { display: grid; gap: 14px; padding-bottom: 28px; border-bottom: 2px solid var(--ink); }
+  .port { display: inline-grid; grid-auto-flow: column; align-items: center; gap: 10px; padding: 8px 14px; border: 1.5px solid var(--ink); border-radius: 999px; font-family: "IBM Plex Mono", monospace; font-size: 13px; width: max-content; }
+  .port i { display: block; width: 10px; height: 10px; border-radius: 50%; background: var(--amber); }
+  .part { margin-top: 40px; padding: 14px 18px; border-radius: 12px; background: var(--ink); color: var(--paper); display: grid; gap: 2px; }
+  .part .eyebrow { color: var(--paper); opacity: 0.7; }
+  .part h2 { margin: 0; color: inherit; }
+  section { display: grid; gap: 16px; padding: 30px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; }
+  table { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+  th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  td:first-child { color: var(--muted); width: 26%; }
+  .tablewrap { overflow-x: auto; }
+  .yes { color: var(--bad); font-weight: 600; }
+  .no { color: var(--good); font-weight: 600; }
+  .toggles { display: grid; gap: 10px; }
+  .toggle { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px; padding: 12px 16px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+  .toggle b { font-size: 16px; }
+  .toggle span { font-size: 13.5px; color: var(--muted); }
+  .toggle .sw { width: 52px; height: 30px; border-radius: 999px; background: #c9ced3; position: relative; }
+  .toggle .sw::after { content: ""; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+  .toggle .off { font-family: "IBM Plex Mono", monospace; font-size: 12px; letter-spacing: 0.1em; color: var(--good); font-weight: 600; }
+  .toggle.del b { color: var(--bad); }
+  .path { font-family: "IBM Plex Mono", monospace; font-size: 14px; background: var(--amber-soft); padding: 6px 10px; border-radius: 8px; display: inline-block; }
+  .callout { padding: 14px 18px; border-left: 4px solid var(--amber); background: var(--amber-soft); border-radius: 0 10px 10px 0; display: grid; gap: 6px; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .stats > div { padding: 14px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); display: grid; gap: 2px; }
+  .stats b { font-family: "Bricolage Grotesque", sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -0.01em; }
+  .stats span { font-size: 13.5px; color: var(--muted); }
+  ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; gap: 18px; }
+  ol.steps > li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; counter-increment: step; }
+  ol.steps > li::before { content: counter(step); font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 22px; color: var(--accent); line-height: 1.2; }
+  ol.steps > li > div { display: grid; gap: 8px; }
+  ol.steps ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; font-size: 15.5px; }
+  pre { margin: 0; background: var(--code-bg); color: var(--code-ink); padding: 12px 14px; border-radius: 10px; overflow-x: auto; font-family: "IBM Plex Mono", Menlo, Consolas, monospace; font-size: 13.5px; line-height: 1.55; white-space: pre-wrap; }
+  code { font-family: "IBM Plex Mono", Menlo, Consolas, monospace; font-size: 0.92em; }
+  p code, li code, td code { background: var(--amber-soft); padding: 1px 6px; border-radius: 5px; }
+  .adcard { border: 1px solid var(--line); border-radius: 14px; background: var(--panel); padding: 14px 16px; display: grid; gap: 8px; max-width: 420px; }
+  .adcard .row { display: grid; grid-template-columns: 28px 1fr auto; align-items: center; gap: 10px; font-size: 15px; }
+  .adcard .fav { width: 28px; height: 28px; border-radius: 8px; background: var(--accent); }
+  .adcard .lbl { font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 1px 7px; }
+  .adcard .t { font-weight: 600; }
+  .adcard .d { font-size: 14.5px; color: var(--muted); }
+  ul.check { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  ul.check li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  ul.check li::before { content: "✓"; color: var(--good); font-weight: 700; }
+  ul.cross { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  ul.cross li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  ul.cross li::before { content: "✕"; color: var(--bad); font-weight: 700; }
+  .links { display: grid; gap: 6px; font-size: 15.5px; }
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  footer { padding-top: 26px; color: var(--muted); font-size: 14px; display: grid; gap: 4px; }
+  @media (max-width: 560px) { .stats { grid-template-columns: 1fr; } }
+</style>
+<style>
+ .copy{float:right;margin:-4px 0 6px 8px;font:600 13px 'IBM Plex Sans',sans-serif;padding:6px 12px;border-radius:8px;border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);cursor:pointer}
+ .blk{margin:12px 0}
+ @media print{.copy{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Giveaway · from the reel</p>
+    <h1>Ponytail kit</h1>
+    <p class="lede">AI se kam aur saaf code likhwao. <b>Ponytail</b> by DietrichGebert is a free, open-source (MIT) skill that makes your AI coding agent think like "the laziest senior dev in the room". Repo: <a href="https://github.com/DietrichGebert/ponytail">github.com/DietrichGebert/ponytail</a></p>
+  </header>
+
+  <div class="part"><p class="eyebrow">Option 1</p><h2>Plugin install (Claude Code)</h2></div>
+  <section>
+    <p>Send these as <b>two separate prompts</b> inside Claude Code:</p>
+    <div class="blk"><button class="copy" data-t="c1">Copy</button><pre><code id="c1">/plugin marketplace add DietrichGebert/ponytail</code></pre></div>
+    <div class="blk"><button class="copy" data-t="c2">Copy</button><pre><code id="c2">/plugin install ponytail@ponytail</code></pre></div>
+    <p>Codex, Copilot CLI, Cursor and more: the install steps for each tool are in the <a href="https://github.com/DietrichGebert/ponytail#install">repo README</a>.</p>
+  </section>
+
+  <div class="part"><p class="eyebrow">Option 2 · company blocks outside plugins</p><h2>Paste this into CLAUDE.md</h2></div>
+  <section>
+    <p>Put it in <span class="path">CLAUDE.md</span> at your project root (or <span class="path">~/.claude/CLAUDE.md</span> for all projects).</p>
+    <div class="blk"><button class="copy" data-t="c3">Copy</button><pre><code id="c3">## Write the minimum code (lazy senior dev rule)
+
+Before writing any code, stop at the FIRST step that solves the task:
+
+1. Does this need to exist? If not, skip it and say why.
+2. Is it already in this codebase? Reuse it, don&#x27;t rewrite it.
+3. Does the language&#x27;s standard library do it? Use that.
+4. Does the platform do it natively (&lt;input type=&quot;date&quot;&gt;, Intl.NumberFormat, structuredClone)? Use that.
+5. Does an already-installed dependency do it? Use that. Never add a new package for one function.
+6. Can it be one line? Write one line.
+7. Only then: write the minimum that works.
+
+Read the code you are changing first. Be lazy about the solution, never about understanding the problem.
+Never cut: input validation at trust boundaries, error handling that prevents data loss, security, accessibility.</code></pre></div>
+  </section>
+
+  <div class="part"><p class="eyebrow">Codex · Cursor · Copilot</p><h2>Same text in AGENTS.md</h2></div>
+  <section>
+    <p>Save the same block as <span class="path">AGENTS.md</span> at your project root. These tools read it automatically.</p>
+  </section>
+
+  <div class="part"><p class="eyebrow">Claude skill</p><h2>SKILL.md</h2></div>
+  <section>
+    <p>Save as <span class="path">.claude/skills/lazy-senior/SKILL.md</span> in your project:</p>
+    <div class="blk"><button class="copy" data-t="c4">Copy</button><pre><code id="c4">---
+name: lazy-senior
+description: Use before writing or changing code. Makes you pick the smallest correct solution (reuse, stdlib, native feature, installed dependency) before writing new code, without dropping validation, error handling, security or accessibility.
+---
+
+## Write the minimum code (lazy senior dev rule)
+
+Before writing any code, stop at the FIRST step that solves the task:
+
+1. Does this need to exist? If not, skip it and say why.
+2. Is it already in this codebase? Reuse it, don&#x27;t rewrite it.
+3. Does the language&#x27;s standard library do it? Use that.
+4. Does the platform do it natively (&lt;input type=&quot;date&quot;&gt;, Intl.NumberFormat, structuredClone)? Use that.
+5. Does an already-installed dependency do it? Use that. Never add a new package for one function.
+6. Can it be one line? Write one line.
+7. Only then: write the minimum that works.
+
+Read the code you are changing first. Be lazy about the solution, never about understanding the problem.
+Never cut: input validation at trust boundaries, error handling that prevents data loss, security, accessibility.</code></pre></div>
+  </section>
+
+  <div class="part"><p class="eyebrow">Honest notes</p><h2>Read before you trust the numbers</h2></div>
+  <section>
+    <ul>
+      <li>54% less code, 20% cheaper, 27% faster and "safety tests passed" are the <b>creator's own benchmark</b>: 12 feature tasks on one FastAPI + React repo, Claude Haiku 4.5, n=4. Not a guarantee for your project.</li>
+      <li>Savings are big where AI over-builds (colour picker 287 → 23 lines) and near zero where the code is already minimal.</li>
+      <li>The pasted rule is a lighter version of the plugin. The plugin also runs hooks that keep it active every session.</li>
+      <li>The README says on some models cost can go up.</li>
+    </ul>
+  </section>
+
+  <div class="part"><p class="eyebrow">Sources</p><h2>Links</h2></div>
+  <section>
+    <ul>
+      <li><a href="https://github.com/DietrichGebert/ponytail">Ponytail repo</a></li>
+      <li><a href="https://github.com/DietrichGebert/ponytail/blob/main/benchmarks/results/2026-06-18-agentic.md">Creator's benchmark write-up</a></li>
+      <li><a href="https://blog.scottlogic.com/2026/06/16/ponytail-yagni-and-the-problem-with-prompt-benchmarks.html">The public critique (Scott Logic)</a></li>
+      <li><a href="https://www.infoq.com/news/2026/08/ponytail-agent-skill-benchmark/">InfoQ on the fix</a></li>
+    </ul>
+    <p class="lede" style="font-size:14px;margin-top:14px">Rule text adapted from Ponytail's decision ladder (MIT licence, © DietrichGebert). Made by @shashikant.ai</p>
+  </section>
+</div>
+<script>
+document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', () => {
+  const t = document.getElementById(b.dataset.t).innerText;
+  (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(() => {
+    b.textContent = 'Copied ✓'; setTimeout(() => b.textContent = 'Copy', 1500);
+  }).catch(() => {});
+}));
+</script>
+</body>
+</html>
