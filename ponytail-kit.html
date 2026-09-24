@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Ponytail kit: install commands, a copy-paste CLAUDE.md / AGENTS.md rule and a Claude skill file that make your AI write less, cleaner code.">
-<title>Ponytail kit</title>
+<meta name="description" content="Ponytail complete guide: what it is, how it works, real examples, honest benchmark numbers, install for Claude Code, Codex, Copilot and Cursor, CLAUDE.md rule, commands, uninstall and FAQ.">
+<title>Ponytail guide</title>
 <style>
   img { max-width: 100%; }
   @media print {
@@ -102,29 +102,82 @@
 <style>
  .copy{float:right;margin:-4px 0 6px 8px;font:600 13px 'IBM Plex Sans',sans-serif;padding:6px 12px;border-radius:8px;border:1.5px solid var(--ink);background:var(--panel);color:var(--ink);cursor:pointer}
  .blk{margin:12px 0}
- @media print{.copy{display:none}}
+ .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+ .toc a{font-size:14px;padding:5px 11px;border:1.5px solid var(--line);border-radius:999px;text-decoration:none;color:var(--ink)}
+ details{border:1.5px solid var(--line);border-radius:10px;padding:10px 14px;margin:10px 0;background:var(--panel)}
+ summary{font-weight:600;cursor:pointer}
+ details p{margin-top:8px}
+ .note{font-size:14px;color:var(--muted);margin-top:10px}
+ h3{margin-top:18px}
+ td code{white-space:normal;word-break:break-word}
+ .tablewrap{overflow-x:auto}
+ @media print{.copy,.toc{display:none} details{break-inside:avoid} details>*{display:block}}
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <p class="eyebrow">Giveaway · from the reel</p>
-    <h1>Ponytail kit</h1>
-    <p class="lede">AI se kam aur saaf code likhwao. <b>Ponytail</b> by DietrichGebert is a free, open-source (MIT) skill that makes your AI coding agent think like "the laziest senior dev in the room". Repo: <a href="https://github.com/DietrichGebert/ponytail">github.com/DietrichGebert/ponytail</a></p>
+    <p class="eyebrow">From the reel · complete guide</p>
+    <h1>Ponytail: make your AI write less code</h1>
+    <p class="lede">Everything about Ponytail in one page: what it is, how it works, honest numbers, install for every tool, the CLAUDE.md rule if you can't install plugins, and answers to common questions.</p>
+    <nav class="toc"><a href="#what">What is it</a><a href="#how">How it works</a><a href="#examples">Examples</a><a href="#numbers">Numbers</a><a href="#install">Install</a><a href="#commands">Commands</a><a href="#noplugin">No plugin?</a><a href="#uninstall">Uninstall</a><a href="#faq">FAQ</a></nav>
   </header>
-
-  <div class="part"><p class="eyebrow">Option 1</p><h2>Plugin install (Claude Code)</h2></div>
-  <section>
-    <p>Send these as <b>two separate prompts</b> inside Claude Code:</p>
-    <div class="blk"><button class="copy" data-t="c1">Copy</button><pre><code id="c1">/plugin marketplace add DietrichGebert/ponytail</code></pre></div>
-    <div class="blk"><button class="copy" data-t="c2">Copy</button><pre><code id="c2">/plugin install ponytail@ponytail</code></pre></div>
-    <p>Codex, Copilot CLI, Cursor and more: the install steps for each tool are in the <a href="https://github.com/DietrichGebert/ponytail#install">repo README</a>.</p>
-  </section>
-
-  <div class="part"><p class="eyebrow">Option 2 · company blocks outside plugins</p><h2>Paste this into CLAUDE.md</h2></div>
-  <section>
-    <p>Put it in <span class="path">CLAUDE.md</span> at your project root (or <span class="path">~/.claude/CLAUDE.md</span> for all projects).</p>
-    <div class="blk"><button class="copy" data-t="c3">Copy</button><pre><code id="c3">## Write the minimum code (lazy senior dev rule)
+<div class="part" id="what"><p class="eyebrow">Start here</p><h2>What is Ponytail?</h2></div>
+<section>
+<p><b>Ponytail</b> is a free, open-source (MIT) skill for AI coding agents, made by <a href="https://github.com/DietrichGebert">DietrichGebert</a>. It makes your AI think like "the laziest senior dev in the room": before writing code, it checks whether the code is even needed, and whether something that already exists can do the job.</p>
+<ul>
+<li><b>145K+ GitHub stars</b> (created June 2026), #1 GitHub trending repo of the day, week and month.</li>
+<li>Works with <b>Claude Code, Codex, GitHub Copilot, Cursor</b>, Gemini CLI, OpenCode, Windsurf, Cline and ~20 agents in total.</li>
+<li>Its rule: <i>"The best code is the code you never wrote."</i> But lazy, not careless: it never cuts validation, error handling, security or accessibility.</li>
+</ul></section>
+<div class="part" id="how"><p class="eyebrow">The idea</p><h2>How it works: the 7-step ladder</h2></div>
+<section>
+<p>Before writing code, the agent stops at the <b>first</b> step that solves the task:</p>
+<div class="blk"><button class="copy" data-t="c1">Copy</button><pre><code id="c1">1. Does this need to exist?   → no: skip it (YAGNI)
+2. Already in this codebase?  → reuse it, don&#x27;t rewrite
+3. Stdlib does it?            → use it
+4. Native platform feature?   → use it
+5. Installed dependency?      → use it
+6. One line?                  → one line
+7. Only then: the minimum that works</code></pre></div>
+<p>It reads the code it is changing first, then picks the rung. <b>Lazy about the solution, never about understanding the problem.</b></p></section>
+<div class="part" id="examples"><p class="eyebrow">Real examples</p><h2>What normal AI writes vs what Ponytail picks</h2></div>
+<section><div class="tablewrap"><table><tr><th>Task</th><th>Normal AI</th><th>With Ponytail</th></tr><tr><td>Date picker</td><td>installs a library, writes a wrapper component + stylesheet</td><td><code>&lt;input type=&quot;date&quot;&gt;</code></td></tr><tr><td>Colour picker</td><td>custom component (287 lines in the benchmark)</td><td><code>&lt;input type=&quot;color&quot;&gt;</code></td></tr><tr><td>Deep copy an object</td><td>npm install lodash → cloneDeep</td><td><code>const copy = structuredClone(original);</code></td></tr><tr><td>Show ₹12,34,567</td><td>npm install numeral</td><td><code>new Intl.NumberFormat(&quot;en-IN&quot;, { style: &quot;currency&quot;, currency: &quot;INR&quot; }).format(1234567)</code></td></tr><tr><td>Group a list by status</td><td>lodash groupBy or a hand-written reduce</td><td><code>Object.groupBy(orders, o =&gt; o.status)</code></td></tr><tr><td>Read URL parameters</td><td>npm install query-string</td><td><code>new URLSearchParams(location.search).get(&quot;page&quot;)</code></td></tr></table></div><p class="note">Examples from the Ponytail repo's <code>examples/</code> folder; the ₹ (en-IN) version is ours.</p></section>
+<div class="part" id="numbers"><p class="eyebrow">Honest numbers</p><h2>Does it really cut code?</h2></div>
+<section>
+<p>From the <b>creator's own benchmark</b>: real Claude Code sessions on a FastAPI + React repo, 12 feature tasks, Claude Haiku 4.5, 4 runs each, compared with the same agent with no skill.</p>
+<div class="tablewrap"><table><tr><th></th><th>Code (lines)</th><th>Tokens</th><th>Cost</th><th>Time</th><th>Safety tests</th></tr><tr><td>Ponytail</td><td>−54%</td><td>−22%</td><td>−20%</td><td>−27%</td><td>100% passed</td></tr></table></div>
+<ul>
+<li><b>Big wins</b> where AI over-builds: date picker 404 → 23 lines, colour picker 287 → 23, file dropzone 251 → 95.</li>
+<li><b>Almost no change</b> where the code is already minimal (simple backend endpoints).</li>
+<li>The README says on some models (e.g. GPT-5.5) cost can go <b>up</b>, because the model spends extra thinking on the ladder.</li>
+<li><b>The story:</b> the first claim was "80–94% less code". Colin Eberhardt (CTO, Scott Logic) showed that benchmark was unfair. The creator re-tested properly and published the lower, honest 54%.</li>
+</ul></section>
+<div class="part" id="install"><p class="eyebrow">Install</p><h2>Install it in your tool</h2></div>
+<section>
+<h3>Claude Code</h3><p>Send these as <b>two separate prompts</b> inside Claude Code (also works in the Desktop app's Code tab):</p>
+<div class="blk"><button class="copy" data-t="c2">Copy</button><pre><code id="c2">/plugin marketplace add DietrichGebert/ponytail</code></pre></div><div class="blk"><button class="copy" data-t="c3">Copy</button><pre><code id="c3">/plugin install ponytail@ponytail</code></pre></div>
+<p>Needs <code>node</code> on your PATH for its two small hooks.</p>
+<h3>Codex (CLI + desktop app)</h3>
+<div class="blk"><button class="copy" data-t="c4">Copy</button><pre><code id="c4">codex plugin marketplace add DietrichGebert/ponytail
+codex plugin add ponytail@ponytail</code></pre></div>
+<p>Then run <code>codex</code>, open <code>/hooks</code>, trust its two hooks, start a new thread.</p>
+<h3>GitHub Copilot CLI</h3>
+<div class="blk"><button class="copy" data-t="c5">Copy</button><pre><code id="c5">copilot plugin marketplace add DietrichGebert/ponytail
+copilot plugin install ponytail@ponytail</code></pre></div>
+<h3>Cursor</h3>
+<div class="blk"><button class="copy" data-t="c6">Copy</button><pre><code id="c6">git clone https://github.com/DietrichGebert/ponytail
+node ponytail/scripts/cursor-hooks.js install</code></pre></div>
+<p>Or the rule-only way: copy <code>.cursor/rules/</code> from the repo into your project.</p>
+<h3>Windsurf, Cline, Copilot Chat (VS Code / JetBrains), Kiro, Zed, Aider…</h3>
+<p>Copy the matching rules file from the repo (<code>.windsurf/rules/</code>, <code>.clinerules/</code>, <code>.github/copilot-instructions.md</code>, <code>AGENTS.md</code>, <code>.kiro/steering/</code>). VS Code's Codex extension, Amp and Jules read <code>AGENTS.md</code> automatically.</p>
+<p>All tools: <a href="https://github.com/DietrichGebert/ponytail#install">github.com/DietrichGebert/ponytail#install</a></p></section>
+<div class="part" id="commands"><p class="eyebrow">Use it</p><h2>Commands</h2></div>
+<section><div class="tablewrap"><table><tr><th>Command</th><th>What it does</th></tr><tr><td><code>/ponytail lite | full | ultra | off</code></td><td>Set how strict it is, or turn it off. Default is <b>full</b>.</td></tr><tr><td><code>/ponytail-review</code></td><td>Reviews your current diff and gives a delete-list of over-engineering.</td></tr><tr><td><code>/ponytail-audit</code></td><td>Checks the whole repo for over-engineering.</td></tr><tr><td><code>/ponytail-debt</code></td><td>Collects the shortcuts it deferred, so 'later' doesn't become 'never'.</td></tr><tr><td><code>/ponytail-help</code></td><td>Quick reference.</td></tr></table></div><p class="note">Commands work in Claude Code, Codex (use <code>@ponytail-review</code>), Gemini, OpenCode and other skill-capable tools. Rule-file installs (Windsurf, Cline, Copilot Chat) get the rule without commands.</p></section>
+<div class="part" id="noplugin"><p class="eyebrow">Company blocks outside plugins?</p><h2>Paste the rule instead (no code, nothing to install)</h2></div>
+<section>
+<p>Put this in <code>CLAUDE.md</code> at your project root (or <code>~/.claude/CLAUDE.md</code> for all projects). For Codex, Cursor, Copilot, Amp, Jules: save the same text as <code>AGENTS.md</code>.</p>
+<div class="blk"><button class="copy" data-t="c7">Copy</button><pre><code id="c7">## Write the minimum code (lazy senior dev rule)
 
 Before writing any code, stop at the FIRST step that solves the task:
 
@@ -138,17 +191,8 @@ Before writing any code, stop at the FIRST step that solves the task:
 
 Read the code you are changing first. Be lazy about the solution, never about understanding the problem.
 Never cut: input validation at trust boundaries, error handling that prevents data loss, security, accessibility.</code></pre></div>
-  </section>
-
-  <div class="part"><p class="eyebrow">Codex · Cursor · Copilot</p><h2>Same text in AGENTS.md</h2></div>
-  <section>
-    <p>Save the same block as <span class="path">AGENTS.md</span> at your project root. These tools read it automatically.</p>
-  </section>
-
-  <div class="part"><p class="eyebrow">Claude skill</p><h2>SKILL.md</h2></div>
-  <section>
-    <p>Save as <span class="path">.claude/skills/lazy-senior/SKILL.md</span> in your project:</p>
-    <div class="blk"><button class="copy" data-t="c4">Copy</button><pre><code id="c4">---
+<h3>Or as a Claude skill</h3><p>Save as <code>.claude/skills/lazy-senior/SKILL.md</code> in your project:</p>
+<div class="blk"><button class="copy" data-t="c8">Copy</button><pre><code id="c8">---
 name: lazy-senior
 description: Use before writing or changing code. Makes you pick the smallest correct solution (reuse, stdlib, native feature, installed dependency) before writing new code, without dropping validation, error handling, security or accessibility.
 ---
@@ -167,28 +211,20 @@ Before writing any code, stop at the FIRST step that solves the task:
 
 Read the code you are changing first. Be lazy about the solution, never about understanding the problem.
 Never cut: input validation at trust boundaries, error handling that prevents data loss, security, accessibility.</code></pre></div>
-  </section>
+<p class="note">This is a lighter version: the plugin also runs hooks that keep it active every session and adds the commands. The creator's own data shows a short pasted prompt works less consistently than the full skill, so review what your AI writes. Rule text adapted from Ponytail's ladder (MIT, © DietrichGebert).</p></section>
+<div class="part" id="uninstall"><p class="eyebrow">Remove it</p><h2>Uninstall</h2></div>
+<section><div class="tablewrap"><table><tr><th>Tool</th><th>Command</th></tr><tr><td>Claude Code</td><td><code>/plugin remove ponytail</code></td></tr><tr><td>Codex</td><td><code>codex plugin remove ponytail</code></td></tr><tr><td>Cursor hooks</td><td><code>node scripts/cursor-hooks.js uninstall</code></td></tr><tr><td>Rule files (Cursor rule, Windsurf, Cline…)</td><td>Delete the copied file</td></tr></table></div><p class="note">To also clean its small settings files, run <code>node scripts/uninstall.js</code> from the repo <b>before</b> removing the plugin.</p></section>
+<div class="part" id="faq"><p class="eyebrow">Questions people ask</p><h2>FAQ</h2></div>
+<section><details><summary>Is it free?</summary><p>Yes. MIT licence, no account, no API key. Ponytail itself costs nothing; your AI tool's plan stays the same.</p></details><details><summary>Is it safe to install?</summary><p>It's open source, so you can read every line. The Claude Code / Codex plugin runs two tiny Node.js hooks that add the rule to each session. If your company doesn't allow that, use the paste-the-rule option above: it's plain text, no code runs.</p></details><details><summary>Will it break or delete my existing code?</summary><p>No. It changes how the AI writes <b>new</b> code. It doesn't touch files on its own. Always review the diff like you normally would.</p></details><details><summary>Does it really save tokens and money?</summary><p>In the creator's benchmark: about 22% fewer tokens and 20% lower cost on Claude Haiku 4.5. On other models it varies, and on some it can cost more. Test it on your own project.</p></details><details><summary>My project uses a design system (shadcn, MUI…). Will it ignore it?</summary><p>Step 2 of the ladder is 'already in this codebase? reuse it', which comes before native browser features, so it should reuse your components. This case isn't in the benchmark, so check its first few changes.</p></details><details><summary>Does it make the AI lazy about security?</summary><p>No. The rule says validation, data-loss handling, security and accessibility are never cut. In the creator's safety tests it passed 100%; a plain 'write one-liners' prompt dropped one guard.</p></details><details><summary>Can I turn it off for one task?</summary><p>Yes: <code>/ponytail off</code>, or <code>/ponytail lite</code> for a softer version.</p></details><details><summary>Does it work with caveman (the short-answers skill)?</summary><p>Yes, the README recommends it. Caveman shortens what the AI says; Ponytail shortens what it builds.</p></details><details><summary>Why 'Ponytail'?</summary><p>Every office has that one senior dev with a ponytail who replaces your 50 lines with one. Ponytail puts him inside your AI.</p></details></section>
+<div class="part" id="links"><p class="eyebrow">Sources</p><h2>Links</h2></div>
+<section><ul>
+<li><a href="https://github.com/DietrichGebert/ponytail">Ponytail on GitHub</a></li>
+<li><a href="https://github.com/DietrichGebert/ponytail/blob/main/benchmarks/results/2026-06-18-agentic.md">Creator's benchmark write-up</a></li>
+<li><a href="https://blog.scottlogic.com/2026/06/16/ponytail-yagni-and-the-problem-with-prompt-benchmarks.html">The critique: "Ponytail? YAGNI!" (Scott Logic)</a></li>
+<li><a href="https://www.infoq.com/news/2026/08/ponytail-agent-skill-benchmark/">InfoQ: Ponytail corrects its own benchmark</a></li>
+</ul>
+<p class="note">Guide by @shashikant.ai · facts checked 24 Sep 2026. Stars and features change; the GitHub repo is the source of truth.</p></section>
 
-  <div class="part"><p class="eyebrow">Honest notes</p><h2>Read before you trust the numbers</h2></div>
-  <section>
-    <ul>
-      <li>54% less code, 20% cheaper, 27% faster and "safety tests passed" are the <b>creator's own benchmark</b>: 12 feature tasks on one FastAPI + React repo, Claude Haiku 4.5, n=4. Not a guarantee for your project.</li>
-      <li>Savings are big where AI over-builds (colour picker 287 → 23 lines) and near zero where the code is already minimal.</li>
-      <li>The pasted rule is a lighter version of the plugin. The plugin also runs hooks that keep it active every session.</li>
-      <li>The README says on some models cost can go up.</li>
-    </ul>
-  </section>
-
-  <div class="part"><p class="eyebrow">Sources</p><h2>Links</h2></div>
-  <section>
-    <ul>
-      <li><a href="https://github.com/DietrichGebert/ponytail">Ponytail repo</a></li>
-      <li><a href="https://github.com/DietrichGebert/ponytail/blob/main/benchmarks/results/2026-06-18-agentic.md">Creator's benchmark write-up</a></li>
-      <li><a href="https://blog.scottlogic.com/2026/06/16/ponytail-yagni-and-the-problem-with-prompt-benchmarks.html">The public critique (Scott Logic)</a></li>
-      <li><a href="https://www.infoq.com/news/2026/08/ponytail-agent-skill-benchmark/">InfoQ on the fix</a></li>
-    </ul>
-    <p class="lede" style="font-size:14px;margin-top:14px">Rule text adapted from Ponytail's decision ladder (MIT licence, © DietrichGebert). Made by @shashikant.ai</p>
-  </section>
 </div>
 <script>
 document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', () => {
@@ -197,6 +233,7 @@ document.querySelectorAll('.copy').forEach(b => b.addEventListener('click', () =
     b.textContent = 'Copied ✓'; setTimeout(() => b.textContent = 'Copy', 1500);
   }).catch(() => {});
 }));
+window.addEventListener('beforeprint', () => document.querySelectorAll('details').forEach(d => d.open = true));
 </script>
 </body>
 </html>
