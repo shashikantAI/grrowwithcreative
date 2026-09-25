@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Ponytail complete guide: what it is, how it works, real examples, honest benchmark numbers, install for Claude Code, Codex, Copilot and Cursor, CLAUDE.md rule, commands, uninstall and FAQ.">
+<meta name="description" content="Ponytail complete guide: what it is, how it works, real examples, honest benchmark numbers, install for Claude Code, Codex, Copilot, Cursor, OpenCode, Gemini CLI and more, CLAUDE.md rule, commands, uninstall and FAQ.">
 <title>Ponytail guide</title>
 <style>
   img { max-width: 100%; }
@@ -169,6 +169,16 @@ copilot plugin install ponytail@ponytail</code></pre></div>
 <div class="blk"><button class="copy" data-t="c6">Copy</button><pre><code id="c6">git clone https://github.com/DietrichGebert/ponytail
 node ponytail/scripts/cursor-hooks.js install</code></pre></div>
 <p>Or the rule-only way: copy <code>.cursor/rules/</code> from the repo into your project.</p>
+<h3>OpenCode</h3><p>Add this to your <code>opencode.json</code>:</p>
+<div class="blk"><button class="copy" data-t="c7">Copy</button><pre><code id="c7">{ &quot;plugin&quot;: [&quot;@dietrichgebert/ponytail&quot;] }</code></pre></div>
+<p>Adds the rule every turn plus the <code>/ponytail</code> commands and <code>lite / full / ultra / off</code> levels. OpenCode also reads <code>AGENTS.md</code>, so copying that file alone gives you the rule without the plugin.</p>
+<h3>Gemini CLI</h3>
+<div class="blk"><button class="copy" data-t="c8">Copy</button><pre><code id="c8">gemini extensions install https://github.com/DietrichGebert/ponytail</code></pre></div>
+<h3>Antigravity CLI (new name of Gemini CLI)</h3>
+<div class="blk"><button class="copy" data-t="c9">Copy</button><pre><code id="c9">agy plugin install https://github.com/DietrichGebert/ponytail</code></pre></div>
+<p>Type the commands as chat messages (e.g. <code>/ponytail-review</code>).</p>
+<h3>More agents (one command each)</h3>
+<div class="tablewrap"><table><tr><td>Pi agent</td><td><code>pi install git:github.com/DietrichGebert/ponytail</code></td></tr><tr><td>Devin CLI</td><td><code>devin plugins install DietrichGebert/ponytail</code></td></tr><tr><td>Hermes Agent</td><td><code>hermes plugins install DietrichGebert/ponytail --enable</code> (restart Hermes)</td></tr><tr><td>Grok Build</td><td><code>grok plugin install DietrichGebert/ponytail --trust</code>, then enable it in <code>/plugins</code></td></tr><tr><td>OpenClaw</td><td><code>clawhub install ponytail</code></td></tr><tr><td>Swival</td><td><code>swival skills add --global https://github.com/DietrichGebert/ponytail</code> then <code>swival skills add ponytail</code></td></tr><tr><td>Qoder, CodeWhale</td><td>Zero setup: copy the repo's <code>AGENTS.md</code> into your project</td></tr></table></div>
 <h3>Windsurf, Cline, Copilot Chat (VS Code / JetBrains), Kiro, Zed, Aider…</h3>
 <p>Copy the matching rules file from the repo (<code>.windsurf/rules/</code>, <code>.clinerules/</code>, <code>.github/copilot-instructions.md</code>, <code>AGENTS.md</code>, <code>.kiro/steering/</code>). VS Code's Codex extension, Amp and Jules read <code>AGENTS.md</code> automatically.</p>
 <p>All tools: <a href="https://github.com/DietrichGebert/ponytail#install">github.com/DietrichGebert/ponytail#install</a></p></section>
@@ -177,7 +187,7 @@ node ponytail/scripts/cursor-hooks.js install</code></pre></div>
 <div class="part" id="noplugin"><p class="eyebrow">Company blocks outside plugins?</p><h2>Paste the rule instead (no code, nothing to install)</h2></div>
 <section>
 <p>Put this in <code>CLAUDE.md</code> at your project root (or <code>~/.claude/CLAUDE.md</code> for all projects). For Codex, Cursor, Copilot, Amp, Jules: save the same text as <code>AGENTS.md</code>.</p>
-<div class="blk"><button class="copy" data-t="c7">Copy</button><pre><code id="c7">## Write the minimum code (lazy senior dev rule)
+<div class="blk"><button class="copy" data-t="c10">Copy</button><pre><code id="c10">## Write the minimum code (lazy senior dev rule)
 
 Before writing any code, stop at the FIRST step that solves the task:
 
@@ -192,7 +202,7 @@ Before writing any code, stop at the FIRST step that solves the task:
 Read the code you are changing first. Be lazy about the solution, never about understanding the problem.
 Never cut: input validation at trust boundaries, error handling that prevents data loss, security, accessibility.</code></pre></div>
 <h3>Or as a Claude skill</h3><p>Save as <code>.claude/skills/lazy-senior/SKILL.md</code> in your project:</p>
-<div class="blk"><button class="copy" data-t="c8">Copy</button><pre><code id="c8">---
+<div class="blk"><button class="copy" data-t="c11">Copy</button><pre><code id="c11">---
 name: lazy-senior
 description: Use before writing or changing code. Makes you pick the smallest correct solution (reuse, stdlib, native feature, installed dependency) before writing new code, without dropping validation, error handling, security or accessibility.
 ---
