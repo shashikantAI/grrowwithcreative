@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="MCP starter guide: API vs MCP, how it works, 10-minute Claude Desktop setup, servers to install first, build your own in Python.">
+<title>MCP Starter Guide</title>
+<style>
+  img { max-width: 100%; }
+  @media print {
+    body { font-size: 12.5px; }
+    .wrap { max-width: 100%; padding: 0; }
+    pre { white-space: pre-wrap; word-break: break-word; }
+    section { break-inside: avoid; }
+    a { color: inherit; text-decoration: underline; }
+  }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root {
+    --paper: #f6f7f5;
+    --ink: #131a20;
+    --muted: #5b6670;
+    --line: #d9dee2;
+    --panel: #ffffff;
+    --code-bg: #0f151b;
+    --code-ink: #e6edf3;
+    --accent: #1f5fbf;
+    --accent-ink: #ffffff;
+    --amber: #d99400;
+    --amber-soft: rgba(217, 148, 0, 0.14);
+    --good: #1f8a5b;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0f1418;
+      --ink: #e9eef2;
+      --muted: #97a3ad;
+      --line: #27323b;
+      --panel: #161d24;
+      --code-bg: #0a0e12;
+      --code-ink: #e6edf3;
+      --accent: #6ea3ff;
+      --accent-ink: #0b1220;
+      --amber: #f0b429;
+      --amber-soft: rgba(240, 180, 41, 0.16);
+      --good: #4ccb8f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0f1418;
+    --ink: #e9eef2;
+    --muted: #97a3ad;
+    --line: #27323b;
+    --panel: #161d24;
+    --code-bg: #0a0e12;
+    --code-ink: #e6edf3;
+    --accent: #6ea3ff;
+    --accent-ink: #0b1220;
+    --amber: #f0b429;
+    --amber-soft: rgba(240, 180, 41, 0.16);
+    --good: #4ccb8f;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 22px 80px; }
+  h1, h2, h3 { font-family: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif; text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(38px, 7vw, 56px); font-weight: 800; line-height: 1.02; letter-spacing: -0.02em; }
+  h2 { font-size: 26px; font-weight: 700; letter-spacing: -0.01em; margin-top: 8px; }
+  h3 { font-size: 18px; font-weight: 700; }
+  p { margin: 0; }
+  .eyebrow { font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .lede { font-size: 19px; color: var(--muted); max-width: 60ch; }
+  header { display: grid; gap: 14px; padding-bottom: 28px; border-bottom: 2px solid var(--ink); }
+  .port {
+    display: inline-grid; grid-auto-flow: column; align-items: center; gap: 10px;
+    padding: 8px 14px; border: 1.5px solid var(--ink); border-radius: 999px;
+    font-family: "IBM Plex Mono", monospace; font-size: 13px; width: max-content;
+  }
+  .port i { display: block; width: 26px; height: 12px; border: 2px solid var(--ink); border-radius: 7px; }
+  section { display: grid; gap: 16px; padding: 34px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: 0; }
+  .one-line {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1.5px solid var(--ink); border-radius: 14px; overflow: hidden;
+  }
+  .one-line > div { padding: 18px 20px; display: grid; gap: 6px; }
+  .one-line > div + div { border-left: 1.5px solid var(--ink); }
+  .one-line b { font-family: "Bricolage Grotesque", sans-serif; font-size: 24px; font-weight: 800; }
+  .one-line .for { color: var(--muted); font-size: 15px; }
+  .one-line .mcp { background: var(--amber-soft); }
+  table { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+  th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  td:first-child { color: var(--muted); width: 26%; }
+  .tablewrap { overflow-x: auto; }
+  .flow {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; align-items: stretch;
+  }
+  .flow > div { padding: 14px 12px; border: 1px solid var(--line); background: var(--panel); display: grid; gap: 4px; }
+  .flow > div:first-child { border-radius: 12px 0 0 12px; }
+  .flow > div:last-child { border-radius: 0 12px 12px 0; }
+  .flow > div + div { border-left: 0; }
+  .flow b { font-family: "Bricolage Grotesque", sans-serif; font-size: 16px; }
+  .flow span { font-size: 13.5px; color: var(--muted); }
+  .flow .hub { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+  .flow .hub span { color: var(--accent-ink); opacity: 0.85; }
+  ol.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; display: grid; gap: 18px; }
+  ol.steps > li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; counter-increment: step; }
+  ol.steps > li::before {
+    content: counter(step); font-family: "Bricolage Grotesque", sans-serif; font-weight: 800; font-size: 22px;
+    color: var(--accent); line-height: 1.2;
+  }
+  ol.steps > li > div { display: grid; gap: 8px; }
+  pre {
+    margin: 0; background: var(--code-bg); color: var(--code-ink); padding: 14px 16px; border-radius: 10px;
+    overflow-x: auto; font-family: "IBM Plex Mono", Menlo, Consolas, monospace; font-size: 13.5px; line-height: 1.55;
+  }
+  code { font-family: "IBM Plex Mono", Menlo, Consolas, monospace; font-size: 0.92em; }
+  p code, li code, td code { background: var(--amber-soft); padding: 1px 6px; border-radius: 5px; }
+  .servers { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .servers > a {
+    display: grid; gap: 4px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 10px;
+    background: var(--panel); color: inherit; text-decoration: none;
+  }
+  .servers > a:hover, .servers > a:focus-visible { border-color: var(--accent); outline: none; }
+  .servers b { font-size: 15.5px; }
+  .servers span { font-size: 13.5px; color: var(--muted); }
+  ul.check { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  ul.check li { display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+  ul.check li::before { content: "✓"; color: var(--good); font-weight: 700; }
+  .links { display: grid; gap: 6px; font-size: 15.5px; }
+  a { color: var(--accent); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+  footer { padding-top: 26px; color: var(--muted); font-size: 14px; display: grid; gap: 4px; }
+  @media (max-width: 560px) {
+    .flow { grid-template-columns: 1fr 1fr; }
+    .flow > div:first-child { border-radius: 12px 0 0 0; }
+    .flow > div:nth-child(2) { border-radius: 0 12px 0 0; }
+    .flow > div:nth-child(3) { border-left: 1px solid var(--line); border-top: 0; border-radius: 0 0 0 12px; }
+    .flow > div:last-child { border-top: 0; border-radius: 0 0 12px 0; }
+    .servers { grid-template-columns: 1fr; }
+    .one-line { grid-template-columns: 1fr; }
+    .one-line > div + div { border-left: 0; border-top: 1.5px solid var(--ink); }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="port"><i></i> one port, any tool</span>
+    <h1>MCP Starter Guide</h1>
+    <p class="lede">Reel dekh ke aaye ho? Ye wahi starter guide hai. MCP kya hai, API se kaise alag hai, aur 10 minute mein pehla MCP server kaise chalate ho. No fluff.</p>
+  </header>
+
+  <section>
+    <p class="eyebrow">The one-line difference</p>
+    <div class="one-line">
+      <div><b>API</b><span class="for">written for developers</span><p>One door into one product. A developer decides what to call, when, and with which parameters.</p></div>
+      <div class="mcp"><b>MCP</b><span class="for">written for the model</span><p>A standard plug. The tool describes itself once; the model discovers it and decides what to call.</p></div>
+    </div>
+    <p>MCP does not replace APIs. Every MCP server still calls an API underneath. Anthropic's own docs put it in one sentence: <em>"Think of MCP like a USB-C port for AI applications."</em></p>
+  </section>
+
+  <section>
+    <p class="eyebrow">API vs MCP</p>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th></th><th>API</th><th>MCP</th></tr></thead>
+        <tbody>
+          <tr><td>Who calls it</td><td>Your code</td><td>The AI model, at runtime</td></tr>
+          <tr><td>Discovery</td><td>Read the docs, write the integration</td><td>Server lists its tools; the model reads them</td></tr>
+          <tr><td>10 tools × 5 AI apps</td><td>50 custom integrations</td><td>15 connections through one protocol</td></tr>
+          <tr><td>Where it runs</td><td>Wherever you deploy it</td><td>Locally (stdio) or remote (HTTP)</td></tr>
+          <tr><td>Owner</td><td>Each vendor</td><td>Open standard, Linux Foundation (Agentic AI Foundation) since Dec 2025</td></tr>
+          <tr><td>Adopted by</td><td>Everyone, for decades</td><td>Claude, ChatGPT, Gemini, Copilot, Cursor, VS Code</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">How it works</p>
+    <div class="flow">
+      <div><b>Host</b><span>Claude Desktop, ChatGPT, Cursor, VS Code</span></div>
+      <div><b>Client</b><span>Lives inside the host, one per server</span></div>
+      <div class="hub"><b>MCP server</b><span>Exposes tools, resources, prompts</span></div>
+      <div><b>Your stuff</b><span>Files, GitHub, Postgres, Slack, any API</span></div>
+    </div>
+    <p>A server offers three things: <strong>tools</strong> (functions the model can call), <strong>resources</strong> (data it can read), and <strong>prompts</strong> (reusable templates). Most servers you'll use are just tools.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">Try it in 10 minutes · Claude Desktop</p>
+    <ol class="steps">
+      <li><div><h3>Install Node.js</h3><p>Version 18 or newer from nodejs.org. Most servers run with <code>npx</code>, so this is the only prerequisite.</p></div></li>
+      <li><div><h3>Open the config file</h3><p>macOS: <code>~/Library/Application Support/Claude/claude_desktop_config.json</code><br>Windows: <code>%APPDATA%\Claude\claude_desktop_config.json</code><br>Create it if it doesn't exist.</p></div></li>
+      <li><div><h3>Add the filesystem server</h3><p>Replace the path with a folder you're happy to expose. Only the folders you list are visible.</p>
+<pre>{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "C:\\Users\\you\\Desktop"
+      ]
+    }
+  }
+}</pre></div></li>
+      <li><div><h3>Restart Claude Desktop</h3><p>A tools icon appears under the message box. Ask: <em>"List the files on my Desktop and summarise the newest one."</em> Claude asks permission before each tool call. That permission prompt is MCP working.</p></div></li>
+    </ol>
+    <p>Cursor and VS Code use the same JSON shape: Cursor reads <code>.cursor/mcp.json</code> in your project, VS Code reads <code>.vscode/mcp.json</code> (key is <code>servers</code> instead of <code>mcpServers</code>).</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">Servers worth installing first</p>
+    <div class="servers">
+      <a href="https://github.com/modelcontextprotocol/servers"><b>Filesystem</b><span>Read and edit files in allowed folders. The reference server.</span></a>
+      <a href="https://github.com/modelcontextprotocol/servers"><b>Git</b><span>Log, diff, commit from chat. Same reference repo.</span></a>
+      <a href="https://github.com/github/github-mcp-server"><b>GitHub</b><span>Issues, PRs, code search. Maintained by GitHub.</span></a>
+      <a href="https://github.com/microsoft/playwright-mcp"><b>Playwright</b><span>Drive a real browser: open pages, click, fill forms.</span></a>
+      <a href="https://github.com/modelcontextprotocol/servers"><b>Fetch</b><span>Pull a web page as clean markdown.</span></a>
+      <a href="https://github.com/modelcontextprotocol/servers"><b>Memory</b><span>A small knowledge graph the model can remember across chats.</span></a>
+      <a href="https://github.com/makenotion/notion-mcp-server"><b>Notion</b><span>Search and edit your workspace. Official Notion server.</span></a>
+      <a href="https://registry.modelcontextprotocol.io"><b>The registry</b><span>Thousands more, with namespace verification. Search before you build.</span></a>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Build your own in 12 lines · Python</p>
+    <p>The official SDK ships FastMCP. A function with a docstring becomes a tool the model can see.</p>
+<pre>pip install "mcp[cli]"</pre>
+<pre>from mcp.server.fastmcp import FastMCP
+
+mcp = FastMCP("my-tools")
+
+@mcp.tool()
+def gst_total(amount: float, rate: float = 18) -> float:
+    """Return the amount including GST at the given rate (%)."""
+    return round(amount * (1 + rate / 100), 2)
+
+if __name__ == "__main__":
+    mcp.run()</pre>
+<pre>mcp dev server.py      # opens the MCP Inspector to test the tool
+mcp install server.py  # registers it in Claude Desktop</pre>
+    <p>Type hints become the tool's schema, the docstring becomes its description. That description is the whole reason the model knows when to call it, so write it like you're explaining to a new hire.</p>
+  </section>
+
+  <section>
+    <p class="eyebrow">Before you connect anything</p>
+    <ul class="check">
+      <li>A server runs on your machine with your permissions. Install only ones you'd run as a script.</li>
+      <li>Least privilege: list only the folders, repos, or databases the job needs.</li>
+      <li>Read the tool call before approving it. The permission prompt exists for a reason.</li>
+      <li>Keep API keys in environment variables (the <code>env</code> field in the config), never in prompts.</li>
+      <li>MCP servers still hit APIs underneath, so rate limits and bills still apply.</li>
+    </ul>
+  </section>
+
+  <section>
+    <p class="eyebrow">Read next</p>
+    <div class="links">
+      <a href="https://modelcontextprotocol.io/docs/getting-started/intro">modelcontextprotocol.io — official docs and quickstart</a>
+      <a href="https://modelcontextprotocol.io/specification/latest">The specification (2026-07-28 release)</a>
+      <a href="https://www.anthropic.com/news/model-context-protocol">Anthropic's launch post, Nov 25 2024</a>
+      <a href="https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation">Linux Foundation: Agentic AI Foundation, Dec 9 2025</a>
+      <a href="https://github.com/modelcontextprotocol/python-sdk">Python SDK</a> · <a href="https://github.com/modelcontextprotocol/typescript-sdk">TypeScript SDK</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>From the reel "API vs MCP". Questions? Reply in DM.</p>
+    <p>Facts checked September 2026. Every claim above links to its source.</p>
+  </footer>
+</div>
+
+</body>
+</html>
