@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="DOTS kit from the @shashikant.ai reel: free Hermes Agent setup (from official docs) and AI agent safety rules.">
+<title>DOTS kit: Hermes setup</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root { --paper:#f7f5fc; --ink:#17122b; --muted:#5d5874; --line:#ddd8ea; --panel:#fff; --violet:#5b2ee0; --lime:#c6f432; --lime-ink:#16200a; --red:#d63b3b; --code-bg:#120d24; --code-ink:#ece8fb; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper:#0f0b1c; --ink:#eeeaf9; --muted:#a39dbd; --line:#2b2445; --panel:#17122b; --violet:#9b7bff; --code-bg:#0a0714; } }
+  :root[data-theme="dark"] { --paper:#0f0b1c; --ink:#eeeaf9; --muted:#a39dbd; --line:#2b2445; --panel:#17122b; --violet:#9b7bff; --code-bg:#0a0714; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:"IBM Plex Sans","Segoe UI",system-ui,sans-serif; font-size:17px; line-height:1.6; }
+  .wrap { max-width:760px; margin:0 auto; padding:44px 16px 80px; }
+  .hero { background:linear-gradient(135deg,#2a1570,#5b2ee0 60%,#8a5cff); color:#fff; border-radius:22px; padding:30px 24px; }
+  .by { font-family:"IBM Plex Mono",monospace; font-size:13px; opacity:.85; }
+  h1,h2 { font-family:"Bricolage Grotesque","Segoe UI",sans-serif; margin:0; text-wrap:balance; }
+  h1 { font-size:clamp(32px,7vw,48px); font-weight:800; line-height:1.04; letter-spacing:-.02em; margin:10px 0 10px; }
+  h1 mark { background:var(--lime); color:var(--lime-ink); padding:0 8px; border-radius:8px; }
+  .hero p { margin:0; opacity:.92; }
+  h2 { font-size:25px; font-weight:800; margin:40px 0 12px; }
+  h3 { font-family:"Bricolage Grotesque",sans-serif; font-size:18px; margin:22px 0 8px; color:var(--violet); }
+  ul.story { padding-left:20px; } ul.story li { margin:6px 0; }
+  .claim { background:var(--panel); border-left:4px solid var(--red); border-radius:10px; padding:12px 14px; margin-top:12px; font-size:15.5px; }
+  .links { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
+  .links a { display:block; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:12px 14px; color:inherit; text-decoration:none; }
+  .links a:hover { border-color:var(--violet); }
+  .links b { color:var(--violet); display:block; font-size:16.5px; }
+  .links span { color:var(--muted); font-size:14px; word-break:break-all; }
+  .tbl { width:100%; border-collapse:separate; border-spacing:0; background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; font-size:15.5px; }
+  .tbl th, .tbl td { padding:10px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  .tbl tr:last-child td { border-bottom:0; }
+  .tbl th { background:#2a1570; color:#fff; font-family:"Bricolage Grotesque",sans-serif; }
+  .win { background:var(--lime); color:var(--lime-ink); font-weight:600; }
+  .verdict { margin-top:12px; font-weight:600; }
+  pre { background:var(--code-bg); color:var(--code-ink); border-radius:14px; padding:16px; overflow-x:auto; font-family:"IBM Plex Mono",monospace; font-size:13.5px; line-height:1.55; }
+  .note { color:var(--muted); font-size:15px; }
+  footer { margin-top:36px; color:var(--muted); font-size:14.5px; }
+  footer strong { color:var(--ink); }
+</style>
+<style>code{font-family:"IBM Plex Mono",monospace;font-size:.9em;background:rgba(91,46,224,.1);padding:1px 5px;border-radius:5px} ol.story{padding-left:22px} ol.story li{margin:8px 0}</style></head>
+<body>
+<div class="wrap">
+<header class="hero">
+    <div class="by">@shashikant.ai · DOTS</div>
+    <h1>Free <mark>Hermes Agent</mark> setup + AI agent safety rules</h1>
+    <p>From the reel "OpenAI dots: 4 things nobody is telling you".</p>
+  </header>
+<p>By @shashikant.ai. From the reel &quot;OpenAI dots: 4 things nobody is telling you&quot;.</p>
+<div class="claim">Setup steps below are taken from Hermes Agent&#x27;s official docs (checked 30 Sep 2026). I have not tested them on my own machine yet.</div>
+<h2>OpenAI dots in 20 seconds</h2>
+<ul class="story">
+<li>Launched 29 Sep 2026: an always-on AI agent with its own cloud computer, connected to 4,000+ apps.</li>
+<li>To be useful it needs your apps (Gmail, Slack, calendar), so it can read your mails and chats, even when you are not using it (&quot;proactive research&quot;).</li>
+<li>Disconnecting an app does not erase what it already learned from it.</li>
+<li>Only on ChatGPT Pro ($100 / $200 / $500 a month) or Business Premium. No India date yet.</li>
+</ul>
+<h2>The free alternative: Hermes Agent</h2>
+<ul class="story">
+<li>Open source (MIT) by Nous Research, 250K+ GitHub stars: <a href="https://github.com/NousResearch/hermes-agent" target="_blank" rel="noopener">https://github.com/NousResearch/hermes-agent</a></li>
+<li>Runs on Windows, macOS, Linux, WSL2 and Android (Termux). Talk to it on Telegram, WhatsApp, Slack, Discord, Signal or email.</li>
+<li>The software is free. The AI model behind it is your choice: a paid API, a provider&#x27;s free tier, or a local model (Ollama) on your own PC.</li>
+</ul>
+<h3>1. Install</h3>
+<p>Windows (PowerShell):</p>
+<pre>iex (irm https://hermes-agent.nousresearch.com/install.ps1)</pre>
+<p>macOS / Linux / WSL2:</p>
+<pre>curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
+source ~/.bashrc</pre>
+<p>Or download the Hermes Desktop installer from <a href="https://hermes-agent.nousresearch.com" target="_blank" rel="noopener">https://hermes-agent.nousresearch.com</a></p>
+<h3>2. Pick a model</h3>
+<pre>hermes setup      # guided setup wizard
+hermes model      # choose the provider / model</pre>
+<p>Options include OpenRouter, OpenAI, Anthropic, Hugging Face, Nous Portal, or a local model through a custom endpoint (Ollama, vLLM). The docs say the model needs at least a 64K-token context window.</p>
+<h3>3. First chat</h3>
+<pre>hermes --tui</pre>
+<p>Success = the model name shows in the banner and it answers normally.</p>
+<h3>4. Connect Telegram or WhatsApp</h3>
+<pre>hermes gateway setup
+hermes gateway start</pre>
+<ul class="story">
+<li>Telegram: create a bot with BotFather and paste its token.</li>
+<li>WhatsApp: pair by scanning a QR code (Baileys bridge), or use the WhatsApp Cloud API with a Meta Business account.</li>
+<li>Only you should be able to talk to it. Either allowlist your user ID (e.g. <code>TELEGRAM_ALLOWED_USERS=123456789</code>) or approve people one by one:</li>
+</ul>
+<pre>hermes pairing approve telegram &lt;CODE&gt;
+hermes pairing list</pre>
+<p>By default it denies everyone who is not allowlisted or paired.</p>
+<p>Docs: <a href="https://hermes-agent.nousresearch.com/docs/getting-started/quickstart" target="_blank" rel="noopener">https://hermes-agent.nousresearch.com/docs/getting-started/quickstart</a> and <a href="https://hermes-agent.nousresearch.com/docs/user-guide/messaging" target="_blank" rel="noopener">https://hermes-agent.nousresearch.com/docs/user-guide/messaging</a></p>
+<h2>AI agent safety rules (dots, Hermes or any agent)</h2>
+<ol class="story">
+<li><strong>Keep approvals on.</strong> In Hermes, set <code>approvals.mode: manual</code> in <code>~/.hermes/config.yaml</code> while you learn, so it asks before running risky commands. Never use <code>/yolo</code>.</li>
+<li><strong>Connect only what the job needs.</strong> One app at a time, not &quot;everything&quot;.</li>
+<li><strong>No bank, UPI or password access</strong> until you trust it, and even then with a small limit.</li>
+<li><strong>Remember:</strong> disconnecting an app doesn&#x27;t erase what an agent already learned. Think before you connect.</li>
+<li><strong>Never allow all users</strong> on a bot (<code>GATEWAY_ALLOW_ALL_USERS=true</code> is for testing only).</li>
+<li><strong>Check what it did.</strong> Read its activity/history regularly.</li>
+</ol>
+<p>Security docs: <a href="https://hermes-agent.nousresearch.com/docs/user-guide/security" target="_blank" rel="noopener">https://hermes-agent.nousresearch.com/docs/user-guide/security</a></p>
+<p>Follow @shashikant.ai for more AI tools, explained honestly.</p>
+</div>
+</body>
+</html>
