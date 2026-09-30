@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Laya vs Jev: every source from the @shashikant.ai reel (papers, launch posts, the independent test), a quick comparison, and how to try Laya free.">
+<title>Laya vs Jev: links</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root { --paper:#f7f5fc; --ink:#17122b; --muted:#5d5874; --line:#ddd8ea; --panel:#fff; --violet:#5b2ee0; --lime:#c6f432; --lime-ink:#16200a; --red:#d63b3b; --code-bg:#120d24; --code-ink:#ece8fb; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --paper:#0f0b1c; --ink:#eeeaf9; --muted:#a39dbd; --line:#2b2445; --panel:#17122b; --violet:#9b7bff; --code-bg:#0a0714; } }
+  :root[data-theme="dark"] { --paper:#0f0b1c; --ink:#eeeaf9; --muted:#a39dbd; --line:#2b2445; --panel:#17122b; --violet:#9b7bff; --code-bg:#0a0714; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--paper); color:var(--ink); font-family:"IBM Plex Sans","Segoe UI",system-ui,sans-serif; font-size:17px; line-height:1.6; }
+  .wrap { max-width:760px; margin:0 auto; padding:44px 16px 80px; }
+  .hero { background:linear-gradient(135deg,#2a1570,#5b2ee0 60%,#8a5cff); color:#fff; border-radius:22px; padding:30px 24px; }
+  .by { font-family:"IBM Plex Mono",monospace; font-size:13px; opacity:.85; }
+  h1,h2 { font-family:"Bricolage Grotesque","Segoe UI",sans-serif; margin:0; text-wrap:balance; }
+  h1 { font-size:clamp(32px,7vw,48px); font-weight:800; line-height:1.04; letter-spacing:-.02em; margin:10px 0 10px; }
+  h1 mark { background:var(--lime); color:var(--lime-ink); padding:0 8px; border-radius:8px; }
+  .hero p { margin:0; opacity:.92; }
+  h2 { font-size:25px; font-weight:800; margin:40px 0 12px; }
+  h3 { font-family:"Bricolage Grotesque",sans-serif; font-size:18px; margin:22px 0 8px; color:var(--violet); }
+  ul.story { padding-left:20px; } ul.story li { margin:6px 0; }
+  .claim { background:var(--panel); border-left:4px solid var(--red); border-radius:10px; padding:12px 14px; margin-top:12px; font-size:15.5px; }
+  .links { list-style:none; padding:0; margin:0; display:grid; gap:8px; }
+  .links a { display:block; background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:12px 14px; color:inherit; text-decoration:none; }
+  .links a:hover { border-color:var(--violet); }
+  .links b { color:var(--violet); display:block; font-size:16.5px; }
+  .links span { color:var(--muted); font-size:14px; word-break:break-all; }
+  .tbl { width:100%; border-collapse:separate; border-spacing:0; background:var(--panel); border:1px solid var(--line); border-radius:14px; overflow:hidden; font-size:15.5px; }
+  .tbl th, .tbl td { padding:10px 12px; border-bottom:1px solid var(--line); text-align:left; vertical-align:top; }
+  .tbl tr:last-child td { border-bottom:0; }
+  .tbl th { background:#2a1570; color:#fff; font-family:"Bricolage Grotesque",sans-serif; }
+  .win { background:var(--lime); color:var(--lime-ink); font-weight:600; }
+  .verdict { margin-top:12px; font-weight:600; }
+  pre { background:var(--code-bg); color:var(--code-ink); border-radius:14px; padding:16px; overflow-x:auto; font-family:"IBM Plex Mono",monospace; font-size:13.5px; line-height:1.55; }
+  .note { color:var(--muted); font-size:15px; }
+  footer { margin-top:36px; color:var(--muted); font-size:14.5px; }
+  footer strong { color:var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div class="by">@shashikant.ai · LAYA</div>
+    <h1>Laya vs Jev: <mark>all the links</mark></h1>
+    <p>Every source from the reel, so you can check it yourself, plus how to try Laya free.</p>
+  </header>
+
+  <h2>The story in 30 seconds</h2>
+  <ul class="story">
+    <li><strong>Jev</strong> is a "System One" decision model by TypeSafe AI (founder Diogo Almeida, ex-OpenAI), launched 15 Sep 2026. It doesn't write text. It returns typed decisions with a confidence score.</li>
+    <li><strong>Laya</strong> is a free, open-source model by Nandakishor Mukkunnoth (ConvAI Innovations, Kasaragod, Kerala). It came out a few days later.</li>
+  </ul>
+  <div class="claim"><strong>His claim:</strong> he published the same core idea in a research paper in March 2025. This is a claim, not proven. TypeSafe has not replied publicly, and TypeSafe says it worked in stealth for two years.</div>
+
+  <h2>Sources</h2>
+  <h3>Jev (TypeSafe)</h3>
+  <ul class="links">
+    <li><a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev" target="_blank" rel="noopener"><b>Launch post ("After two years in stealth")</b><span>typesafe.ai/blog/introducing-system-one-models-and-jev</span></a></li>
+    <li><a href="https://docs.typesafe.ai/models" target="_blank" rel="noopener"><b>Models and pricing ($0.042 per 1M input tokens, output free)</b><span>docs.typesafe.ai/models</span></a></li>
+    <li><a href="https://vercel.com/blog/ai-gateway-jev-model-launch" target="_blank" rel="noopener"><b>Vercel: fastest-adopted model in AI Gateway history</b><span>vercel.com/blog/ai-gateway-jev-model-launch</span></a></li>
+  </ul>
+  <h3>Laya and the claim</h3>
+  <ul class="links">
+    <li><a href="https://github.com/NandhaKishorM/laya" target="_blank" rel="noopener"><b>Laya on GitHub (Apache 2.0)</b><span>github.com/NandhaKishorM/laya</span></a></li>
+    <li><a href="https://laya.convaiinnovations.com/" target="_blank" rel="noopener"><b>His article: "I built … a year ago"</b><span>laya.convaiinnovations.com</span></a></li>
+    <li><a href="https://arxiv.org/abs/2503.23303" target="_blank" rel="noopener"><b>Paper 1: SalesRLAgent (submitted 30 Mar 2025)</b><span>arxiv.org/abs/2503.23303</span></a></li>
+    <li><a href="https://arxiv.org/abs/2510.01237" target="_blank" rel="noopener"><b>Paper 2: Confidence-Aware Routing (submitted 23 Sep 2025)</b><span>arxiv.org/abs/2510.01237</span></a></li>
+    <li><a href="https://news.ycombinator.com/item?id=49765348" target="_blank" rel="noopener"><b>The Hacker News debate</b><span>news.ycombinator.com/item?id=49765348</span></a></li>
+    <li><a href="https://startupfortune.com/the-developer-who-says-he-built-jev-first-just-gave-everyone-a-free-version/" target="_blank" rel="noopener"><b>News coverage (Startup Fortune)</b><span>startupfortune.com</span></a></li>
+  </ul>
+  <h3>Who is better</h3>
+  <ul class="links">
+    <li><a href="https://github.com/NandhaKishorM/laya/issues/450" target="_blank" rel="noopener"><b>Independent test on 741 real documents: Jev 0.919 vs Laya 0.780</b><span>github.com/NandhaKishorM/laya/issues/450</span></a></li>
+    <li><a href="https://github.com/NandhaKishorM/laya/blob/main/BENCHMARKS.md" target="_blank" rel="noopener"><b>Laya's own benchmark table (incl. Banking77)</b><span>github.com/NandhaKishorM/laya/blob/main/BENCHMARKS.md</span></a></li>
+  </ul>
+
+  <h2>Quick comparison</h2>
+  <table class="tbl">
+    <tr><th></th><th>Jev</th><th>Laya</th></tr>
+    <tr><td>Price</td><td>Paid ($0.042 / 1M input tokens)</td><td class="win">Free (Apache 2.0)</td></tr>
+    <tr><td>Model</td><td>Closed, API only</td><td class="win">Open code + weights</td></tr>
+    <tr><td>Runs on</td><td>TypeSafe cloud</td><td class="win">Your laptop or PC (CPU or GPU)</td></tr>
+    <tr><td>Speed</td><td>236–276 ms per question (independent)</td><td class="win">~6–7x faster (Laya's own test, T4 GPU)</td></tr>
+    <tr><td>Accuracy, independent test</td><td class="win">0.919</td><td>0.780</td></tr>
+    <tr><td>70+ options (Banking77)</td><td class="win">0.870 (72 labels)</td><td>0.425 (77 labels)</td></tr>
+  </table>
+  <p class="verdict">Want it free and local? Use Laya. Need the most accuracy? Use Jev.</p>
+
+  <h2>Try Laya free (Python 3.10+)</h2>
+<pre>python -m pip install laya</pre>
+<pre>from laya import Router
+
+router = Router()
+state = "Hi, we were billed twice for March. Please refund the duplicate."
+questions = {
+    "department": {"type": "choice", "instructions": "Which department?",
+                   "criteria": {"billing": "invoices, payments, refunds",
+                                "technical": "bugs, outages"}}
+}
+result = router.predict(state, questions)
+print(result["answers"]["department"]["choice"])  # billing</pre>
+  <p class="note">It runs on a normal CPU (slower, a few hundred ms per question) or a GPU. Test it on your own data before you trust it for anything important.</p>
+
+  <footer>Checked on 30 Sep 2026. Follow <strong>@shashikant.ai</strong> for more AI tools, explained honestly.</footer>
+</div>
+</body>
+</html>
