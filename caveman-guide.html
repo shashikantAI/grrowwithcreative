@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Caveman setup guide — shashikant.ai</title>
+<style>:root{--v1:#F5F2FF;--v2:#8C74F2;--ink:#141414;--deep:#2A1F6B;--lime:#C6F432}body{margin:0;background:linear-gradient(180deg,var(--v1),#E4DCFF);color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 16px 60px}h1{color:var(--deep);font-size:30px;line-height:1.2}h2{color:var(--deep);border-left:6px solid var(--lime);padding-left:10px;margin-top:30px}
+pre{background:#0F0B1F;color:#E9E4FF;padding:14px;border-radius:12px;overflow-x:auto}code{font-family:ui-monospace,monospace}p code,li code{background:#fff;padding:1px 6px;border-radius:6px}
+table{border-collapse:collapse;width:100%;background:#fff;border-radius:12px;overflow:hidden}th,td{padding:8px 10px;border-bottom:1px solid #eee;text-align:left}th{background:var(--deep);color:#fff}b{background:var(--lime);padding:0 4px;border-radius:4px}</style></head>
+<body><main><h1>Caveman setup guide — tested by shashikant.ai</h1>
+<p><i>Free AI coding skill that makes Claude Code / Cursor / Codex answer short. Tested on 3 Oct 2026.</i></p>
+<h2>1. Install (one command)</h2>
+<pre><code>
+npx skills add JuliusBrussee/caveman -g
+</code></pre>
+<p>Works in Claude Code, Codex, Gemini CLI, Cursor, Windsurf, Cline, Copilot and 30+ agents. No account, no API key.</p>
+<p>If your agent doesn&#x27;t switch on its own, type <code>/caveman</code> at the start of your message. Say &quot;normal mode&quot; to switch it off.</p>
+<h2>2. What I measured (my own test)</h2>
+<p>Same React question, asked twice each in Claude Code (headless), output tokens:</p>
+<table>
+<tr><th></th><th>Run 1</th><th>Run 2</th><th>Average</th></tr>
+<tr><td>Normal</td><td>736</td><td>757</td><td>**746**</td></tr>
+<tr><td>/caveman</td><td>467</td><td>533</td><td>**500**</td></tr>
+</table>
+<p>About <b>33% fewer output tokens</b>, same diagnosis, same fix.</p>
+<h2>3. What others measured</h2>
+<li><b>JetBrains</b> (86 real coding tasks): quality the same (8 better, 10 worse, 64 tied) — but <b>output tokens only −8.5%</b>, not the advertised 65%. Their verdict: <i>&quot;Safe, honest about style, oversold on savings.&quot;</i></li>
+<li><b>CAVEWOMAN paper</b> (arXiv, Jun 2026): output compression cut cost <b>1.4–2.4× per model</b> (up to 3× best case).</li>
+<h2>4. The catch</h2>
+<li>Savings are big on <b>chat-style questions and explanations</b>, small in <b>coding-agent work</b> (code itself is never shortened).</li>
+<li>On <b>per-request plans</b> (e.g. GitHub Copilot premium requests) it saves <b>nothing</b> — a short answer is still one request.</li>
+<li>The rules add ~1,000 input tokens per call, so very short one-line questions can cost <b>more</b>.</li>
+<p><b>Verdict:</b> ⚠️ Worth it for long chats, explanations and log-heavy sessions. Skip it if you only generate code or pay per request.</p>
+<h2>5. Uninstall</h2>
+<pre><code>
+npx skills remove caveman -g
+</code></pre>
+<p>(The install command adds a whole pack of caveman skills — run <code>npx skills list</code> to see them and remove the ones you don&#x27;t want.)</p>
+<h2>Sources</h2>
+<li>github.com/JuliusBrussee/caveman (README, &quot;When to use / when to skip&quot;)</li>
+<li>blog.jetbrains.com/ai/2026/07/speak-to-ai-agents-like-cavemen-tosave-tokens/</li>
+<li>arxiv.org/abs/2606.24083 (CAVEWOMAN)</li>
+<p>— shashikant.ai · <i>Free bhi, sach bhi.</i> Follow for every free AI tool, tested.</p></main></body></html>
