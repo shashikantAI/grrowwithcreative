@@ -1,0 +1,51 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>GitHub ka Iceberg — shashikant.ai</title><style>:root{--v1:#F5F2FF;--v2:#8C74F2;--ink:#141414;--deep:#2A1F6B;--lime:#C6F432}body{margin:0;background:linear-gradient(180deg,var(--v1),#E4DCFF);color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 16px 60px}h1{color:var(--deep);font-size:30px;line-height:1.2}h2{color:var(--deep);border-left:6px solid var(--lime);padding-left:10px;margin-top:30px}
+pre{background:#0F0B1F;color:#E9E4FF;padding:14px;border-radius:12px;overflow-x:auto}code{font-family:ui-monospace,monospace}p code,li code{background:#fff;padding:1px 6px;border-radius:6px}
+table{border-collapse:collapse;width:100%;background:#fff;border-radius:12px;overflow:hidden}th,td{padding:8px 10px;border-bottom:1px solid #eee;text-align:left}th{background:var(--deep);color:#fff}b{background:var(--lime);padding:0 4px;border-radius:4px}</style></head><body><main><h1>GitHub ka Iceberg — 5 free tricks, step by step (shashikant.ai)</h1>
+<p>Tested on 4 Oct 2026. Sab free. Har step real hai, reel mein jo dikha wahi.</p>
+<h2>1. Roz ka hot repo — GitHub Trending</h2>
+<p>Open <b>github.com/trending</b>. &quot;Date range&quot; → Today / This week. Language filter se apni language chuno.</p>
+<p>Tip: is page ko bookmark kar lo, roz 1 minute dekho.</p>
+<h2>2. Code ka diagram — gitdiagram</h2>
+<p>Kisi bhi repo ke URL mein <code>github</code> ki jagah <code>gitdiagram</code> likho:</p>
+<p><code>github.com/facebook/react</code> → <code>gitdiagram.com/facebook/react</code></p>
+<p>Poora codebase ek clickable diagram ban jaata hai. Free, login nahi chahiye.</p>
+<h2>3. VS Code, bina install — press &quot;.&quot;</h2>
+<p>GitHub pe koi bhi repo kholo aur keyboard pe <b>.</b> (dot) dabao. Ya URL mein <code>github.com</code> ki jagah <code>github.dev</code> likho.</p>
+<p>Browser mein VS Code khul jaata hai: files padho, search karo, edit karo, commit karo.</p>
+<p>Pehli baar &quot;GitHub Repositories wants to sign in&quot; aaye toh Allow karo.</p>
+<h2>4. Free computer, browser mein — Codespaces</h2>
+<p>Apne repo pe: <b>Code → Codespaces → Create codespace on main</b>.</p>
+<p>Ek poora Linux machine browser mein (2 core, 8 GB RAM) with terminal, Python, Node, Docker.</p>
+<p>Free plan: <b>120 core-hours + 15 GB storage har mahine</b>. Kaam khatam → codespace <b>Stop</b> karo (github.com/codespaces → ⋯ → Stop), warna hours chalte rehte hain.</p>
+<h2>5. GitHub khud chalaye — Actions schedule</h2>
+<p>Repo mein <b>Add file → Create new file</b> → naam: <code>.github/workflows/daily.yml</code> → ye paste karo:</p>
+<pre><code>
+name: roz-subah-9-baje
+on:
+  schedule:
+    - cron: &quot;30 3 * * *&quot;   # 09:00 IST, roz (cron UTC mein hota hai)
+  workflow_dispatch:        # &quot;Run workflow&quot; button
+permissions:
+  contents: write
+jobs:
+  kaam:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: kaam karo
+        run: echo &quot;$(TZ=Asia/Kolkata date) - GitHub ne khud chala diya&quot; &gt;&gt; log.txt
+      - name: save
+        run: |
+          git config user.name &quot;github-actions[bot]&quot;
+          git config user.email &quot;github-actions[bot]@users.noreply.github.com&quot;
+          git add log.txt &amp;&amp; git commit -m &quot;roz ka kaam&quot; &amp;&amp; git push
+</code></pre>
+<p>Commit karo → <b>Actions</b> tab → <b>Run workflow</b> → ~10 second mein green ✅.</p>
+<p><code>run:</code> wali line mein apni script daalo (python script, backup, report, kuch bhi).</p>
+<p>Public repo = unlimited free minutes. Private repo = 2,000 min/month free.</p>
+<p>Live demo: github.com/shashikantAI/github-iceberg-demo (roz 9 baje log.txt mein line add hoti hai).</p>
+<h2>Ek sach</h2>
+<p>Codespaces ke 120 ghante Free plan ki limit hai, uske baad paisa lagta hai. Actions public repo mein free hai.</p>
+<p>Sources: docs.github.com (Codespaces billing, Actions billing, VS Code for the Web).</p>
+<p>— @shashikant.ai</p></main></body></html>
