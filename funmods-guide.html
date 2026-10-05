@@ -1,0 +1,59 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Claude Code Mods — shashikant.ai</title><style>:root{--v1:#F5F2FF;--v2:#8C74F2;--ink:#141414;--deep:#2A1F6B;--lime:#C6F432}body{margin:0;background:linear-gradient(180deg,var(--v1),#E4DCFF);color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 16px 60px}h1{color:var(--deep);font-size:30px;line-height:1.2}h2{color:var(--deep);border-left:6px solid var(--lime);padding-left:10px;margin-top:30px}
+pre{background:#0F0B1F;color:#E9E4FF;padding:14px;border-radius:12px;overflow-x:auto}code{font-family:ui-monospace,monospace}p code,li code{background:#fff;padding:1px 6px;border-radius:6px}
+table{border-collapse:collapse;width:100%;background:#fff;border-radius:12px;overflow:hidden}th,td{padding:8px 10px;border-bottom:1px solid #eee;text-align:left}th{background:var(--deep);color:#fff}b{background:var(--lime);padding:0 4px;border-radius:4px}pre{white-space:pre-wrap;word-break:break-word}</style></head><body><main><h1>Claude Code Mods — reel wale 5 mods, install commands ke saath (shashikant.ai)</h1>
+<p>Checked on 5 Oct 2026. Mod = ek chhota plugin jo Claude Code ke andar naya feature jod deta hai. Mods free hain; Claude Code khud Pro/Max plan ya API key se chalta hai.</p>
+<h2>Pehle ek baar check karo</h2>
+<ol>
+<li>Terminal mein likho: <code>claude --version</code> — version <b>2.1.287 ya usse naya</b> hona chahiye. Purana hai toh Claude Code update karo.</li>
+<li>Mods terminal wale Claude Code aur Desktop app ke Code tab mein dikhte hain. VS Code extension ke chat panel mein mod chalta hai, par uska design nahi dikhta.</li>
+</ol>
+<h2>1. cc-arcade — Claude ke andar Tetris, Snake, Doom</h2>
+<p>Banane wala: Seza Akgün · github.com/sezaakgun/cc-arcade</p>
+<pre><code>
+claude plugin marketplace add sezaakgun/cc-arcade
+claude plugin install cc-arcade@cc-arcade
+</code></pre>
+<p>Phir Claude Code kholo aur likho <code>/arcade</code> (ya seedha <code>/arcade tetris</code>). Board pe click karo, arrow keys se khelo, <code>Esc</code> se wapas prompt pe. Claude ka kaam khatam hote hi game <b>pause</b> ho jaata hai.</p>
+<p>Tip: purane Windows console mein blocks boxes jaise dikhte hain — Windows Terminal use karo.</p>
+<h2>2, 3, 4. Token Weather, Blast Radius, Replay Theater — Anthropic ke sample mods</h2>
+<p>Banane wala: Anthropic · github.com/anthropics/claude-code-playground (folder <code>claude-code/mods</code>)</p>
+<pre><code>
+git clone https://github.com/anthropics/claude-code-playground
+claude plugin marketplace add ./claude-code-playground/claude-code/mods
+claude plugin install token-weather@claude-code-playground-mods
+claude plugin install blast-radius@claude-code-playground-mods
+claude plugin install replay-theater@claude-code-playground-mods
+</code></pre>
+<p>Sirf ek baar try karna hai, install nahi? Toh: <code>claude --plugin-dir ./claude-code-playground/claude-code/mods/token-weather</code></p>
+<ul>
+<li><b>Token Weather</b>: prompt ke upar ek patti — Claude ki memory (context) kitni bhari hai, mausam ki tarah: Clear, Showers, Storm.</li>
+<li><b>Blast Radius</b>: <code>rm -rf</code> ya force push jaise command ko rok ke dikhata hai ki kya kya delete hoga. <code>1</code> = Proceed, <code>2</code> = Cancel.</li>
+<li><b>Replay Theater</b>: Claude ke kaam ke baad <code>R</code> dabao (ya <code>/replay</code> likho) aur har edit ek ek karke dekho. <code>N</code> = next, <code>P</code> = previous.</li>
+</ul>
+<p>Dhyan do: clone wala folder delete ya move kiya toh ye mods load hona band ho jaate hain. Aur mere Windows test mein Blast Radius error de gaya (use <code>bash</code> chahiye) — Mac/Linux pe maine test nahi kiya.</p>
+<h2>5. Apna khud ka mod — mera Spider Crawl</h2>
+<p>Koi coding nahi. Claude Code mein bas ye likho:</p>
+<pre><code>
+make a mod: jab bhi tum web search karo, prompt ke upar ek spider dikhao jo web pe chale, aur har site ka naam ek thread ki tarah list karo
+</code></pre>
+<p>Claude poochhega <b>&quot;Enable hot reloading for this session?&quot;</b> — <code>Enable for this session</code> chuno. Mod usi session mein chalu ho jaata hai. Ab likho <code>search the web for today&#x27;s India cricket score</code> aur spider dekho.</p>
+<p>Apna idea daalo: chai break reminder, cricket score patti, kuch bhi.</p>
+<h2>Install se pehle 1 safety check (zaroori)</h2>
+<p>Mod aapki permissions se chalta hai: files padh sakta hai, API keys padh sakta hai, har prompt dekh sakta hai. Isliye sirf bharose wale mods.</p>
+<p>Kisi bhi mod ko install karne se pehle uska folder download karo aur chalao:</p>
+<pre><code>
+claude plugin validate ./mod-ka-folder
+</code></pre>
+<p>Output mein <code>hooks:</code> aur <code>calls:</code> lines batati hain ki mod kya kya chhoota hai. <code>$.fs</code> = files, <code>$.process</code> = programs chalana, network calls = data bahar bhejna. Samajh na aaye toh install mat karo.</p>
+<h2>Mod band kaise karein</h2>
+<ul>
+<li>Ek mod: Claude Code mein <code>/plugin</code> → <b>Installed</b> tab → disable ya uninstall.</li>
+<li>Saare mods, ek session ke liye: <code>claude --safe-mode</code></li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li>Official docs: code.claude.com/docs/en/plugins/mods/overview</li>
+<li>Launch post: x.com/ClaudeDevs (1 Oct 2026) · Tetris demo: x.com/bcherny (14 Sep 2026)</li>
+<li>1,745 mods ki community list: github.com/karanb192/awesome-claude-code-mods (scan 4 Oct 2026)</li>
+</ul></main></body></html>
