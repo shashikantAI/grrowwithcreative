@@ -1,0 +1,79 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Claude Code Mods — 7 mods guide — shashikant.ai</title><style>:root{--v1:#F5F2FF;--v2:#8C74F2;--ink:#141414;--deep:#2A1F6B;--lime:#C6F432}body{margin:0;background:linear-gradient(180deg,var(--v1),#E4DCFF);color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 16px 60px}h1{color:var(--deep);font-size:30px;line-height:1.2}h2{color:var(--deep);border-left:6px solid var(--lime);padding-left:10px;margin-top:30px}
+pre{background:#0F0B1F;color:#E9E4FF;padding:14px;border-radius:12px;overflow-x:auto}code{font-family:ui-monospace,monospace}p code,li code{background:#fff;padding:1px 6px;border-radius:6px}
+table{border-collapse:collapse;width:100%;background:#fff;border-radius:12px;overflow:hidden}th,td{padding:8px 10px;border-bottom:1px solid #eee;text-align:left}th{background:var(--deep);color:#fff}b{background:var(--lime);padding:0 4px;border-radius:4px}pre{white-space:pre-wrap;word-break:break-word}</style></head><body><main><h1>Claude Code Mods — video wale 7 mods, install commands ke saath (shashikant.ai)</h1>
+<p>Checked on 6 Oct 2026. Mod = ek chhota plugin jo Claude Code ke andar naya feature add kar deta hai. Yeh saare mods free hain; Claude Code khud Pro/Max plan ya API key se chalta hai.</p>
+<h2>Pehle ek baar check karo</h2>
+<ol>
+<li>Terminal mein likho: <code>claude --version</code> — version <b>2.1.287 ya usse naya</b> hona chahiye. Purana hai toh Claude Code update karo.</li>
+<li>Mods terminal wale Claude Code aur Desktop app ke Code tab mein dikhte hain. VS Code extension ke chat panel mein mod chalta hai, par uska design nahi dikhta.</li>
+<li>Install ke baad Claude Code dobara open karo (ya chalti session mein <code>/reload-plugins</code> likho).</li>
+</ol>
+<h2>1. Guardrails — files safe (delete / force push rok deta hai)</h2>
+<p>Banane wala: mishgoldenberg · github.com/mishgoldenberg/claude-mods (MIT)</p>
+<pre><code>
+claude plugin marketplace add mishgoldenberg/claude-mods
+claude plugin install guardrails@claude-mods
+</code></pre>
+<p>Claude jab <code>rm -rf</code>, force push, <code>.env</code> padhna jaisi command chalane wala hota hai, mod usko pehle hi rok deta hai aur red alert dikhata hai. Yaad rakho: yeh sirf jaani-pehchani commands pakadta hai — <b>seat belt hai, poori safety nahi</b> (unke apne README ke words: "a seatbelt, not a sandbox").</p>
+<h2>2. Token Weather — context window = mausam</h2>
+<p>Banane wala: Anthropic ka sample mod · github.com/anthropics/claude-code-playground (folder <code>claude-code/mods</code>)</p>
+<pre><code>
+git clone https://github.com/anthropics/claude-code-playground
+claude plugin marketplace add ./claude-code-playground/claude-code/mods
+claude plugin install token-weather@claude-code-playground-mods
+</code></pre>
+<p>Prompt ke upar ek patti: context window kitni bhari hai — Clear (25% se kam), Cloudy (25–49%), Showers (50–74%), Storm (75–89%), Compact soon (90%+). Storm dikhe toh <code>/compact</code> karo ya nayi chat start karo.</p>
+<p>Dhyan do: clone wala folder delete ya move kiya toh yeh mod load hona band ho jaata hai.</p>
+<h2>3. Replay Theater — har change ka replay</h2>
+<p>Same marketplace (upar wala clone):</p>
+<pre><code>
+claude plugin install replay-theater@claude-code-playground-mods
+</code></pre>
+<p>Claude ka kaam khatam hone ke baad <code>R</code> dabao (ya <code>/replay</code> likho) aur har edit ek ek karke dekho. <code>N</code> = next, <code>P</code> = previous, <code>C</code> = close.</p>
+<h2>4. Burn Meter — five hour + weekly limit live</h2>
+<p>Banane wala: OneWave-AI · github.com/OneWave-AI/claude-code-mods (MIT)</p>
+<pre><code>
+claude plugin marketplace add OneWave-AI/claude-code-mods
+claude plugin install burn-meter@claude-code-mods
+</code></pre>
+<p>Prompt ke upar: session ka kharcha, 5-hour limit aur weekly limit ki bars, aur dono kab reset hongi.</p>
+<h2>5. Prompt Coach — send se pehle clear prompt</h2>
+<p>Same marketplace jaisa Guardrails (mishgoldenberg):</p>
+<pre><code>
+claude plugin install prompt-coach@claude-mods
+</code></pre>
+<p>Aapka prompt send hone se pehle padhta hai aur ek clear version dikhata hai. Aap choose karte ho: Send improved / Send mine / Edit. Kabhi chupke se nahi badalta.</p>
+<h2>6. cc-arcade — Claude ke andar Tetris, Snake</h2>
+<p>Banane wala: Seza Akgün · github.com/sezaakgun/cc-arcade (MIT)</p>
+<pre><code>
+claude plugin marketplace add sezaakgun/cc-arcade
+claude plugin install cc-arcade@cc-arcade
+</code></pre>
+<p>Claude Code mein <code>/arcade</code> likho (ya <code>/arcade tetris</code>). Arrow keys se khelo, <code>Esc</code> se wapas. Claude ka kaam khatam hote hi game <b>pause</b> ho jaata hai.</p>
+<p>Tip: purane Windows console mein blocks boxes jaise dikhte hain — Windows Terminal use karo.</p>
+<h2>7. Apna khud ka mod — 0 line code</h2>
+<p>Claude Code mein simple words mein likho ki aapko kya chahiye. Mera prompt:</p>
+<pre><code>
+make a mod: jab bhi tum web search karo, prompt ke upar ek spider dikhao jo web pe chale
+</code></pre>
+<p>Claude poochhega <b>"Enable hot reloading for this session?"</b> — <code>Enable for this session</code> chuno. Mod usi chat mein chalu ho jaata hai. Apna idea daalo: chai break reminder, cricket score patti, paani peene ki yaad — kuch bhi.</p>
+<h2>Install se pehle 1 safety check (zaroori)</h2>
+<p>Mod aapki hi permissions se chalta hai: files padh sakta hai, API keys padh sakta hai, aapka har prompt dekh sakta hai. Anthropic khud kehta hai: mods sandboxed nahi hain. Isliye sirf bharose wale mods.</p>
+<p>Kisi bhi mod ko install karne se pehle uska folder download karo aur chalao:</p>
+<pre><code>
+git clone https://github.com/mishgoldenberg/claude-mods
+claude plugin validate ./claude-mods/plugins/guardrails
+</code></pre>
+<p>Output mein <code>hooks:</code> aur <code>calls:</code> lines batati hain ki mod kya kya chhoota hai — <code>$.fs</code> = files, <code>$.process</code> = programs chalana, network calls = data bahar bhejna. Samajh na aaye toh install mat karo.</p>
+<h2>Mod band kaise karein</h2>
+<ul>
+<li>Ek mod: <code>claude plugin disable guardrails@claude-mods</code> (ya Claude Code mein <code>/plugin</code> → Installed → disable / uninstall).</li>
+<li>Saare mods, ek session ke liye: <code>claude --safe-mode</code></li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li>Official docs: code.claude.com/docs/en/plugins/mods/overview</li>
+<li>Launch post: claude.com/blog/claude-code-mods (1 Oct 2026)</li>
+<li>1,747 mods ki community list: github.com/karanb192/awesome-claude-code-mods (scan 4 Oct 2026)</li>
+</ul></main></body></html>
