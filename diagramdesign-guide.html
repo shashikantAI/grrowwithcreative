@@ -1,0 +1,60 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Diagram Design Guide — DESIGN</title>
+<style>:root{--v:#5B2EE0;--d:#2A1F6B;--l:#C6F432;--r:#D12F3A;--ink:#141414}body{margin:0;font:17px/1.55 Inter,system-ui,sans-serif;color:var(--ink);background:linear-gradient(160deg,#F5F2FF,#DCD3FF)}main{max-width:720px;margin:0 auto;padding:28px 18px 60px}h1{font-size:30px;line-height:1.15;margin:0 0 6px}h2{margin:30px 0 8px;padding:8px 14px;background:var(--d);color:#fff;border-radius:12px;font-size:20px}ul,ol{padding-left:22px;margin:6px 0}li{margin:8px 0}a{color:var(--v);font-weight:700;text-decoration:none;border-bottom:2px solid var(--l)}p{margin:8px 0}code,pre{font-family:"JetBrains Mono",Consolas,monospace}pre{background:#141414;color:var(--l);padding:14px 16px;border-radius:12px;font-size:16px;overflow-x:auto}code{background:#fff;padding:1px 6px;border-radius:6px}table{border-collapse:collapse;width:100%;background:#fff;border-radius:12px;overflow:hidden}td,th{padding:10px 12px;border-bottom:1px solid #E6E0FF;text-align:left}th{background:#EFEAFF}.big{font-size:26px;font-weight:800}.red{color:var(--r)}.ok{background:var(--l);padding:0 8px;border-radius:6px}.note{background:#fff;border-left:5px solid var(--r);padding:10px 14px;border-radius:8px}.foot{margin-top:34px;font-size:14px;color:#6B6485}</style></head><body><main>
+<h1>Diagram Design — AI diagram ko magazine jaisa kaise banao</h1>
+<p>@shashikant.ai · comment DESIGN guide · tested on 9 Oct 2026</p>
+
+<h2>1. Yeh folder kya hai</h2>
+<ul>
+<li>GitHub: <a href="https://github.com/cathrynlavery/diagram-design" target="_blank">github.com/cathrynlavery/diagram-design</a> — 47,000+ stars, free, MIT.</li>
+<li>Banane wali: <b>Cathryn Lavery</b> (BestSelf Co ki founder; apni site pe khud likhti hain: <i>"an engineer who can't code from scratch but ships anyway"</i>).</li>
+<li>Ek rulebook jo coding agent diagram banane se <b>pehle</b> padhta hai: ek accent colour, ek patli line, shadow nahi, 42 tarah ke diagram ke template (light / dark / editorial).</li>
+<li>Chalta hai: Claude Code, Codex, GitHub Copilot, Factory Droid, Pi; <code>npx skills add</code> se Cursor, Cline, Gemini CLI aur baaki.</li>
+</ul>
+
+<h2>2. Install (do rasta)</h2>
+<p>Claude Code ke andar:</p>
+<pre>/plugin marketplace add cathrynlavery/diagram-design
+/plugin install diagram-design@diagram-design</pre>
+<p>Cursor / Gemini CLI / koi bhi Agent Skills host:</p>
+<pre>npx skills add cathrynlavery/diagram-design</pre>
+<p>Phir diagram maango jaise normally maangte ho. Pehli baar yeh poochega: style guide customise karna hai? (website URL / tokens paste / default).</p>
+
+<h2>3. Mera test (same prompt, do baar, Claude Code 2.1.295)</h2>
+<p>Prompt: UPI payment flow ka diagram, ek self-contained diagram.html.</p>
+<table><tr><th></th><th>Bina folder</th><th>Folder ke saath</th></tr>
+<tr><td>Time</td><td class="big red">89 sec</td><td class="big">188 sec</td></tr>
+<tr><td>Turns</td><td>2</td><td>12</td></tr>
+<tr><td>Boxes</td><td>32 rounded</td><td>32 (sequence diagram)</td></tr>
+<tr><td>Colours</td><td class="big red">11</td><td class="big"><span class="ok">7, ek accent</span></td></tr>
+<tr><td>Font</td><td>system</td><td>serif title + mono labels</td></tr></table>
+<p class="note"><b>Sach wali baat:</b> time dugna laga. Jo bana woh "sundar" se zyada "consistent" hai — ek colour, ek line weight, legend. Agar tumhe rang-birangi diagram chahiye, yeh woh nahi karega.</p>
+
+<h2>4. Apne brand ke colour (jo maine haath se kiya)</h2>
+<p>Pehla rasta: apni website ka link do, yeh colour aur font padh ke profile banata hai.</p>
+<p>Mere test mein (claude -p, non-interactive) network block tha, isliye isne website nahi padhi aur PROVISIONAL placeholder bana diya. Doosra rasta jo chala: tokens paste karo. Mere:</p>
+<pre>paper #F5F2FF · ink #141414 · accent #4B2BD8 · link #8C74F2 · highlight #C6F432</pre>
+<p>Bolo: <i>"update profile with these tokens, mark confirmed, regenerate diagram-brand.html"</i>. Agla diagram tumhare brand mein.</p>
+
+<h2>5. Output HTML hai, image nahi</h2>
+<ul>
+<li><code>diagram.html</code> offline khulti hai (inline SVG).</li>
+<li>Label badalna ho: file mein text badlo, browser refresh. Dobara generate nahi.</li>
+<li>PNG / SVG export: skill ke scripts (Playwright) se, PNG 2x.</li>
+<li>Purani draw.io / Mermaid / Excalidraw file bhi isse dobara bana sakte ho.</li>
+</ul>
+
+<h2>6. Rule teen (yaad rakhne layak)</h2>
+<ol>
+<li>Ek accent colour (focal cheez ke liye), baaki grey/ink.</li>
+<li>Ek patli line (1 px hairline), shadow bilkul nahi.</li>
+<li>Page pe bheed nahi: density 4/10.</li>
+</ol>
+
+<h2>7. Kab kaam nahi karega</h2>
+<ul>
+<li>Plain chat window (claude.ai / ChatGPT) mein nahi — coding agent chahiye.</li>
+<li>Mera doosra test: chai cafe ka axonometric plan. Bina folder wala zyada colourful aur detailed nikla; folder wala saaf aur editorial. Taste = consistency, jaadu nahi.</li>
+</ul>
+
+<p class="foot">Free tool, free guide. Follow <b>@shashikant.ai</b> for more such AI tools.</p>
+</main></body></html>
