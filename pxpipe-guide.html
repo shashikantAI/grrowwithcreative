@@ -1,0 +1,120 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>pxpipe Test — BILL</title><style>:root{--v:#5B2EE0;--d:#2A1F6B;--l:#C6F432;--r:#D12F3A;--ink:#141414}body{margin:0;font:17px/1.55 Inter,system-ui,sans-serif;color:var(--ink);background:linear-gradient(160deg,#F5F2FF,#DCD3FF)}main{max-width:720px;margin:0 auto;padding:28px 18px 60px}h1{font-size:30px;line-height:1.15;margin:0 0 6px}h2{margin:30px 0 8px;padding:8px 14px;background:var(--d);color:#fff;border-radius:12px;font-size:20px}ul,ol{padding-left:22px;margin:6px 0}li{margin:8px 0}a{color:var(--v);font-weight:700;text-decoration:none;border-bottom:2px solid var(--l)}p{margin:8px 0}table{border-collapse:collapse;width:100%;background:#fff;border-radius:12px;overflow:hidden}td,th{padding:10px 12px;border-bottom:1px solid #E6E0FF;text-align:left;vertical-align:top}th{background:#EFEAFF}.big{font-size:26px;font-weight:800}.red{color:var(--r)}.ok{background:var(--l);padding:0 8px;border-radius:6px;font-weight:700}.no{background:#fff0f0;color:var(--r);padding:0 8px;border-radius:6px;font-weight:700}.note{background:#fff;border-left:5px solid var(--r);padding:10px 14px;border-radius:8px}.link{display:block;text-align:center;font-size:28px;font-weight:800;background:#141414;color:var(--l);border:0;padding:16px;border-radius:14px;margin:10px 0}.foot{margin-top:34px;font-size:14px;color:#6B6485}pre{background:#141414;color:#C6F432;padding:14px;border-radius:12px;white-space:pre-wrap;word-break:break-all;font:13px/1.5 'JetBrains Mono',Consolas,monospace}code{font-family:'JetBrains Mono',Consolas,monospace;background:#EFEAFF;padding:1px 5px;border-radius:5px;overflow-wrap:anywhere}pre code{background:none;padding:0;color:inherit}main{overflow-wrap:anywhere}td,th{padding:8px 8px}table{font-size:15px}</style></head><body><main>
+<h1>pxpipe ka poora test: Claude bill kam hua ya zyada?</h1>
+<p>@shashikant.ai · comment BILL guide · tested 8–9 Oct 2026 on my own Claude Code</p>
+<h2>1. Trick kya hai</h2>
+<p><strong>pxpipe</strong> (github.com/teamchong/pxpipe) ek local proxy hai. Claude Code ke rules, tools aur purani baatein text ki jagah <strong>PNG photo</strong> bana ke bhejta hai.</p>
+<ul>
+<li>Daava (README): bill <strong>59–70% kam</strong>.</li>
+<li>Ek developer ka naap (dev.to, 7 Oct 2026, Opus): kharcha <strong>+196.7%</strong>.</li>
+</ul>
+<h2>2. Mera setup</h2>
+<ul>
+<li>Claude Code (mera account), pxpipe-proxy <strong>v0.14.0</strong>, local proxy <code>127.0.0.1:47821</code></li>
+<li>Same folder: 50 React <code>.tsx</code> files (577 KB)</li>
+<li><strong>Chhota kaam:</strong> "Which file renders a terminal window? Answer with the filename only." (2 baar)</li>
+<li><strong>Lamba kaam:</strong> "Read every .tsx file one by one … then output a table: file, component name, number of props."</li>
+<li>Har run naya session, bill = Claude Code ka apna <code>total_cost_usd</code> (list price)</li>
+</ul>
+<h2>3. Result: Opus 5.5 (8 Oct)</h2>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th>Bina pxpipe</th>
+<th>pxpipe ke saath</th>
+<th>Farak</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chhota, pehli baar</td>
+<td>$0.19</td>
+<td>$1.46</td>
+<td>7.6×</td>
+</tr>
+<tr>
+<td>Chhota, doosri baar</td>
+<td>$0.17</td>
+<td>$0.25</td>
+<td>+43%</td>
+</tr>
+<tr>
+<td>Lamba (50 files)</td>
+<td>$2.27 · 57 s</td>
+<td>$2.51 · 135 s</td>
+<td>+10.5%, 2.4× slow</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>$2.64</strong></td>
+<td><strong>$4.22</strong></td>
+<td><strong>+60%</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Usi waqt pxpipe dashboard: "34% fewer tokens", "Estimated saved $4.01".
+Claude ne khud likha: kuch files photo mein itni saaf nahi thi, toh usne unhe dobara text mein padha.</p>
+<h2>4. Result: Fable 5.1 (9 Oct)</h2>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th>Bina pxpipe</th>
+<th>pxpipe ke saath</th>
+<th>Farak</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chhota, pehli baar</td>
+<td>$0.40</td>
+<td>$0.88</td>
+<td>2.2×</td>
+</tr>
+<tr>
+<td>Chhota, doosri baar</td>
+<td>$0.065</td>
+<td>$0.063</td>
+<td>−3%</td>
+</tr>
+<tr>
+<td>Lamba (50 files)</td>
+<td>$5.44 · 90 s</td>
+<td>$5.03 · 165 s</td>
+<td><strong>−7.5%</strong>, 1.8× slow</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td><strong>$5.90</strong></td>
+<td><strong>$5.97</strong></td>
+<td><strong>lagbhag barabar</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Sahi jawab (lamba kaam): bina pxpipe 50/50. pxpipe ke saath <strong>2 galat</strong> (PromptTicket 17 ki jagah 15, TokenChop 18 ki jagah 17), koi error nahi.</p>
+<h2>5. Bill kyun badhta hai</h2>
+<ul>
+<li>Claude ka <strong>cache</strong> pehle se dohraaye text ko <strong>90% sasta</strong> (0.1×) padhta hai.</li>
+<li>Har nayi photo pehli baar <strong>cache write</strong> hoti hai (1.25×). Naya session = naye photo = naya kharcha.</li>
+<li>Isliye chhote kaam / naye session mein loss, aur sirf lambe kaam mein thodi bachat (metro pass jaisa).</li>
+</ul>
+<h2>6. Kab try karein, kab nahi</h2>
+<ul>
+<li>✅ <strong>Fable</strong> + ghanton lamba session: bachat ho sakti hai (maine sirf 2–3 min ka kaam test kiya).</li>
+<li>❌ <strong>Opus 5.5</strong>: mere test mein 60% mehenga.</li>
+<li>⚠️ Exact numbers / code values wale kaam: jawab khud check karo.</li>
+<li>Sonnet / Haiku: pxpipe by default inhe chhoota hi nahi.</li>
+</ul>
+<h2>7. Koi bhi token tool khud kaise test karein (5 min)</h2>
+<pre><code># 1. bina tool
+claude -p &quot;&lt;same task&gt;&quot; --output-format json --allowedTools &quot;Read,Glob,Grep&quot; &gt; base.json
+# 2. tool ke saath (proxy wale tools ke liye)
+ANTHROPIC_BASE_URL=http://127.0.0.1:47821 claude -p &quot;&lt;same task&gt;&quot; --output-format json --allowedTools &quot;Read,Glob,Grep&quot; &gt; tool.json
+# 3. asli bill compare karo
+python -c &quot;import json;print(json.load(open('base.json'))['total_cost_usd'], json.load(open('tool.json'))['total_cost_usd'])&quot;
+</code></pre>
+<p>Same task, same model (<code>--model</code>), 2–3 baar. Tool ka dashboard nahi, <strong>total_cost_usd</strong> dekho.</p>
+<h2>8. Mera rule</h2>
+<p>Tool ka dashboard sirf andaaza hai. Asli sach sirf tumhara bill batata hai.</p>
+<p class="foot">Sources: <a href="https://github.com/teamchong/pxpipe" target="_blank" rel="noopener">pxpipe README</a> · <a href="https://dev.to/awesome_fredtv_c0c3/token-saving-tools-made-my-claude-code-usage-go-up-heres-the-measurement-edk" target="_blank" rel="noopener">dev.to measurement</a> · <a href="https://github.com/awesomefred0827-hash/claude-token-log" target="_blank" rel="noopener">its raw data</a> + mera khud ka test (Claude Code JSON output).<br>Free guide. Follow <b>@shashikant.ai</b> for more such AI tests.</p>
+</main></body></html>
