@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>God's Eye View Guide</title>
+<style>
+:root{--bg:#05070A;--card:#0d141b;--ink:#eef3f6;--mute:#9fb0bb;--lime:#C6F432;--line:#1f2b36}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(120% 80% at 50% 0%,#0f1a22,#05070A 70%);color:var(--ink);font:17px/1.6 system-ui,Segoe UI,sans-serif}
+.w{max-width:720px;margin:0 auto;padding:28px 16px 60px}h1{font-size:30px;line-height:1.2;margin:8px 0}h2{margin:0 0 6px}
+.tag{display:inline-block;background:var(--lime);color:#111;font-weight:800;padding:3px 10px;border-radius:6px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:16px 0}
+ol{padding-left:22px}li{margin:8px 0}code,pre{font-family:Consolas,monospace;background:#03050a;border:1px solid var(--line);border-radius:8px}
+code{padding:1px 6px}pre{padding:14px;white-space:pre-wrap;word-break:break-word;font-size:14px}
+.nums{display:flex;gap:10px;flex-wrap:wrap}.n{flex:1;min-width:140px;background:#03050a;border-radius:12px;padding:12px;text-align:center}
+.n b{display:block;font-size:26px;color:var(--lime)}.m{color:var(--mute);font-size:14px}a{color:var(--lime)}
+</style></head><body><div class="w">
+<span class="tag">@shashikant.ai · comment EYE</span>
+<h1>God's Eye View: free setup + India tips</h1>
+<p class="m">Tested 11 Oct 2026 on Windows 11 · live flights over Delhi, satellites + earthquakes over India, no key</p>
+<div class="card nums"><div class="n"><b>50K+</b>GitHub stars</div><div class="n"><b>₹0</b>no key needed</div><div class="n"><b>10+</b>live planes over Delhi</div></div>
+<div class="card"><h2>Easiest: no coding (Pinokio)</h2><ol>
+<li>Install or update <b>Pinokio</b> (8.2 or later): <a href="https://desktop.pinokio.co/">desktop.pinokio.co</a></li>
+<li>Open <a href="https://pinokio.co/apps/github-com-bilawalsidhu-gods-eye-view">God's Eye View in Pinokio</a>.</li>
+<li>Click <b>Install</b>, then <b>Start</b>. It opens in your browser.</li>
+</ol></div>
+<div class="card"><h2>Terminal route (what I used)</h2><p class="m">Needs Node.js 24.x.</p>
+<pre>git clone https://github.com/bilawalsidhu/gods-eye-view.git
+cd gods-eye-view
+npm ci
+npm run dev</pre>
+<p>Open <code>http://localhost:4173</code> and pick <b>Explore Manually</b>.</p></div>
+<div class="card"><h2>India in 3 clicks</h2><ol>
+<li><b>LOCATION</b> (bottom) → search <b>Delhi</b> (or your city / airport).</li>
+<li><b>DATA LAYERS → Live Flights ON</b>, wait ~20 s: every plane shows its flight code (IGO = IndiGo, AIC = Air India).</li>
+<li>Click a plane: the camera locks on; <b>COCKPIT</b> rides along with speed + height.</li>
+</ol><p class="m">Also try: Satellites ON, Earthquakes ON, keys 1–7 for night vision / thermal looks.</p></div>
+<div class="card"><h2>Honest notes</h2><ul>
+<li>Free with no key: map, flights, satellites, earthquakes, weather.</li>
+<li>The ground photo is old satellite imagery, <b>not live</b>. You will not see people.</li>
+<li>Live CCTV only in a few foreign cities (Austin, London, Finland…), none in India.</li>
+<li>Ships need a free AISStream key; photo-real 3D needs a free Cesium ion token (personal use).</li></ul>
+<p class="m">Repo: <a href="https://github.com/bilawalsidhu/gods-eye-view">github.com/bilawalsidhu/gods-eye-view</a> · not affiliated</p></div>
+</div></body></html>
