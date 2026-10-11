@@ -1,0 +1,32 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PPT Master Guide</title>
+<style>
+:root{--bg:#120a24;--card:#1d1236;--ink:#f3eefe;--mute:#b9aed6;--lime:#C6F432;--vio:#7B3FE4}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#1a0d38,#0d0820);color:var(--ink);font:17px/1.6 system-ui,Segoe UI,sans-serif}
+.w{max-width:720px;margin:0 auto;padding:28px 16px 60px}h1{font-size:30px;line-height:1.2;margin:8px 0}
+.tag{display:inline-block;background:var(--lime);color:#111;font-weight:800;padding:3px 10px;border-radius:6px;font-size:13px}
+.card{background:var(--card);border:1px solid #33245c;border-radius:16px;padding:18px 18px;margin:16px 0}
+ol{padding-left:22px}li{margin:8px 0}code,pre{font-family:Consolas,monospace;background:#0b0618;border:1px solid #33245c;border-radius:8px}
+code{padding:1px 6px}pre{padding:14px;white-space:pre-wrap;word-break:break-word;font-size:14px}
+.nums{display:flex;gap:10px;flex-wrap:wrap}.n{flex:1;min-width:140px;background:#0b0618;border-radius:12px;padding:12px;text-align:center}
+.n b{display:block;font-size:28px;color:var(--lime)}.m{color:var(--mute);font-size:14px}a{color:var(--lime)}
+</style></head><body><div class="w">
+<span class="tag">@shashikant.ai · comment PPT</span>
+<h1>PPT Master: PDF se editable PowerPoint (install steps + my prompt)</h1>
+<p class="m">Tested 11 Oct 2026 on Windows 11 with Claude Code · Budget at a Glance 2026-27 PDF (25 pages)</p>
+<div class="card nums"><div class="n"><b>12.6 min</b>10 slides</div><div class="n"><b>149</b>editable text boxes</div><div class="n"><b>5</b>real charts</div><div class="n"><b>0</b>photos</div></div>
+<div class="card"><h2>Install (one time)</h2><ol>
+<li>Install <b>Python 3.10+</b> from python.org. Tick <b>"Add to PATH"</b>.</li>
+<li>Download the tool: <code>git clone https://github.com/hugohe3/ppt-master</code> (or Code → Download ZIP on GitHub).</li>
+<li>Open that folder in a terminal and run: <code>pip install -r requirements.txt</code></li>
+<li>Start Claude Code in the same folder: <code>claude</code>. Windows help: <code>docs/windows-installation.md</code> in the repo.</li>
+</ol></div>
+<div class="card"><h2>My prompt</h2><p class="m">Change the PDF path and the audience.</p>
+<pre>Make a PowerPoint from the PDF &lt;path to your PDF&gt; using the quick/fast generate route (no confirmation questions, decide everything yourself). 16:9, about 10 slides, English, audience = &lt;who will watch&gt;. Use native PowerPoint charts and tables (--native-charts-and-tables) for the numbers. Export the final .pptx and print its absolute path at the end.</pre>
+<p>Your file lands in <code>projects/&lt;name&gt;/exports/*.pptx</code>. Open it in PowerPoint: every text box and chart is editable (chart → Edit Data).</p></div>
+<div class="card"><h2>Honest notes</h2><ul>
+<li>Best results with Claude (paid plan). The tool is free; your AI model usage is your cost.</li>
+<li>NotebookLM's slides look flashier, but its PowerPoint export is one picture per slide.</li>
+<li>First drafts are plain. Polish them in PowerPoint; that's the point of editable slides.</li></ul>
+<p class="m">Repo: <a href="https://github.com/hugohe3/ppt-master">github.com/hugohe3/ppt-master</a> (MIT) · not affiliated</p></div>
+</div></body></html>
