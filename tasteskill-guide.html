@@ -1,0 +1,45 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Taste Skill Guide</title>
+<style>
+:root{--bg:#0E0F11;--card:#16181c;--ink:#f1f2f4;--mute:#a3a8b0;--lime:#C6F432;--red:#FF4A3D;--line:#2a2e36}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(120% 80% at 50% 0%,#1a1d22,#0E0F11 70%);color:var(--ink);font:17px/1.6 system-ui,Segoe UI,sans-serif}
+.w{max-width:720px;margin:0 auto;padding:28px 16px 60px}h1{font-size:30px;line-height:1.2;margin:8px 0}h2{margin:0 0 6px;font-size:21px}
+.tag{display:inline-block;background:var(--lime);color:#111;font-weight:800;padding:3px 10px;border-radius:6px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:16px 0}
+ol{padding-left:22px}li{margin:8px 0}code,pre{font-family:Consolas,monospace;background:#08090b;border:1px solid var(--line);border-radius:8px}
+code{padding:1px 6px}pre{padding:14px;white-space:pre-wrap;word-break:break-word;font-size:14px;color:var(--lime)}
+.nums{display:flex;gap:10px;flex-wrap:wrap}.n{flex:1;min-width:140px;background:#08090b;border-radius:12px;padding:12px;text-align:center}
+.n b{display:block;font-size:30px}.m{color:var(--mute);font-size:14px}a{color:var(--lime)}
+button{float:right;background:var(--lime);color:#111;border:0;border-radius:8px;font-weight:800;padding:6px 12px;cursor:pointer}
+</style></head><body><div class="w">
+<span class="tag">@shashikant.ai · comment TASTE</span>
+<h1>Taste Skill: install command + my prompt</h1>
+<p class="m">Tested 11 Oct 2026 on Windows 11 with Claude Code · same prompt, same Claude</p>
+<div class="card nums"><div class="n"><b style="color:var(--red)">15</b>mistakes without skill</div><div class="n"><b style="color:var(--lime)">5</b>with Taste Skill</div><div class="n"><b>₹0</b>free · MIT</div></div>
+
+<div class="card"><h2>1. Install (inside your project folder) <button onclick="cp('i')">Copy</button></h2>
+<pre id="i">npx skills add https://github.com/Leonxlnx/taste-skill --skill design-taste-frontend -a claude-code -y</pre>
+<p class="m">Needs Node.js. Then open Claude Code in the same folder; the skill loads by itself when you ask for a page.
+Repo: <a href="https://github.com/Leonxlnx/taste-skill">github.com/Leonxlnx/taste-skill</a> (94K+ stars on 11 Oct 2026)</p></div>
+
+<div class="card"><h2>2. My prompt (change the business) <button onclick="cp('p')">Copy</button></h2>
+<pre id="p">Build a single-file landing page (index.html, inline CSS and JS, no build step) for "ChaiDaily", a Mumbai chai subscription that delivers fresh masala chai to offices every morning. Include: hero with headline and call to action, 3 benefits, 2 pricing plans in rupees, customer testimonial, footer. Phone-first, also good on desktop.
+Do not invent phone numbers, addresses or reviews; leave clear placeholders like [YOUR NUMBER].
+Use no stock photos; leave [YOUR PHOTO] boxes.</pre>
+<p class="m">The last two lines are my fix for the twist in the reel.</p></div>
+
+<div class="card"><h2>3. Count the mistakes yourself (free)</h2>
+<pre>npx impeccable detect</pre><p class="m">Run it in the folder before and after. Mine: 15 → 5.</p></div>
+
+<div class="card"><h2>4. Before you publish: 4 checks</h2><ol>
+<li>Every <b>photo</b> is yours. The AI picked random placeholder photos (a café for chai, a flyover, a leaf).</li>
+<li>The <b>phone / WhatsApp number</b> is yours. It made one up, and it could be a real stranger's number.</li>
+<li>Prices, address and reviews are real.</li>
+<li>Open it on your phone once.</li></ol></div>
+
+<div class="card m"><b style="color:var(--ink)">Honest notes</b><br>
+It does not make the page perfect: 5 mistakes were still left. My run took a bit longer (114 s vs 107 s).
+Not affiliated with Taste Skill or Anthropic.</div>
+</div>
+<script>function cp(id){navigator.clipboard&&navigator.clipboard.writeText(document.getElementById(id).innerText)}</script>
+</body></html>
