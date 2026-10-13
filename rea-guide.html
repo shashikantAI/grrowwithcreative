@@ -1,0 +1,64 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>REA Netflix Test</title>
+<style>
+:root{--bg:#0B0820;--card:#16122e;--ink:#f1f2f4;--mute:#a9a3c4;--lime:#C6F432;--red:#E50914;--line:#2f2860}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(120% 80% at 50% 0%,#2a1f6b,#0B0820 70%);color:var(--ink);font:17px/1.6 system-ui,Segoe UI,sans-serif}
+.w{max-width:720px;margin:0 auto;padding:28px 16px 60px}h1{font-size:30px;line-height:1.2;margin:8px 0}h2{margin:0 0 6px;font-size:21px}
+.tag{display:inline-block;background:var(--lime);color:#111;font-weight:800;padding:3px 10px;border-radius:6px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:16px 0}
+ol{padding-left:22px}li{margin:8px 0}code,pre{font-family:Consolas,monospace;background:#08061a;border:1px solid var(--line);border-radius:8px}
+code{padding:1px 6px}pre{padding:14px;white-space:pre-wrap;word-break:break-word;font-size:14px;color:var(--lime)}
+.nums{display:flex;gap:10px;flex-wrap:wrap}.n{flex:1;min-width:140px;background:#08061a;border-radius:12px;padding:12px;text-align:center}
+.n b{display:block;font-size:30px}.m{color:var(--mute);font-size:14px}a{color:var(--lime)}
+button{float:right;background:var(--lime);color:#111;border:0;border-radius:8px;font-weight:800;padding:6px 12px;cursor:pointer}
+</style></head><body><div class="w">
+<span class="tag">@shashikant.ai · comment REA</span>
+<h1>REA: setup steps + my Netflix test file</h1>
+<p class="m">Tested 12 Oct 2026 on Windows 11 · rea-agents 6.4.0 · Google Chrome · netflix.com/in opened for 30 seconds, no login, no clicks</p>
+<div class="card nums"><div class="n"><b>121</b>messages in 30 s</div><div class="n"><b style="color:var(--red)">76</b>to other companies</div><div class="n"><b style="color:var(--lime)">18</b>to TikTok (most)</div></div>
+
+<div class="card"><h2>1. What you need</h2><ol>
+<li><b>Node.js 18 or newer</b> (nodejs.org, LTS button). Check: <code>node -v</code></li>
+<li><b>Google Chrome</b> installed (normal install path).</li>
+<li><b>Python 3</b> only for step 4 (the counting script). Optional.</li></ol>
+<p class="m">REA is free and open source: <a href="https://github.com/morluto/rea">github.com/morluto/rea</a> (#1 on GitHub Trending, 12 Oct 2026). Nothing is installed globally; <code>npx</code> downloads it the first time.</p></div>
+
+<div class="card"><h2>2. Save the test file as <code>netflix.json</code> <button onclick="cp('s')">Copy</button></h2>
+<pre id="s">{
+  "browser": { "mode": "launch", "executable_path": "C:/Program Files/Google/Chrome/Application/chrome.exe" },
+  "start_url": { "url": "https://www.netflix.com/in/" },
+  "actions": [
+    { "step_id": "wait", "action": "wait_for_timeout", "duration_ms": 30000 }
+  ],
+  "capture": { "at_end": ["url", "screenshot"], "events": ["network"] }
+}</pre>
+<p class="m">Windows: keep the forward slashes <code>/</code> in the Chrome path (backslashes break the JSON). Mac: <code>/Applications/Google Chrome.app/Contents/MacOS/Google Chrome</code>. Any other site: change only the <code>url</code>.</p></div>
+
+<div class="card"><h2>3. Run REA (same folder) <button onclick="cp('r')">Copy</button></h2>
+<pre id="r">npx -y rea-agents@6.4.0 capture-browser-scenario netflix.json --format json > netflix-capture.json</pre>
+<p class="m">A Chrome window opens, waits 30 seconds and closes. <code>netflix-capture.json</code> now holds every request the page sent: the host, the path and the order.</p></div>
+
+<div class="card"><h2>4. Count where the messages went <button onclick="cp('c')">Copy</button></h2>
+<pre id="c">import json, sys, collections, urllib.parse
+d = json.load(open(sys.argv[1], encoding="utf-8"))
+reqs = [e for e in d["normalized_result"]["events"]["items"] if e.get("kind") == "request"]
+site = sys.argv[2] if len(sys.argv) > 2 else "netflix"
+hosts = collections.Counter(urllib.parse.urlparse(e["url"]["url"]).hostname or "" for e in reqs)
+out = {h: c for h, c in hosts.items() if site not in h and "nflx" not in h}
+print(len(reqs), "requests,", sum(out.values()), "went to other companies' servers")
+for h, c in sorted(out.items(), key=lambda x: -x[1])[:25]:
+    print(f"{c:4}  {h}")</pre>
+<p class="m">Save as <code>count.py</code>, then: <code>python count.py netflix-capture.json netflix</code>. For another site, pass its name as the last word (for example <code>flipkart</code>).</p>
+<p class="m">My output started with: <code>121 requests, 76 went to other companies' servers</code> · <code>18 analytics.tiktok.com</code> · <code>6 tr.snapchat.com</code> · <code>3 match.adsrvr.org</code> (The Trade Desk). Your numbers will differ a little run to run.</p></div>
+
+<div class="card"><h2>5. Want to use REA with Claude Code / Codex?</h2>
+<pre>npx rea-agents setup</pre>
+<p class="m">The repo README shows this command for connecting REA to your AI agent. Read the README first; that part is for apps and binaries, the Netflix test above does not need it.</p></div>
+
+<div class="card m"><b style="color:var(--ink)">Honest notes</b><br>
+No password or card number left in my test; this is how online ads normally work, and most big websites do it.
+Use REA only on sites and apps you are allowed to test, as a normal visitor. Do not use it to break into accounts, crack paid apps or copy someone's software.
+Not affiliated with REA, Netflix or any company named here.</div>
+</div>
+<script>function cp(id){navigator.clipboard&&navigator.clipboard.writeText(document.getElementById(id).innerText)}</script>
+</body></html>
