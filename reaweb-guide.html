@@ -1,0 +1,83 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>REA Website Guide</title>
+<style>
+:root{--bg:#0B0820;--card:#16122e;--ink:#f1f2f4;--mute:#a9a3c4;--lime:#C6F432;--red:#E50914;--line:#2f2860}
+*{box-sizing:border-box}html,body{overflow-x:hidden}.w{overflow-wrap:anywhere}body{margin:0;background:radial-gradient(120% 80% at 50% 0%,#2a1f6b,#0B0820 70%);color:var(--ink);font:17px/1.6 system-ui,Segoe UI,sans-serif}
+.w{max-width:720px;margin:0 auto;padding:28px 16px 60px}h1{font-size:30px;line-height:1.2;margin:8px 0}h2{margin:0 0 6px;font-size:21px}
+.tag{display:inline-block;background:var(--lime);color:#111;font-weight:800;padding:3px 10px;border-radius:6px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:16px 0}
+ol{padding-left:22px}li{margin:8px 0}code,pre{font-family:Consolas,monospace;background:#08061a;border:1px solid var(--line);border-radius:8px}
+code{padding:1px 6px}pre{padding:14px;white-space:pre-wrap;word-break:break-word;font-size:14px;color:var(--lime)}
+.nums{display:flex;gap:10px;flex-wrap:wrap}.n{flex:1;min-width:140px;background:#08061a;border-radius:12px;padding:12px;text-align:center}
+.n b{display:block;font-size:30px}.m{color:var(--mute);font-size:14px}a{color:var(--lime)}
+button{float:right;background:var(--lime);color:#111;border:0;border-radius:8px;font-weight:800;padding:6px 12px;cursor:pointer}
+</style></head><body><div class="w">
+<span class="tag">@shashikant.ai · comment REA</span>
+<h1>REA: kisi bhi website pe chalane ka setup guide + mera Flipkart file</h1>
+<p class="m">Tested 13 Oct 2026 on Windows 11 · rea-agents 6.4.0 · Google Chrome · flipkart.com as a guest (no login), search "iphone 16"</p>
+<div class="card nums"><div class="n"><b>203</b>requests, one search</div><div class="n"><b style="color:var(--lime)">15 MB</b>JavaScript code</div><div class="n"><b>24</b>phones already inside the HTML</div></div>
+<p class="m">Homepage = React 19.1.0, code name <code>batman-returns</code> (in the asset path of <code>fkvendor.js</code>). The search page arrives fully built from the server: 0 API calls for the results list.</p>
+
+<div class="card"><h2>1. What you need</h2><ol>
+<li><b>Node.js 18 or newer</b> (nodejs.org, LTS button). Check: <code>node -v</code></li>
+<li><b>Google Chrome</b> (normal install path).</li>
+<li><b>Python 3</b> only for step 4 (optional).</li></ol>
+<p class="m">REA is free and open source: <a href="https://github.com/morluto/rea">github.com/morluto/rea</a>. Nothing is installed globally; <code>npx</code> downloads it the first time.</p></div>
+
+<div class="card"><h2>2. Save as <code>flipkart.json</code> <button onclick="cp('s')">Copy</button></h2>
+<pre id="s">{
+  &quot;browser&quot;: { &quot;mode&quot;: &quot;launch&quot;, &quot;executable_path&quot;: &quot;C:/Program Files/Google/Chrome/Application/chrome.exe&quot;, &quot;headless&quot;: false },
+  &quot;start_url&quot;: { &quot;url&quot;: &quot;https://www.flipkart.com/&quot; },
+  &quot;actions&quot;: [
+    { &quot;step_id&quot;: &quot;home&quot;,    &quot;action&quot;: &quot;wait_for_timeout&quot;, &quot;duration_ms&quot;: 8000 },
+    { &quot;step_id&quot;: &quot;search&quot;,  &quot;action&quot;: &quot;goto&quot;, &quot;destination&quot;: { &quot;url&quot;: &quot;https://www.flipkart.com/search?q=iphone%2016&quot; }, &quot;wait_until&quot;: &quot;load&quot; },
+    { &quot;step_id&quot;: &quot;results&quot;, &quot;action&quot;: &quot;wait_for_timeout&quot;, &quot;duration_ms&quot;: 10000 }
+  ],
+  &quot;capture&quot;: { &quot;after_each_step&quot;: [&quot;url&quot;], &quot;at_end&quot;: [&quot;url&quot;, &quot;screenshot&quot;], &quot;events&quot;: [&quot;network&quot;],
+               &quot;network&quot;: { &quot;request_body&quot;: false, &quot;response_body&quot;: true, &quot;header_values&quot;: false } }
+}</pre>
+<p class="m">Keep the forward slashes <code>/</code> in the Chrome path. Mac: <code>/Applications/Google Chrome.app/Contents/MacOS/Google Chrome</code>.<br>
+<b style="color:var(--ink)">Any other website:</b> change the two URLs (the homepage + one search or product page of that site). That's all.</p></div>
+
+<div class="card"><h2>3. Run REA (same folder) <button onclick="cp('r')">Copy</button></h2>
+<pre id="r">npx -y rea-agents@6.4.0 capture-browser-scenario flipkart.json --format json &gt; flipkart-capture.json</pre>
+<p class="m">Chrome opens, REA does the steps by itself and closes it. <code>flipkart-capture.json</code> is big (20–40 MB) because it keeps the code your browser received.</p></div>
+
+<div class="card"><h2>4. Quick count (optional) <button onclick="cp('c')">Copy</button></h2>
+<pre id="c">import json, sys, collections, base64, urllib.parse
+d = json.load(open(sys.argv[1], encoding=&quot;utf-8&quot;))[&quot;normalized_result&quot;][&quot;events&quot;][&quot;items&quot;]
+reqs = {e[&quot;transaction_id&quot;]: e for e in d if e.get(&quot;kind&quot;) == &quot;request&quot;}
+types = collections.Counter(e.get(&quot;resource_type&quot;) for e in reqs.values())
+print(len(reqs), &quot;requests |&quot;, types[&quot;script&quot;], &quot;JS files |&quot;, types[&quot;image&quot;], &quot;images |&quot;, types[&quot;fetch&quot;] + types[&quot;xhr&quot;], &quot;data calls (fetch/xhr)&quot;)
+size = {}
+for e in d:
+    b = e.get(&quot;body&quot;) or {}
+    if e.get(&quot;kind&quot;) == &quot;network-content&quot; and e.get(&quot;phase&quot;) == &quot;response&quot; and isinstance(b, dict) and b.get(&quot;content&quot;):
+        raw = b[&quot;content&quot;]
+        size[e[&quot;transaction_id&quot;]] = len(base64.b64decode(raw)) if b.get(&quot;encoding&quot;) == &quot;base64&quot; else len(raw.encode())
+js = [(size.get(t, 0), r[&quot;url&quot;][&quot;url&quot;]) for t, r in reqs.items() if r.get(&quot;resource_type&quot;) == &quot;script&quot;]
+print(f&quot;JS code received: {sum(s for s, _ in js) / 1e6:.1f} MB (decoded)&quot;)
+for s, u in sorted(js, reverse=True)[:8]:
+    print(f&quot;{s / 1e6:6.2f} MB  {urllib.parse.urlparse(u).path[-70:]}&quot;)
+hosts = collections.Counter(urllib.parse.urlparse(r[&quot;url&quot;][&quot;url&quot;]).hostname for r in reqs.values() if r.get(&quot;resource_type&quot;) in (&quot;fetch&quot;, &quot;xhr&quot;))
+print(&quot;API hosts:&quot;, &quot;, &quot;.join(f&quot;{h} ({c})&quot; for h, c in hosts.most_common(6)))</pre>
+<p class="m">Save as <code>count.py</code>, run <code>python count.py flipkart-capture.json</code>. My output: <code>187 requests | 30 JS files</code> · <code>JS code received: 15.3 MB</code> · biggest file <code>MultiWidgetpage.js 6.06 MB</code>. (Run to run the request count moves: my headed run had 203.)</p></div>
+
+<div class="card"><h2>5. Let Claude explain it <button onclick="cp('p')">Copy</button></h2>
+<p class="m">Claude Code (or any AI that can read files) → open the folder → paste:</p>
+<pre id="p">Read flipkart-capture.json (a REA network capture). Tell me in simple Hinglish:
+1) which framework and version the site uses (search the JS for &quot;version:&quot; near react-dom),
+2) the code names in the asset paths,
+3) is the search page built on the server (results already inside the HTML) or loaded by an API call,
+4) which API hosts it talks to and what each call does,
+5) what the site learns about me as a guest.
+Quote the exact string for every claim.</pre>
+<p class="m">Same file, any site: Claude reads the evidence and tells you how the site is built, with the exact proof string for each point.</p></div>
+
+<div class="card m"><b style="color:var(--ink)">Honest notes</b><br>
+REA only reads what the website already sends to your own browser. It doesn't log in, doesn't get into the server and doesn't crack anything.
+Use it as a normal visitor on sites you are allowed to visit; don't use it to copy someone's paid software or break into accounts.
+Not affiliated with REA, Flipkart or any company named here.</div>
+</div>
+<script>function cp(id){navigator.clipboard&&navigator.clipboard.writeText(document.getElementById(id).innerText)}</script>
+</body></html>
