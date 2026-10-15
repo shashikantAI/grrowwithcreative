@@ -55,6 +55,17 @@ for h, c in sorted(out.items(), key=lambda x: -x[1])[:25]:
 <pre>npx rea-agents setup</pre>
 <p class="m">The repo README shows this command for connecting REA to your AI agent. Read the README first; that part is for apps and binaries, the Netflix test above does not need it.</p></div>
 
+<div class="card"><h2>6. My results on 5 sites (same 30-second test)</h2>
+<table style="width:100%;border-collapse:collapse;font-size:15px">
+<tr><th style="text-align:left;padding:6px 4px">Site (url in netflix.json)</th><th style="text-align:right;padding:6px 4px">Ad companies</th></tr>
+<tr><td style="padding:6px 4px"><code>https://www.aajtak.in/</code></td><td style="text-align:right;padding:6px 4px"><b>32</b></td></tr>
+<tr><td style="padding:6px 4px"><code>https://timesofindia.indiatimes.com/</code></td><td style="text-align:right;padding:6px 4px"><b>29</b></td></tr>
+<tr><td style="padding:6px 4px"><code>https://www.bhaskar.com/</code></td><td style="text-align:right;padding:6px 4px"><b>11</b></td></tr>
+<tr><td style="padding:6px 4px"><code>https://www.netflix.com/in/</code></td><td style="text-align:right;padding:6px 4px"><b>8</b></td></tr>
+<tr><td style="padding:6px 4px"><code>https://www.hotstar.com/in</code></td><td style="text-align:right;padding:6px 4px"><b>6</b></td></tr>
+</table>
+<p class="m">Tested 12–13 Oct 2026, no login, no clicks, 30 s each. Your numbers will change a little run to run and by country. To test another site, change only the <code>start_url</code>.</p></div>
+
 <div class="card m"><b style="color:var(--ink)">Honest notes</b><br>
 No password or card number left in my test; this is how online ads normally work, and most big websites do it.
 Use REA only on sites and apps you are allowed to test, as a normal visitor. Do not use it to break into accounts, crack paid apps or copy someone's software.
