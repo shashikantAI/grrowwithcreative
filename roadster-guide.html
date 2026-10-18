@@ -53,50 +53,28 @@ The man in the driver's seat bursts out laughing, throws his head back, claps hi
 <li>Kisi aur ka chehra bina permission use mat karo — platforms ki policy hai aur India ke IT rules bhi.</li>
 <li>Real Roadster abhi udta nahi, demo tha; yeh sirf AI masti hai.</li>
 </ul>
-<h2>Part 2 — Challan wala version (Google Flow, free) — 18 Oct 2026 reel</h2>
-<p>Yeh wala reel (police rokti hai → "Aur kuch?" → button → car upar) Google Flow pe bana, 2 clips, 20 credits, paisa zero.</p>
-<h3>Flow setup</h3>
-<p>flow.google.com (Google login; free account = 50 credits/day, Veo 3.1 Lite = 10 credits per 8 s clip). Project kholo → prompt box mein model ke naam pe click → <b>Video → Frames → 9:16</b>. Ab "Start" aur "End" frame ke do slot dikhenge. Image upload "+" → Upload media se.</p>
-<h3>Clip A — police stop (Start frame → End frame)</h3>
-<ul>
-<li><b>Start frame (F1):</b> Gemini / ChatGPT mein apni photo attach karke yeh image banao (prompt English mein):</li>
-</ul>
+<h2>Part 2 — Challan wala version (18 Oct reel): 4 steps, 2 tools</h2>
+<p>Tools: <b>ChatGPT</b> (images) + <b>Google Flow</b> flow.google.com (video, free 50 credits/day, Veo 3.1 Lite = 10 credits per clip).</p>
+<h3>Step 1 — ChatGPT: start image (apni photo attach karo)</h3>
 <pre>
-Photorealistic night photo from a traffic policeman&#x27;s chest-mounted body camera: the uploaded photo is the exact identity reference, same man, face, hair and beard exactly as in the photo, black t-shirt. He sits in the driver&#x27;s seat of a white 2026 Tesla Roadster, driver window down, looking up at the camera, both hands on the wheel, a glowing red button on the centre console. Behind the car a yellow-and-black MUMBAI TRAFFIC POLICE barricade, wet asphalt reflecting orange streetlights, autos passing far away. A khaki police sleeve and a handheld e-challan device at the bottom edge of the frame. Portrait 9:16.
+Photorealistic night photo from a traffic policeman&#x27;s chest-mounted body camera: the uploaded photo is the exact identity reference, same man, face, hair and beard exactly as in the photo, black t-shirt. He sits in the driver&#x27;s seat of a white 2026 Tesla Roadster, driver window down, looking up at the camera, both hands on the wheel, a glowing red button on the centre console. Behind the car a yellow-and-black MUMBAI TRAFFIC POLICE barricade, wet asphalt reflecting orange streetlights. A khaki police sleeve and a handheld e-challan device at the bottom edge of the frame. Portrait 9:16.
 </pre>
-<ul>
-<li><b>End frame (F2):</b> wahi image dobara edit karo, sirf ek cheez badlo:</li>
-</ul>
+<h3>Step 2 — ChatGPT: end image (same chat, same photo)</h3>
 <pre>
-Edit this photo. Keep everything exactly the same. Change only one thing: his right hand has left the steering wheel and rests on the centre console with his thumb on top of the glowing red button, about to press it. Left hand stays on the wheel. Face completely deadpan, mouth closed. Portrait 9:16.
+Edit this photo. Keep everything exactly the same. Change only one thing: his right hand has left the steering wheel and rests on the centre console with his thumb on top of the glowing red button. Left hand stays on the wheel. Face deadpan, mouth closed. Portrait 9:16.
 </pre>
-<ul>
-<li>F1 ko Start slot, F2 ko End slot mein daalo, phir yeh prompt:</li>
-</ul>
+<h3>Step 3 — Flow: clip 1 (model name → Video → Frames → 9:16; Start = image 1, End = image 2)</h3>
 <pre>
-Continuous handheld police body-camera POV at chest height, night, slight natural shake, no cuts, no camera moves. The man in the driver&#x27;s seat is the only person who speaks. [00:00-00:01] A policeman&#x27;s fist in a khaki sleeve enters from the bottom edge and knocks twice on the roof edge above the window. SFX: two knocks. [00:01-00:04] The man looks up at the camera, bored, mouth closed, waits in silence. [00:04-00:05] He says in Hindi, flat and deadpan, barely moving: &quot;Aur kuch?&quot; [00:05-00:08] He holds eye contact in silence, then slowly moves his right hand off the steering wheel down to the centre console and rests his thumb on the glowing red button, settling exactly into the final frame. No other dialogue, the policeman is never visible. Ambient noise: distant traffic, light rain. Photorealistic raw bodycam footage, no on-screen text, no subtitles, no music. Only one car in frame, the car does not move.
+Continuous handheld police body-camera POV, night, slight shake, no cuts. [00:00-00:01] A policeman&#x27;s fist in a khaki sleeve knocks twice on the roof edge above the window. [00:01-00:04] The man looks up at the camera, bored, mouth closed, silent. [00:04-00:05] He says in Hindi, flat and deadpan: &quot;Aur kuch?&quot; [00:05-00:08] He holds eye contact, then slowly moves his right hand off the wheel and rests his thumb on the glowing red button, settling into the final frame. The policeman is never visible, no other dialogue, no text, no music. Only one car, the car does not move.
 </pre>
-<p><b>Galti jo maine ki:</b> police ki lines prompt mein mat likho. Frame mein sirf tumhara chehra hai, toh Veo saari lines tumhare muh se bulwa deta hai. Police ki awaaz baad mein edit mein dalo (koi bhi Hindi TTS, ya Flow ka pehla clip jisme awaaz aayi ho).</p>
-<h3>Clip B — launch (Clip A ka last frame → sky frame)</h3>
-<ul>
-<li><b>Start frame:</b> Clip A ka last frame (video pause karke screenshot, ya Flow mein "+" se frame save karo).</li>
-<li><b>End frame (F3):</b> usi last frame ko ChatGPT/Gemini mein edit karo:</li>
-</ul>
+<h3>Step 4 — Flow: clip 2 (Start = clip 1 ka last frame; End = ChatGPT se yeh image)</h3>
+<p>End image prompt (clip 1 ka last frame attach karke):</p>
 <pre>
-New version of the same moment, but the body-camera has tilted straight up to follow the car. The same white sports car is about 25 metres up in the black Mumbai night sky, seen from directly below: underside and rear visible, two blazing blue-white cold-gas thruster jets firing straight down, long plumes of white vapour streaming down and filling the lower half of the frame. A hint of orange streetlight glow and the top edge of the yellow MUMBAI TRAFFIC POLICE barricade at the very bottom. No people, no second car, no text. Photorealistic bodycam footage, slight motion blur, portrait 9:16.
+Same moment, but the body-camera has tilted straight up: the same white sports car is about 25 metres up in the black night sky, seen from directly below, two blue-white cold-gas thruster jets firing down, white vapour plumes filling the lower half of the frame, the top edge of the yellow police barricade at the very bottom. No people, no second car, no text. Portrait 9:16.
 </pre>
-<ul>
-<li>Prompt:</li>
-</ul>
+<p>Clip 2 prompt:</p>
 <pre>
-Continuous handheld police body-camera POV, night, no cuts. The same white sports car and the same man as the first frame. [00:00-00:01] The man presses the red button with his thumb; a deep hiss builds, a pale blue-white glow spreads under the car. [00:01-00:03] Pressurised cold-gas thrusters under the car fire: bright blue-white jets, no fire, no flame; a wall of white vapour erupts and the whole car, with the man inside it, lifts straight up and rises out of the top of the frame. The road where it stood is now empty wet asphalt. [00:03-00:06] The camera tilts up fast to follow it: through thinning vapour the same white car climbs vertically on two blue-white jets into the black sky, seen from directly below. [00:06-00:08] The camera settles looking straight up at the car hanging high above on its two jets, vapour plumes filling the lower frame, the top of the yellow police barricade at the bottom edge, exactly the final frame. SFX: button click, deep hiss, a roaring rush of high-pressure gas, softening as the car climbs. No speech, no music, no on-screen text. Only ONE car exists in the whole clip; nothing remains parked on the road. Four normal upright tyres, the car never turns around, the policeman is never visible. Photorealistic raw bodycam footage.
+Continuous handheld police body-camera POV, night, no cuts. [00:00-00:01] The man presses the red button; a deep hiss, a blue-white glow under the car. [00:01-00:03] Cold-gas thrusters fire: blue-white jets, no flame; white vapour erupts and the whole car, with the man inside, lifts straight up out of the top of the frame; the road below is empty. [00:03-00:08] The camera tilts up fast and settles looking straight up at the car climbing on its two jets, vapour filling the lower frame, exactly the final frame. Only ONE car exists in the clip, nothing remains on the road. Four normal tyres, the policeman never visible, no speech, no text, no music.
 </pre>
-<p><b>Sabse badi galti:</b> Flow ka <b>Extend</b> button launch ke liye mat use karo — meri pehli try mein ek car ud gayi aur doosri car neeche khadi rahi. Start frame + End frame wala tarika hi chalta hai: end frame mein car aasmaan mein hai, toh neeche car bach hi nahi sakti.</p>
-<h3>Edit (CapCut / koi bhi editor)</h3>
-<ol>
-<li>Clip A ko 7 s pe kaato, Clip B ko 0.9 s se shuru karo — button press cut pe hi padta hai, stare lamba nahi lagta.</li>
-<li>Police ki 2 lines (License RC PUC dikhao / Insurance aur Aadhaar bhi) 0.7 s aur 4.5 s pe; "Aur kuch?" 3.0 s pe (jahan muh khulta hai).</li>
-<li>Subtitles neeche, music: stop ke time halka suspense, launch pe loud. Last 2 s mein thoda zoom-in taaki barricade ka text (jo AI mein bigad jaata hai) frame se bahar chala jaye.</li>
-<li>Post karte waqt "AI-generated" label ON.</li>
-</ol>
+<p>Extend button mat use karo (doosri car ban jaati hai). Dono clips jodo, police ki awaaz aur subtitles edit mein.</p>
 </main></body></html>
