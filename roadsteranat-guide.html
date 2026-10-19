@@ -1,0 +1,40 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Anatomy skill — ANATOMY guide</title>
+<style>:root{--v:#5B2EE0;--d:#2A1F6B;--l:#C6F432;--r:#D12F3A;--ink:#141414}body{margin:0;font:17px/1.55 Inter,system-ui,sans-serif;color:var(--ink);background:linear-gradient(160deg,#F5F2FF,#DCD3FF)}main{max-width:720px;margin:0 auto;padding:28px 18px 60px}h1{font-size:30px;line-height:1.15;margin:0 0 6px}h2{margin:30px 0 8px;padding:8px 14px;background:var(--d);color:#fff;border-radius:12px;font-size:20px}ul,ol{padding-left:22px;margin:6px 0}li{margin:8px 0}a{color:var(--v);font-weight:700;text-decoration:none;border-bottom:2px solid var(--l)}p{margin:8px 0}table{border-collapse:collapse;width:100%;background:#fff;border-radius:12px;overflow:hidden}td,th{padding:10px 12px;border-bottom:1px solid #E6E0FF;text-align:left;vertical-align:top}th{background:#EFEAFF}.red{color:var(--r)}.ok{background:var(--l);padding:0 8px;border-radius:6px;font-weight:700}.no{background:#fff0f0;color:var(--r);padding:0 8px;border-radius:6px;font-weight:700}.note{background:#fff;border-left:5px solid var(--r);padding:10px 14px;border-radius:8px}.link{display:block;text-align:center;font-size:24px;font-weight:800;background:#141414;color:var(--l);border:0;padding:16px;border-radius:14px;margin:10px 0}.foot{margin-top:34px;font-size:14px;color:#6B6485}pre{white-space:pre-wrap;background:#141414;color:#C6F432;padding:14px;border-radius:12px;font:14px/1.5 ui-monospace,Consolas,monospace}code{background:#fff;padding:1px 6px;border-radius:6px}.copy{display:inline-block;margin:4px 0 0;padding:6px 12px;background:var(--l);border-radius:8px;font-weight:800;cursor:pointer;border:0}</style></head><body><main>
+<h1>Anatomy skill: kisi bhi machine ka X-ray Claude se (shashikant.ai · comment ANATOMY)</h1>
+<p>Reel mein jo dikha (Elon ki flying Roadster ka X-ray), wahi exact steps aur exact prompt. Checked 19 Oct 2026.</p>
+<h2>1. Links</h2>
+<ul>
+<li>Skill (free, MIT): <a class="link" href="https://github.com/wheresryan22/anatomy" target="_blank" rel="noopener">GitHub: wheresryan22/anatomy</a></li>
+<li>Live examples: <a href="https://skills.wheresryan.sh/anatomy" target="_blank" rel="noopener">https://skills.wheresryan.sh/anatomy</a></li>
+</ul>
+<p>16,000+ GitHub stars · 11 din mein · contributors mein Claude bhi (co-author on commits).</p>
+<h2>2. Install (claude.ai, bina coding)</h2>
+<ol>
+<li>GitHub page kholo → green <b>Code</b> button → <b>Download ZIP</b>.</li>
+<li>claude.ai → <b>Settings → Capabilities</b> mein &quot;Code execution and file creation&quot; ON rakho.</li>
+<li><b>Settings → Skills → + Add → Upload skill</b> → ZIP select karo. List mein &quot;anatomy&quot; aa jayega.</li>
+<li>Naya chat → <code>/anatomy</code> likho → skill select ho jayega → apna prompt likho.</li>
+</ol>
+<p>Claude Code / terminal: <code>npx skills add wheresryan22/anatomy</code></p>
+<h2>3. Mera exact Roadster prompt (copy-paste)</h2>
+<pre id="p1">/anatomy the new Tesla Roadster that jumped and flipped in the air at Tesla&#x27;s October 2026 demo, with the side body cut away. Use only what Tesla said publicly and label the figure &quot;Based on Tesla&#x27;s own claims, not a full design&quot;. Show: the electric car body, the battery pack in the floor, a carbon-fibre tank holding about 600 litres of compressed air where the passenger seat would be, and 10 small cold-gas nozzles around the car (the same trick SpaceX uses on Falcon 9). Show the nozzles firing a burst of air so the car pushes off the ground and lifts a little. Interactive: a THRUST button, a live readout of thrust vs the car&#x27;s weight (it only lifts when thrust is more than weight), a tank gauge that empties in about 5 seconds of thrust, and a note that a refill takes 2 to 6 hours. Use simple physics: weight = mass x 9.81, and the tank empties faster at higher thrust. Put every number you assume in a small &quot;assumptions&quot; box. Standalone HTML, dark theme.</pre><button class="copy" onclick="navigator.clipboard.writeText(document.getElementById('p1').innerText);this.innerText='Copied ✓'">Copy prompt</button>
+<p>Claude ne khud research karke 2 cheezein theek ki: 600 L = 400 L tank (passenger seat) + 200 L tank (seat ke peeche), aur 10 mein se 6 nozzle neeche (lift), 4 peeche (aage ka dhakka).</p>
+<h2>4. Bonus: pressure cooker prompt</h2>
+<pre id="p2">/anatomy an Indian pressure cooker on a gas stove with its side cut away: water at the bottom, steam above it, the lid with a rubber gasket, the vent pipe with the weight (the whistle) sitting on it, and the small safety valve. Show the flame turning on, the pressure building, and the whistle lifting and venting steam when the pressure reaches about 1 bar (15 psi) at about 120 C. Interactive: a knob for the flame, a live readout of pressure and temperature, and a button to lift the whistle. Standalone HTML, dark theme.</pre><button class="copy" onclick="navigator.clipboard.writeText(document.getElementById('p2').innerText);this.innerText='Copied ✓'">Copy prompt</button>
+<h2>5. Apna prompt kaise likho (formula)</h2>
+<ol>
+<li><b>Machine + cut:</b> &quot;&lt;machine&gt; with its side cut away&quot;</li>
+<li><b>Parts:</b> jo andar dikhna chahiye, ek-ek naam se</li>
+<li><b>Kya chale:</b> &quot;show X turning on, Y building, Z moving when…&quot;</li>
+<li><b>Interactive:</b> ek button / knob / slider + &quot;live readout of …&quot;</li>
+<li><b>Sach:</b> &quot;use only public facts, put every assumed number in an assumptions box&quot;</li>
+<li><b>Output:</b> &quot;Standalone HTML, dark theme&quot;</li>
+</ol>
+<h2>6. Sach wali baat</h2>
+<ul>
+<li>Ek figure mein <b>35–40+ minute</b> lagte hain (mera Roadster: pehla version ~40 min). Lamba kaam free plan ki limit kha sakta hai; Pro/Max par aaram se chalta hai.</li>
+<li>Roadster figure ek <b>simulation</b> hai: tank sizes aur 10 nozzles Tesla (Lars Moravy) ne bataye; car ka weight (1,750 kg) aur andar ki layout Claude ka andaaza hai. 5 second boost aur 2–6 ghante refill = reported figures.</li>
+<li>Skill Ryan (@wheresryan22) ki banayi hai; ye guide @shashikant.ai ki hai, Anthropic ya Tesla se affiliated nahi.</li>
+</ul>
+<p class="foot">Guide by @shashikant.ai · comment ANATOMY · checked 19 Oct 2026. Skills and plans change, check the links.</p>
+</main></body></html>
