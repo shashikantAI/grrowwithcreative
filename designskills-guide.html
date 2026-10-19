@@ -1,0 +1,89 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Design skills — SKILL guide</title>
+<style>:root{--v:#5B2EE0;--d:#2A1F6B;--l:#C6F432;--r:#D12F3A;--ink:#141414}body{margin:0;font:17px/1.55 Inter,system-ui,sans-serif;color:var(--ink);background:linear-gradient(160deg,#F5F2FF,#DCD3FF)}main{max-width:720px;margin:0 auto;padding:28px 18px 60px}h1{font-size:30px;line-height:1.15;margin:0 0 6px}h2{margin:30px 0 8px;padding:8px 14px;background:var(--d);color:#fff;border-radius:12px;font-size:20px}ul,ol{padding-left:22px;margin:6px 0}li{margin:8px 0}a{color:var(--v);font-weight:700;text-decoration:none;border-bottom:2px solid var(--l)}p{margin:8px 0}table{border-collapse:collapse;width:100%;background:#fff;border-radius:12px;overflow:hidden}td,th{padding:10px 12px;border-bottom:1px solid #E6E0FF;text-align:left;vertical-align:top}th{background:#EFEAFF}.red{color:var(--r)}.ok{background:var(--l);padding:0 8px;border-radius:6px;font-weight:700}.no{background:#fff0f0;color:var(--r);padding:0 8px;border-radius:6px;font-weight:700}.note{background:#fff;border-left:5px solid var(--r);padding:10px 14px;border-radius:8px}.link{display:block;text-align:center;font-size:24px;font-weight:800;background:#141414;color:var(--l);border:0;padding:16px;border-radius:14px;margin:10px 0}.foot{margin-top:34px;font-size:14px;color:#6B6485}pre{white-space:pre-wrap;background:#141414;color:#C6F432;padding:14px;border-radius:12px;font:14px/1.5 ui-monospace,Consolas,monospace}code{background:#fff;padding:1px 6px;border-radius:6px}.copy{display:inline-block;margin:4px 0 0;padding:6px 12px;background:var(--l);border-radius:8px;font-weight:800;cursor:pointer;border:0}pre code{background:none;padding:0;color:inherit}</style></head><body><main>
+<h1>Design skills ka sach + fix line (shashikant.ai · comment SKILL)</h1>
+<p>Reel mein jo dikha (Apple, Stripe, Linear skill vs bina skill), uske exact links, install steps aur fix line. Checked 19 Oct 2026.</p>
+<h2>1. Link</h2>
+<ul>
+<li>Repo (87 design skills, free): <a class="link" href="https://github.com/ihlamury/design-skills" target="_blank" rel="noopener">GitHub: ihlamury/design-skills</a></li>
+<li>Ye skills websites se automatically "extracted" hain (README khud bolta hai). Apple, Stripe ya Linear ne nahi banayi.</li>
+</ul>
+<h2>2. Install (Claude Code)</h2>
+<pre><code id="c1">npx skills add ihlamury/design-skills
+</code></pre><button class="copy" onclick="navigator.clipboard.writeText(document.getElementById('c1').innerText);this.textContent='Copied ✓'">Copy</button>
+<p>Sirf ek skill chahiye? Repo clone karo aur us skill ka folder copy karo:</p>
+<pre><code id="c2">git clone https://github.com/ihlamury/design-skills.git
+cp -r design-skills/skills/apple ~/.claude/skills/
+</code></pre><button class="copy" onclick="navigator.clipboard.writeText(document.getElementById('c2').innerText);this.textContent='Copied ✓'">Copy</button>
+<p>claude.ai pe: skill ka folder ZIP karo → Settings → Skills → Upload skill.</p>
+<h2>3. Fix line (install ke baad, apne prompt ke end mein lagao)</h2>
+<pre><code id="c3">Audit this skill for conflicting rules and unreadable text. Fix those issues before building.
+</code></pre><button class="copy" onclick="navigator.clipboard.writeText(document.getElementById('c3').innerText);this.textContent='Copied ✓'">Copy</button>
+<p>Mere test mein Claude ne Apple skill mein 10 takrate rules pakde, skill theek ki, aur gayab Subscribe button wapas aa gaya.</p>
+<h2>4. Mera test (same prompt, 4 baar, Claude Code)</h2>
+<pre><code id="c4">Build a landing page for ChaiDaily, a chai subscription startup in India. Make one file, index.html, with inline CSS and no libraries (Google Fonts is fine). Sections: a hero with a headline and a button, 3 features, pricing with 3 plans, and a footer. Make it look professional.
+</code></pre><button class="copy" onclick="navigator.clipboard.writeText(document.getElementById('c4').innerText);this.textContent='Copied ✓'">Copy</button>
+<table>
+<thead>
+<tr>
+<th>Version</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bina skill</td>
+<td>Sabse premium: serif headline, khud ka kulhad drawing</td>
+</tr>
+<tr>
+<td>Apple skill</td>
+<td>Header ka Subscribe button gayab (blue button pe blue text)</td>
+</tr>
+<tr>
+<td>Stripe skill</td>
+<td>Light blue-grey look, phone pe header button kat gaya</td>
+</tr>
+<tr>
+<td>Linear skill</td>
+<td>Sabse "brand jaisa": dark page, violet button</td>
+</tr>
+</tbody>
+</table>
+<h2>5. Rules jo aapas mein takrate hain (khud naapa)</h2>
+<table>
+<thead>
+<tr>
+<th>Skill</th>
+<th>Rule</th>
+<th>Uska apna colour</th>
+<th>Contrast</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Apple</td>
+<td>"MUST maintain 4.5:1" (line 28)</td>
+<td>body text #808080 (line 36)</td>
+<td>3.95 : 1 ✗</td>
+</tr>
+<tr>
+<td>Linear</td>
+<td>same 4.5:1 rule</td>
+<td>#5C5C5C on dark</td>
+<td>2.97 : 1 ✗</td>
+</tr>
+<tr>
+<td>Stripe</td>
+<td>same 4.5:1 rule</td>
+<td>#9DA1A9 on light</td>
+<td>~2.4 : 1 ✗</td>
+</tr>
+</tbody>
+</table>
+<p>Apple skill bolti hai "MUST use Inter", jabki Apple ka apna font SF Pro hai.</p>
+<h2>6. Sach wali baat</h2>
+<ul>
+<li>Fix line ka test maine ek baar kiya (Apple skill). Har baar same result ki guarantee nahi, par Claude pehle takraav dhoondh leta hai.</li>
+<li>Skill sirf rulebook hai. Naam Apple hone se output Apple-level nahi hota.</li>
+<li>Ye guide @shashikant.ai ki hai; repo ihlamury ka hai; Apple, Stripe, Linear ya Anthropic se affiliated nahi.</li>
+</ul>
+<p class="foot">@shashikant.ai · Instagram · YouTube @shashikantai24</p></main></body></html>
