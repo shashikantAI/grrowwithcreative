@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>MCP Code Mode Guide</title><meta name="robots" content="noindex">
+<style>
+:root{--bg:#0E0F11;--card:#16181c;--ink:#f1f2f4;--mute:#a3a8b0;--lime:#C6F432;--red:#FF4A3D;--line:#2a2e36}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(120% 80% at 50% 0%,#1a1d22,#0E0F11 70%);color:var(--ink);font:17px/1.6 system-ui,Segoe UI,sans-serif}
+.w{max-width:720px;margin:0 auto;padding:28px 16px 60px}h1{font-size:30px;line-height:1.2;margin:8px 0}h2{margin:0 0 6px;font-size:21px}
+.tag{display:inline-block;background:var(--lime);color:#111;font-weight:800;padding:3px 10px;border-radius:6px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin:16px 0}
+ol{padding-left:22px}li{margin:8px 0}code,pre{font-family:Consolas,monospace;background:#08090b;border:1px solid var(--line);border-radius:8px}
+code{padding:1px 6px}pre{padding:14px;white-space:pre-wrap;word-break:break-word;font-size:14px;color:var(--lime)}
+.nums{display:flex;gap:10px;flex-wrap:wrap}.n{flex:1;min-width:140px;background:#08090b;border-radius:12px;padding:12px;text-align:center}
+.n b{display:block;font-size:30px}.m{color:var(--mute);font-size:14px}a{color:var(--lime)}
+button{float:right;background:var(--lime);color:#111;border:0;border-radius:8px;font-weight:800;padding:6px 12px;cursor:pointer}
+</style></head><body><div class="w">
+</head><body><div class="w">
+<span class="tag">@shashikant.ai · Is MCP dead?</span>
+<h1>MCP Code Mode — GitHub links + kaise try karein</h1>
+<p class="m">Reel ka short answer: MCP dead nahi hai. Badla sirf tareeka hai — AI har tool ko ek-ek karke call karne ki jagah code likhta hai, jo sandbox mein chalta hai.</p>
+
+<div class="nums">
+<div class="n"><b>1,170,523</b><span class="m">tokens — Cloudflare API ke 2,594 tools, normal MCP</span></div>
+<div class="n"><b>~1,100</b><span class="m">tokens — same API, Code Mode (search + execute)</span></div>
+</div>
+<p class="m">Numbers: cloudflare/mcp README ki token table.</p>
+
+<div class="card"><h2>1. Cloudflare MCP server (reel wala Code Mode server)</h2>
+<p>Poori Cloudflare API (~2,500 endpoints) sirf ~1k tokens mein.<br><a href="https://github.com/cloudflare/mcp">github.com/cloudflare/mcp</a></p>
+<p>Claude Code / Cursor / kisi bhi MCP client mein ye config daalo — connect karte hi Cloudflare login (OAuth) khulega:</p>
+<button onclick="navigator.clipboard.writeText(document.getElementById('c1').innerText)">Copy</button>
+<pre id="c1">{
+  "mcpServers": {
+    "cloudflare-api": {
+      "type": "http",
+      "url": "https://mcp.cloudflare.com/mcp"
+    }
+  }
+}</pre>
+<p class="m">Comparison dekhna hai? URL ke end mein <code>?codemode=false</code> lagao — har endpoint alag tool ban jaata hai (~244k tokens).</p></div>
+
+<div class="card"><h2>2. Apne agent mein Code Mode — @cloudflare/codemode</h2>
+<p>Tumhare tools ko TypeScript API bana deta hai; AI code likhta hai jo isolated sandbox mein chalta hai.<br><a href="https://github.com/cloudflare/agents/tree/main/packages/codemode">github.com/cloudflare/agents → packages/codemode</a></p>
+<pre>npm install @cloudflare/codemode agents ai zod</pre>
+<p class="m">⚠️ Package "Experimental" hai — production mein soch samajh ke use karo.</p></div>
+
+<div class="card"><h2>3. Coding agent ke liye prompt (bina kisi setup ke)</h2>
+<p>Jab koi kaam bahut saare tool calls ka ho, Claude Code / Codex / Cursor ko bolo:</p>
+<button onclick="navigator.clipboard.writeText(document.getElementById('c3').innerText)">Copy</button>
+<pre id="c3">Don't call the tools one by one. Write one script that runs all the steps and print only the final result.</pre>
+<p class="m">Kaam tab karta hai jab tumhare setup mein agent script chala sakta ho aur tools code se call ho sakein.</p></div>
+
+<div class="card"><h2>4. Original sources</h2>
+<ol>
+<li>Anthropic — <a href="https://www.anthropic.com/engineering/code-execution-with-mcp">Code execution with MCP</a> (4 Nov 2025): ek example mein 150,000 → 2,000 tokens.</li>
+<li>Cloudflare — <a href="https://blog.cloudflare.com/code-mode/">Code Mode: the better way to use MCP</a> (26 Sep 2025)</li>
+<li>Cloudflare — <a href="https://blog.cloudflare.com/code-mode-mcp/">Code Mode: give agents an entire API in 1,000 tokens</a> (20 Feb 2026)</li>
+</ol></div>
+<p class="m">Follow <a href="https://instagram.com/shashikant.ai">@shashikant.ai</a> for more AI dev tricks.</p>
+</div></body></html>
