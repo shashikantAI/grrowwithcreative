@@ -1,0 +1,68 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>PHP2Shell check — shashikant.ai</title><style>:root{--v1:#F5F2FF;--v2:#8C74F2;--ink:#141414;--deep:#2A1F6B;--lime:#C6F432}body{margin:0;background:linear-gradient(180deg,var(--v1),#E4DCFF);color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 16px 60px}h1{color:var(--deep);font-size:30px;line-height:1.2}h2{color:var(--deep);border-left:6px solid var(--lime);padding-left:10px;margin-top:30px}
+pre{background:#0F0B1F;color:#E9E4FF;padding:14px;border-radius:12px;overflow-x:auto}code{font-family:ui-monospace,monospace}p code,li code{background:#fff;padding:1px 6px;border-radius:6px}
+table{border-collapse:collapse;width:100%;background:#fff;border-radius:12px;overflow:hidden}th,td{padding:8px 10px;border-bottom:1px solid #eee;text-align:left}th{background:var(--deep);color:#fff}b{background:var(--lime);padding:0 4px;border-radius:4px}a{color:#4B2BD8;word-break:break-all}pre{white-space:pre-wrap}</style></head><body><main><h1>PHP2Shell check — apni website 5 minute mein check karo (shashikant.ai)</h1>
+<p>Reel ke saath wala guide. Facts 22 Oct 2026 ke hain (sources neeche). Is guide mein sirf <b>check aur fix</b> hai, koi hacking step nahi.</p>
+<h2>Kya hua (1 line)</h2>
+<p>PHP ke andar ek purana memory bug (2020 mein mila, 2024 mein dobara mila) AI ki madad se exploit karne layak ban gaya. Score <b>9.2/10</b> (CVSS). 21 Oct 2026 ko fix aaya, aur Europe ki kai sarkari websites precaution mein offline gayi.</p>
+<h2>Step 1 — apna PHP version dekho</h2>
+<p><b>WordPress:</b> Dashboard → <b>Tools → Site Health → Info → Server</b> → line <b>PHP version</b>.</p>
+<p><b>cPanel hosting:</b> Software → <b>MultiPHP Manager</b> (ya "Select PHP Version") → current version.</p>
+<p><b>Developer ho:</b> server pe <code>php -v</code> chalao.</p>
+<h2>Step 2 — safe version se milao</h2>
+<table>
+<thead>
+<tr>
+<th>tumhari series</th>
+<th>safe (fix) version ya usse naya</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>8.5</td>
+<td><b>8.5.12</b></td>
+</tr>
+<tr>
+<td>8.4</td>
+<td><b>8.4.27</b></td>
+</tr>
+<tr>
+<td>8.3</td>
+<td><b>8.3.36</b></td>
+</tr>
+<tr>
+<td>8.2</td>
+<td><b>8.2.35</b></td>
+</tr>
+<tr>
+<td>8.1 ya purana</td>
+<td>official support khatam — host se 8.3/8.4 pe upgrade maango</td>
+</tr>
+</tbody>
+</table>
+<p>Tumhara version isse <b>purana</b> hai? → Step 3.</p>
+<h2>Step 3 — host / developer ko ye message bhejo</h2>
+<p><b>English (copy):</b></p>
+<pre><code>Hi, please update the PHP version on my server to the patched release for PHP2Shell
+(CVE-2026-109618 / CVE-2026-109619): 8.5.12, 8.4.27, 8.3.36 or 8.2.35 or newer.
+My site currently shows PHP &lt;your version&gt;. Please confirm once done. Thanks!
+</code></pre>
+<p><b>Hinglish (copy):</b></p>
+<pre><code>Hi, mere server ka PHP PHP2Shell (CVE-2026-109618 / 109619) ke patched version pe update kar do —
+8.5.12, 8.4.27, 8.3.36 ya 8.2.35 (ya naya). Abhi site pe PHP &lt;tumhara version&gt; dikh raha hai. Ho jaye toh batana. Thanks!
+</code></pre>
+<h2>Yaad rakho</h2>
+<ul>
+<li><b>WordPress auto-update sirf WordPress aur plugins update karta hai, server ka PHP nahi.</b> PHP hosting company / server wala update karta hai.</li>
+<li>Har website hack nahi hui: zyada tar public attacks ko ek aur bug bhi chahiye. Par risk lene ka koi faayda nahi; update free hai.</li>
+<li>Update ke baad Site Health dobara kholo aur naya version confirm karo.</li>
+</ul>
+<h2>Sources</h2>
+<ul>
+<li>SecurityWeek — <a href="https://www.securityweek.com/php2shell-patches-land-as-first-exploitation-attempts-hit-sensors/">https://www.securityweek.com/php2shell-patches-land-as-first-exploitation-attempts-hit-sensors/</a></li>
+<li>Sansec Research — <a href="https://sansec.io/research/php2shell">https://sansec.io/research/php2shell</a></li>
+<li>Help Net Security (fixed versions, Amazon MadPot) — <a href="https://www.helpnetsecurity.com/2026/10/21/php2shell-php-vulnerabilities-patched-cve-2026-109618-cve-2026-109619/">https://www.helpnetsecurity.com/2026/10/21/php2shell-php-vulnerabilities-patched-cve-2026-109618-cve-2026-109619/</a></li>
+<li>The Hacker News (CVSS 9.2) — <a href="https://thehackernews.com/2026/10/php2shell-what-actually-protects-you.html">https://thehackernews.com/2026/10/php2shell-what-actually-protects-you.html</a></li>
+<li>NL Times (Dutch sites offline) — <a href="https://nltimes.nl/2026/10/22/important-dutch-websites-still-offline-php-issues">https://nltimes.nl/2026/10/22/important-dutch-websites-still-offline-php-issues</a></li>
+</ul>
+<p>— @shashikant.ai</p></main></body></html>
