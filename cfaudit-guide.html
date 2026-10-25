@@ -1,0 +1,22 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Cloudflare Security Audit Skill — free pack (shashikant.ai)</title><style>:root{--v1:#F5F2FF;--v2:#8C74F2;--ink:#141414;--deep:#2A1F6B;--lime:#C6F432}body{margin:0;background:linear-gradient(180deg,var(--v1),#E4DCFF);color:var(--ink);font:17px/1.6 system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 16px 60px}h1{color:var(--deep);font-size:30px;line-height:1.2}h2{color:var(--deep);border-left:6px solid var(--lime);padding-left:10px;margin-top:30px}
+pre{background:#0F0B1F;color:#E9E4FF;padding:14px;border-radius:12px;white-space:pre-wrap;word-break:break-word}code{font-family:ui-monospace,monospace}p code,li code{background:#fff;padding:1px 6px;border-radius:6px}
+table{border-collapse:collapse;width:100%;background:#fff;border-radius:12px;overflow:hidden}th,td{padding:8px 10px;border-bottom:1px solid #eee;text-align:left}th{background:var(--deep);color:#fff}b{background:var(--lime);padding:0 4px;border-radius:4px}</style></head><body><main><h1>Cloudflare Security Audit Skill — free pack (shashikant.ai)</h1>
+<p>Tested by me on a 45-line Flask app with 6 bug groups I planted: it found all 6. Source: <a href="https://github.com/cloudflare/security-audit-skill">https://github.com/cloudflare/security-audit-skill</a> (MIT, free).</p>
+<h2>1. Install (inside your project folder)</h2>
+<p>Tool: terminal. This is the command from the repo README.</p>
+<pre><code>npx skills add https://github.com/cloudflare/security-audit-skill --skill security-audit
+</code></pre>
+<h2>2. Run it</h2>
+<p>Tool: Claude Code, opened in the same project. Type:</p>
+<pre><code>security audit this codebase
+</code></pre>
+<h2>3. Read the report</h2>
+<table><tr><th>Verdict</th><th>Meaning</th></tr><tr><td>CONFIRMED</td><td>the skill reproduced the bug in a sandbox</td></tr><tr><td>NEEDS VALIDATION</td><td>the code says yes, but it was not run, so check it yourself</td></tr><tr><td>REJECTED</td><td>a second agent disproved it</td></tr></table>
+<p>Each finding has a source trace (file:line) and a suggested fix. Fix the NEEDS VALIDATION ones first if they touch login, admin pages, file download or SQL.</p>
+<h2>4. Turn a finding into a fix</h2>
+<p>Tool: Claude Code. Paste:</p>
+<pre><code>Fix finding #1 from the audit report. Use the source-level fix it suggests, then add a regression test that fails before the fix and passes after.
+</code></pre>
+<h2>5. Honest catches from my test</h2>
+<ul><li>Full run on a tiny file: 24 agents, about 15 minutes, about $6.5 at API prices. A quick single-agent pass took 107 seconds and about $0.39 but has no second-agent checking.</li><li>On Windows I got 0 confirmed, 7 needs validation, because the full audit only confirms bugs inside an OS sandbox and Windows had none. Use Linux, macOS or WSL if you want confirmed results.</li><li>Cloudflare says repeated runs find more bugs, so one run is not a final clearance.</li><li>A clean report does not mean the app is safe.</li><li>Run it on your own code only, and never point it at a live site you do not own.</li></ul></main></body></html>
