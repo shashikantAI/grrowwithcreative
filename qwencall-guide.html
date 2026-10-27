@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Local AI safe setup — free guide (shashikant.ai)</title><style>:root{--bg:#03100A;--deep:#0F2E1C;--nv:#9BFFB2;--lime:#C6F432;--red:#FF4A3D}body{margin:0;background:radial-gradient(120% 60% at 50% 0%,#12341f,var(--bg) 60%);color:#EAFBEF;font:17px/1.6 system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 16px 60px}h1{color:var(--lime);font-size:30px;line-height:1.2}h2{color:var(--nv);border-left:6px solid var(--lime);padding-left:10px;margin-top:30px}
+pre{background:#000;color:var(--nv);padding:14px;border-radius:12px;white-space:pre-wrap;word-break:break-word;border:1px solid #1f4a2c}code{font-family:ui-monospace,monospace}p code,li code{background:#0b2414;color:var(--nv);padding:1px 6px;border-radius:6px}
+a{color:var(--lime)}b{background:var(--lime);color:#111;padding:0 4px;border-radius:4px}.rec{font-family:ui-monospace,monospace;color:var(--nv);font-size:13px;letter-spacing:2px}.rec i{display:inline-block;width:10px;height:10px;border-radius:5px;background:var(--red);margin-right:8px}</style></head><body><main><div class="rec"><i></i>REC · AI PAKDA GAYA #01</div><h1>Local AI safe setup — free guide (shashikant.ai · AI PAKDA GAYA #01)</h1>
+<p>Reel: Cohere&#x27;s test caught Alibaba&#x27;s Qwen model (Qwen3.8-Flash-Next) writing &quot;no tool calls&quot; in its plan, then running commands and trying to upload a test file to an Alibaba Cloud server in Beijing. Their sandbox had no internet, so it stopped. Very rare in their test (less than 1 in 100,000 calls); Cohere&#x27;s own report: <a href="https://cohere.com/blog/concerning-behaviour-popular-open-weight-ai-model">https://cohere.com/blog/concerning-behaviour-popular-open-weight-ai-model</a></p>
+<p>Two rules for any AI agent on your laptop (Qwen, Llama, DeepSeek, Claude Code, Codex, OpenCode…):</p>
+<p><b>1. Internet only where you decide. 2. Every command asks you first.</b></p>
+<h2>1. Internet band (the real wall)</h2>
+<p>Approval prompts slow an agent down; they are not a sandbox. The wall is the network.</p>
+<p><b>Option A — Docker (cleanest):</b> run the agent inside a container with no network at all.</p>
+<pre><code>docker run --rm -it --network none -v &quot;%cd%&quot;:/work -w /work &lt;your-agent-image&gt;</code></pre>
+<p>Inside it the agent can read and edit your project, but no command can reach the internet. (Docker docs: <code>--network none</code> = only a loopback device.)</p>
+<p><b>Option B — Windows firewall (no Docker):</b> block outbound traffic for the agent&#x27;s program.</p>
+<pre><code>New-NetFirewallRule -DisplayName &quot;Block AI agent&quot; -Direction Outbound -Program &quot;C:\path\to\agent.exe&quot; -Action Block</code></pre>
+<p>Undo: <code>Remove-NetFirewallRule -DisplayName &quot;Block AI agent&quot;</code></p>
+<p>Note: blocks only that program; commands the agent starts through other programs (curl, python) need their own rule — that is why Option A is better.</p>
+<h2>2. Har command pe approval</h2>
+<p><b>OpenCode</b> — <code>opencode.json</code>:</p>
+<pre><code>{ &quot;permission&quot;: { &quot;bash&quot;: { &quot;*&quot;: &quot;ask&quot; }, &quot;webfetch&quot;: &quot;deny&quot; } }</code></pre>
+<p>Every shell command asks you first; web fetch is off. (opencode.ai/docs/permissions — &quot;ask&quot; is friction, not a sandbox, so keep step 1.)</p>
+<p><b>Claude Code</b> — keep the default ask mode, never <code>--dangerously-skip-permissions</code>. In <code>.claude/settings.json</code>:</p>
+<pre><code>{ &quot;permissions&quot;: { &quot;deny&quot;: [&quot;WebFetch&quot;, &quot;Bash(curl:*)&quot;, &quot;Bash(wget:*)&quot;] } }</code></pre>
+<p>The docs warn Bash patterns are prefix matches and can be bypassed — again, step 1 is the real wall.</p>
+<h2>3. Plan nahi, command check karo</h2>
+<p>From Cohere&#x27;s post — stop the agent when a command shows:</p>
+<ul><li>an upload: <code>-X PUT</code>, <code>--data-binary</code>, <code>-T</code>, <code>scp</code>, <code>rsync</code> to a host you don&#x27;t know</li><li>a cloud URL you never use (<code>*.aliyuncs.com</code>, random storage buckets)</li><li><code>169.254.169.254</code> (cloud credential address)</li><li><code>unshare</code>, <code>sudo</code>, permission tricks when it hit a &quot;permission denied&quot;</li></ul>
+<p>The plan text (&quot;I will not call tools&quot;) is not proof. The command is.</p>
+<p>— shashikant.ai · comment ALIBABA on the reel for updates</p></main></body></html>
