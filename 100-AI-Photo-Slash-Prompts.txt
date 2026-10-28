@@ -1,0 +1,138 @@
+100 AI PHOTO SLASH PROMPTS
+By @shashikant.ai
+
+HOW TO USE
+Upload your photo to an image-capable AI editor. Copy one slash prompt below and send it with your photo. Start each experiment from the original photo rather than stacking edits. Save the result you like.
+
+These are short creative prompts, not official built-in commands. The slash is a convenient writing convention, not a guaranteed feature switch. Interpretation, face consistency and results vary by model and photo. Descriptions below explain the intended effect; you only need to copy the slash phrase to experiment.
+
+[TRIED] means we generated and inspected a result using this exact short prompt in this project. It does not guarantee repeatability. All other entries are untested ideas. Some tried results differ from the initial concept: those actual results are described here.
+
+01 /giant miniature [TRIED] — You as a giant overlooking a tiny coastal town.
+02 /ghost-walk [TRIED] — Fading copies of you trail behind your walking pose.
+03 /portal split [TRIED] — Two versions of you across a glowing beach/city divide.
+04 /shattered reality [TRIED] — Floating mirror fragments show alternate versions of the scene.
+05 /liquid chrome [TRIED] — Reflective metallic clothing and surroundings.
+06 /anime [TRIED] — An illustrated anime version of the photograph.
+07 /worms eye wide [TRIED] — Ground-level wide perspective with a dramatic sky.
+08 /shadow rebellion — A shadow that takes a different pose from its owner.
+09 /living reflection — A reflection that behaves differently from its subject.
+10 /pixel dissolve — Part of the subject breaks into colourful digital pixels.
+
+SURREAL TRANSFORMATIONS
+11 /fire fade — Part of the silhouette dissolves into glowing embers.
+12 /butterfly dissolve — A silhouette disperses into butterflies.
+13 /water dissolve — Part of the subject becomes suspended water droplets.
+14 /sand drift — A silhouette gradually turns into windblown sand.
+15 /smoke silhouette — Smoke curls form or replace part of the silhouette.
+16 /paper peel — The photograph peels away in paper-like layers.
+17 /flower bloom — Flowers grow across clothing or the surrounding scene.
+18 /ice sculpture — A translucent sculpted-ice version of the subject.
+19 /glass body — A surreal transparent glass interpretation of the figure.
+20 /gold statue — A polished sculptural gold treatment.
+
+IMPOSSIBLE SCALE AND SPACE
+21 /levitation — The subject floats above the ground.
+22 /gravity glitch — Nearby objects appear suspended in midair.
+23 /pocket universe — A miniature cosmos appears inside a pocket.
+24 /moon balloon — The moon floats like a balloon held by the subject.
+25 /cloud staircase — Steps rise from the scene into the clouds.
+26 /ocean doorway — A freestanding doorway opens onto another ocean scene.
+27 /floating island — The subject stands on an island suspended in the sky.
+28 /folded city — Buildings and streets fold around the subject.
+29 /infinite hallway — Repeated architecture stretches into an impossible distance.
+30 /tiny planet — The surroundings curve into a miniature spherical world.
+
+LIGHT AND ATMOSPHERE
+31 /neon noir — Dark cinematic lighting with saturated neon accents.
+32 /golden hour — Soft warm sunlight and long shadows.
+33 /blue hour — Cool twilight tones just after sunset.
+34 /moonlit portrait — Cool directional moonlight with deep shadows.
+35 /window light — Soft side light shaped by a nearby window.
+36 /prism light — Rainbow bands of refracted light cross the scene.
+37 /volumetric rays — Visible shafts of light pass through haze.
+38 /rim light — A bright outline separates the subject from the background.
+39 /candle glow — Warm, intimate light with gentle falloff.
+40 /bioluminescent glow — Glowing organic details illuminate the setting.
+
+CAMERA AND COMPOSITION
+41 /birds eye view — A view looking straight down from above.
+42 /low angle — A viewpoint below the subject for a strong stance.
+43 /high angle — A viewpoint looking down toward the subject.
+44 /close-up — A tight crop emphasizing the face and expression.
+45 /extreme close-up — A very tight detail of an eye or facial feature.
+46 /over the shoulder — A scene seen from behind the subject's shoulder.
+47 /dutch angle — A deliberately tilted horizon.
+48 /fisheye — Curved wide-angle lens distortion.
+49 /telephoto compression — A long-lens look with visually compressed depth.
+50 /symmetrical framing — A centered composition with balanced surroundings.
+
+MOTION AND TIME
+51 /long exposure — A still-photo look with motion trails.
+52 /motion blur — Directional blur conveys speed or movement.
+53 /light trails — Moving lights create luminous paths through the scene.
+54 /freeze splash — Water is caught as sharply frozen droplets.
+55 /strobe motion — Several movement phases appear in one photograph.
+56 /speed tunnel — The background stretches into a tunnel of motion.
+57 /time echo — Repeated moments of the subject overlap in the scene.
+58 /wind sweep — Hair, fabric and particles suggest a strong gust.
+59 /bullet time — A dramatic frozen-action perspective.
+60 /zoom burst — Radial streaks draw attention toward the subject.
+
+FILM AND EDITORIAL
+61 /paparazzi editorial — Candid editorial framing; interpretation may include a contact sheet.
+62 /film noir — High-contrast monochrome with dramatic shadows.
+63 /vintage polaroid — Soft instant-film colour and a print-like finish.
+64 /35mm film — Natural film grain and photographic colour rendering.
+65 /cinematic teal orange — Cool shadows balanced against warm highlights.
+66 /direct flash — A bold on-camera flash look with crisp shadows.
+67 /fashion editorial — A polished magazine-style fashion photograph.
+68 /contact sheet — Multiple related frames arranged like film proofs.
+69 /vintage sepia — Warm brown monochrome with an aged photographic mood.
+70 /silver gelatin — Rich black-and-white darkroom-print styling.
+
+ART AND MATERIAL
+71 /watercolor — Translucent painted washes and soft pigment edges.
+72 /oil painting — Rich brushwork and layered painted texture.
+73 /charcoal sketch — Expressive monochrome strokes and smudged shading.
+74 /pencil drawing — Fine graphite lines and tonal shading.
+75 /comic book — Bold outlines, stylized shading and graphic colour.
+76 /claymation — A handmade clay-model interpretation.
+77 /paper cutout — Layered paper shapes with tactile edges.
+78 /low poly — Angular faceted forms and simplified geometry.
+79 /stained glass — Coloured glass panels separated by dark leading.
+80 /embroidered portrait — A stitched-thread interpretation with textile texture.
+
+WORLDS AND WEATHER
+81 /underwater — Submerged scenery with filtered light and floating particles.
+82 /rainy neon — Wet reflective surfaces and glowing urban lights.
+83 /snow globe — The scene becomes a miniature world inside a snow globe.
+84 /desert mirage — Heat haze and a dreamlike desert atmosphere.
+85 /enchanted forest — A lush woodland with magical lighting.
+86 /cosmic ocean — The sea blends into stars and nebula-like colours.
+87 /aurora sky — Flowing northern-light colours above the scene.
+88 /cherry blossom — Soft petals and flowering trees surround the subject.
+89 /misty mountains — Layered peaks and atmospheric mountain fog.
+90 /storm portrait — Brooding clouds and dramatic storm lighting.
+
+REFLECTIONS AND FUTURISTIC LOOKS
+91 /double exposure — A portrait silhouette overlaps another scene.
+92 /glass reflection — Layered reflections through glass.
+93 /mirror maze — Multiple reflections repeat the subject in different directions.
+94 /kaleidoscope — Mirrored fragments form a geometric pattern.
+95 /hologram — A translucent luminous digital projection effect.
+96 /cyberpunk — Futuristic city styling and technological details.
+97 /wireframe — A digital mesh outlines the subject or environment.
+98 /thermal vision — A stylized heat-map colour palette, not real temperature data.
+99 /infrared dream — Surreal false-colour foliage and skies, not sensor evidence.
+100 /scanline glitch — Horizontal scan lines and digital distortion.
+
+QUICK PICKS
+Start with 01–07 for examples already tried in this project.
+For unusual reveals, experiment with 08, 09, 23, 28 or 83.
+For a more natural portrait, try 32, 35, 44, 64 or 67.
+
+KEEP EXPECTATIONS REAL
+A short prompt can change your pose, outfit, background or face unexpectedly. Re-upload the original for each new attempt. If precision matters, add a plain-language instruction such as “Keep my face and outfit unchanged.” That is optional extra guidance, not part of the short prompts above.
+
+Made for creative experimentation by @shashikant.ai.
