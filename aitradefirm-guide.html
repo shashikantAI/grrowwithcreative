@@ -1,0 +1,28 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TradingAgents setup guide (shashikant.ai)</title><style>:root{--bg:#0B0820;--lime:#C6F432}body{margin:0;background:radial-gradient(120% 60% at 50% 0%,#2A1F6B,var(--bg) 60%);color:#F5F2FF;font:17px/1.6 system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 16px 60px}h1{color:var(--lime);font-size:30px;line-height:1.2}h2{color:#C9BCFA;border-left:6px solid var(--lime);padding-left:10px;margin-top:30px}
+pre{background:#000;color:var(--lime);padding:14px;border-radius:12px;white-space:pre-wrap;word-break:break-word;border:1px solid #2A1F6B}code{font-family:ui-monospace,monospace}
+b{background:var(--lime);color:#111;padding:0 4px;border-radius:4px}ol{padding-left:22px}.rec{font-family:ui-monospace,monospace;color:#C9BCFA;font-size:13px;letter-spacing:2px}.rec i{display:inline-block;width:10px;height:10px;border-radius:5px;background:#ff4d4d;margin-right:8px}
+button{background:var(--lime);color:#111;border:0;border-radius:10px;padding:10px 16px;font-weight:700;font-size:15px;cursor:pointer;margin-top:8px}table{border-collapse:collapse;width:100%}td{border-bottom:1px solid #2A1F6B;padding:6px}.warn{border:2px solid #FF4A55;border-radius:12px;padding:12px 14px;background:#2a0a14}</style></head><body><main><div class="rec"><i></i>TRADE · shashikant.ai</div><h1>TradingAgents: a 12-AI trading company on your own laptop</h1>
+<p>Repo: <a style="color:var(--lime)" href="https://github.com/TauricResearch/TradingAgents">github.com/TauricResearch/TradingAgents</a> · free and open source (<b>Apache-2.0</b>) · 1,18,000+ GitHub stars.</p>
+<h2>What it is</h2><ol><li><b>Analyst team (4):</b> market/chart, social mood (Reddit, StockTwits), news, fundamentals (balance sheet).</li>
+<li><b>Bull vs bear (2)</b> argue "khareedo" vs "mat khareedo", then a <b>research manager</b> picks a side.</li>
+<li><b>Trader</b> writes the plan, the <b>risk team (3)</b> looks for danger, the <b>portfolio manager</b> gives the final answer (Buy / Overweight / Hold / Underweight / Sell).</li></ol>
+<h2>Option A: free, on your own computer (what I used)</h2><p>Needs Python 3.11+, about 10 GB free disk, and ideally 16 GB RAM or a GPU.</p>
+<ol><li>Install Ollama from <a style="color:var(--lime)" href="https://ollama.com">ollama.com</a>, then download a model:<pre id="a1"><code>ollama pull qwen2.5:14b</code></pre><button onclick="navigator.clipboard.writeText(document.getElementById('a1').innerText);this.textContent='Copied ✓'">Copy</button></li>
+<li>Get the code and install it:<pre id="a2"><code>git clone https://github.com/TauricResearch/TradingAgents.git
+cd TradingAgents
+python -m venv .venv
+.venv\Scripts\activate
+pip install .</code></pre><button onclick="navigator.clipboard.writeText(document.getElementById('a2').innerText);this.textContent='Copied ✓'">Copy</button><p style="font-size:14px;color:#C9BCFA">Mac/Linux: use <code>source .venv/bin/activate</code> instead of the 4th line.</p></li>
+<li>Run it:<pre id="a3"><code>tradingagents</code></pre><button onclick="navigator.clipboard.writeText(document.getElementById('a3').innerText);this.textContent='Copied ✓'">Copy</button>Pick <b>Ollama</b> as the provider, choose "Custom model ID" → <code>qwen2.5:14b</code>, ticker <code>RELIANCE.NS</code>, and a date.</li></ol>
+<h2>Option B: with ChatGPT, Claude or Gemini</h2><p>Better answers, costs API money. Set one key, open a new terminal, run <code>tradingagents</code> and pick that provider:</p>
+<pre id="b1"><code>setx OPENAI_API_KEY &quot;your-key&quot;
+setx ANTHROPIC_API_KEY &quot;your-key&quot;
+setx GOOGLE_API_KEY &quot;your-key&quot;</code></pre><button onclick="navigator.clipboard.writeText(document.getElementById('b1').innerText);this.textContent='Copied ✓'">Copy</button>
+<p>Have ChatGPT Plus? Run <code>tradingagents login chatgpt</code> and choose "Subscription" instead of a key.</p>
+<h2>Indian shares</h2><p>Use the Yahoo Finance ticker: NSE = <code>.NS</code> (e.g. <code>RELIANCE.NS</code>, <code>TCS.NS</code>), BSE = <code>.BO</code>.</p>
+<h2>My test, honestly</h2><table><tr><td>Date given</td><td><b>7 April 2025</b> (market crash day)</td></tr><tr><td>Stock / model</td><td>Reliance · free local Qwen 2.5 14B</td></tr>
+<tr><td>Final decision</td><td><b>Overweight</b> (= thoda zyada khareedo)</td></tr><tr><td>Next 21 trading days</td><td>Reliance <b>+23.2%</b> (Rs 1,166 → Rs 1,437) · Nifty 50 +12.5%</td></tr></table>
+<p>Limits: for a past date the free news and social feeds came back empty, and the small local model invented an entry price. It is <b>one test</b>, so it proves nothing; luck is possible.</p>
+<div class="warn">The repo itself says: "It is not intended as financial, investment, or trading advice." Use it for research and learning, never as a buy/sell signal for real money.</div>
+<p style="margin-top:40px;color:#C9BCFA">shashikant.ai · @shashikant.ai</p></main></body></html>
