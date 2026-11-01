@@ -7,7 +7,7 @@ h2{margin:30px 0 8px;font-size:15px;letter-spacing:.08em;text-transform:uppercas
 .m{color:var(--mute);font-size:14px}code{background:#221a4a;padding:1px 6px;border-radius:5px}ol li{margin:6px 0}
 pre{background:#0b0918;border:1px solid var(--line);border-radius:10px;padding:12px;white-space:pre-wrap;font:13.5px/1.5 ui-monospace,Consolas,monospace;color:#dcd8f0}</style></head>
 <body><div class="w"><span class="tag">@shashikant.ai</span><h1>6 Weird Claude Code Skills (comment WEIRD)</h1><p class="m">These are the 6 slash commands from the reel, as real Claude Code skills. Copy each one into your project, type the command in Claude Code, and Claude writes the animation as code. No editing app, no video model.</p>
-<h2>How to use</h2><ol><li>Install Claude Code (claude.com/claude-code) and open it inside any project folder.</li><li>For each skill make a folder: <code>.claude/skills/&lt;name&gt;/</code> (example: <code>.claude/skills/melt/</code>).</li><li>Inside it create <code>SKILL.md</code> and paste the text from the box below (keep the top part between the <code>---</code> lines).</li><li>Restart Claude Code, type <code>/</code> and you will see the commands. Type <code>/melt</code> and press Enter.</li><li>Claude builds one HTML file and opens it. Want it as an MP4? Ask: "turn this into a Remotion video and render it".</li></ol><h2>The 6 skills</h2><div class="card"><b><span class="n">1.</span>/melt</b><p>Make the current screen melt like hot wax - a 3 second animation, one HTML file</p><p class="m">.claude/skills/melt/SKILL.md</p><pre>---
+<h2>How to use</h2><ol><li>Install Claude Code (claude.com/claude-code) and open it inside any project folder.</li><li>For each skill make a folder: <code>.claude/skills/&lt;name&gt;/</code> (example: <code>.claude/skills/melt/</code>).</li><li>Inside it create <code>SKILL.md</code> and paste the text from the box below (keep the top part between the <code>---</code> lines).</li><li>Restart Claude Code, type <code>/</code> and you will see the commands. Type <code>/melt</code> and press Enter.</li><li>Claude builds one HTML file and opens it. Want it as an MP4? Ask: "turn this into a Remotion video and render it".</li></ol><h2>The 6 skills</h2><div class="card" id="melt"><b><span class="n">1.</span>/melt</b><p>Make the current screen melt like hot wax - a 3 second animation, one HTML file</p><p class="m">.claude/skills/melt/SKILL.md</p><pre>---
 name: melt
 description: Make the current screen melt like hot wax - a 3 second animation, one HTML file
 ---
@@ -17,7 +17,7 @@ Build ONE self-contained file `melt.html` (no libraries) that plays a 3 second a
    (smooth sine offsets, so it looks like wax, not glitch slices) and slides down with gravity.
 3. Leave faint drip trails behind every column (2 copies at 30% and 60% of the fall, 20% opacity).
 4. A wavy puddle (orange -&gt; violet -&gt; lime gradient) rises from the bottom as the screen drips into it.
-5. A few drops fall separately. Loop forever. Open it in the browser when done.</pre></div><div class="card"><b><span class="n">2.</span>/chai-chart</b><p>Turn numbers into a bar chart made of cutting-chai glasses that fill up with steam</p><p class="m">.claude/skills/chai-chart/SKILL.md</p><pre>---
+5. A few drops fall separately. Loop forever. Open it in the browser when done.</pre></div><div class="card" id="chai-chart"><b><span class="n">2.</span>/chai-chart</b><p>Turn numbers into a bar chart made of cutting-chai glasses that fill up with steam</p><p class="m">.claude/skills/chai-chart/SKILL.md</p><pre>---
 name: chai-chart
 description: Turn numbers into a bar chart made of cutting-chai glasses that fill up with steam
 ---
@@ -27,7 +27,7 @@ Build ONE file `chai-chart.html` (SVG + JS, no libraries), 1080x1920, warm dark-
 - Glasses spring up one by one, then chai pours in from above and fills each to 86%, a foam ellipse on top.
 - The number above each glass counts up while it fills; steam curls rise after it is full.
 - Title + unit on top (&quot;OFFICE CHAI / cups per day&quot;). Highlight the biggest value in lime #C6F432.
-Open it in the browser when done.</pre></div><div class="card"><b><span class="n">3.</span>/shatter</b><p>Crack the screen like glass from a tap point and blow the pieces apart in 3D</p><p class="m">.claude/skills/shatter/SKILL.md</p><pre>---
+Open it in the browser when done.</pre></div><div class="card" id="shatter"><b><span class="n">3.</span>/shatter</b><p>Crack the screen like glass from a tap point and blow the pieces apart in 3D</p><p class="m">.claude/skills/shatter/SKILL.md</p><pre>---
 name: shatter
 description: Crack the screen like glass from a tap point and blow the pieces apart in 3D
 ---
@@ -37,7 +37,7 @@ Build ONE file `shatter.html` (no libraries), 1080x1920:
 3. Every cell becomes a shard: a copy of the UI clipped with clip-path polygon.
 4. After 0.4 s the shards fly outward in 3D (perspective 1500px): speed by direction, gravity, random rotateX/rotateZ, translateZ.
 5. Behind them reveal the shard count in big lime text: &quot;48 PIECES - every piece = a few lines of code&quot;.
-Replay on click. Open it in the browser when done.</pre></div><div class="card"><b><span class="n">4.</span>/xray</b><p>X-ray scan a phone - a scan line reveals battery, chip, camera and coil with labels</p><p class="m">.claude/skills/xray/SKILL.md</p><pre>---
+Replay on click. Open it in the browser when done.</pre></div><div class="card" id="xray"><b><span class="n">4.</span>/xray</b><p>X-ray scan a phone - a scan line reveals battery, chip, camera and coil with labels</p><p class="m">.claude/skills/xray/SKILL.md</p><pre>---
 name: xray
 description: X-ray scan a phone - a scan line reveals battery, chip, camera and coil with labels
 ---
@@ -46,7 +46,7 @@ Build ONE file `xray.html` (SVG + CSS, no libraries), 1080x1920, dark blue grid 
 2. A glowing cyan scan bar moves top -&gt; bottom over 1.5 s; everything above it turns to X-ray:
    cyan glowing outlines of camera cluster, chip (with a grid), battery, wireless charging coil (dashed circles), speaker, screws.
 3. After the scan, lime callout labels pop in one by one with leader lines: CAMERA, CHIP, BATTERY, WIRELESS COIL, SPEAKER.
-4. The phone tilts slowly in 3D the whole time. Open it in the browser when done.</pre></div><div class="card"><b><span class="n">5.</span>/ants</b><p>Hundreds of ants walk in from the edges and write your text</p><p class="m">.claude/skills/ants/SKILL.md</p><pre>---
+4. The phone tilts slowly in 3D the whole time. Open it in the browser when done.</pre></div><div class="card" id="ants"><b><span class="n">5.</span>/ants</b><p>Hundreds of ants walk in from the edges and write your text</p><p class="m">.claude/skills/ants/SKILL.md</p><pre>---
 name: ants
 description: Hundreds of ants walk in from the edges and write your text
 ---
@@ -54,7 +54,7 @@ Ask me for the text (default &quot;CLAUDE DID THIS&quot;, 3 lines). Build ONE fi
 1. Draw the text on a hidden canvas (900 weight, ~200px), sample a point every 15 px inside the letters -&gt; one ant per point.
 2. Each ant starts on a big circle outside the screen, walks to its point with a wiggle, legs moving, body rotated along its path.
 3. Ants arrive at random times over ~2 s, then fidget in place. Show a counter &quot;ANTS ARRIVED: n / total&quot;.
-Open it in the browser when done.</pre></div><div class="card"><b><span class="n">6.</span>/this-reel</b><p>Rewind the video you just made and reveal its own source code scrolling past</p><p class="m">.claude/skills/this-reel/SKILL.md</p><pre>---
+Open it in the browser when done.</pre></div><div class="card" id="this-reel"><b><span class="n">6.</span>/this-reel</b><p>Rewind the video you just made and reveal its own source code scrolling past</p><p class="m">.claude/skills/this-reel/SKILL.md</p><pre>---
 name: this-reel
 description: Rewind the video you just made and reveal its own source code scrolling past
 ---
