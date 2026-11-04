@@ -1,0 +1,46 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>HARNESS starter kit — CLAUDE.md / AGENTS.md (comment HARNESS)</title><style>:root{--bg:#0B0820;--card:#151033;--ink:#f1f0fa;--mute:#a9a4c8;--lime:#C6F432;--vio:#7C6CF0;--line:#2a2350}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(120% 70% at 50% 0%,#2A1F6B,#0B0820 70%);color:var(--ink);font:17px/1.6 system-ui,Segoe UI,sans-serif}
+.w{max-width:760px;margin:0 auto;padding:28px 16px 60px}h1{font-size:30px;line-height:1.2;margin:10px 0}
+h2{margin:30px 0 8px;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--lime)}
+.tag{display:inline-block;background:var(--lime);color:#111;font-weight:800;padding:3px 10px;border-radius:6px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:12px 0}.card b{font-size:21px;color:#E07B53}.n{color:var(--mute);margin-right:6px}
+.m{color:var(--mute);font-size:14px}code{background:#221a4a;padding:1px 6px;border-radius:5px}ol li{margin:6px 0}
+pre{background:#0b0918;border:1px solid var(--line);border-radius:10px;padding:12px;white-space:pre-wrap;font:13.5px/1.5 ui-monospace,Consolas,monospace;color:#dcd8f0}.tbl{width:100%;border-collapse:collapse;font-size:15px}.tbl td,.tbl th{border:1px solid var(--line);padding:8px;text-align:left}.tbl th{color:var(--lime)}</style></head>
+<body><div class="w"><span class="tag">@shashikant.ai</span><h1>HARNESS starter kit — tumhare AI ka pehla saaz</h1>
+<p class="m">Reel: "Is aadmi ke paas sabse taaqatwar ghoda hai…" (harness engineering). Model = ghoda. Harness = saaz. Ye file tumhare AI coding agent ko bina test chalaye "done" bolne nahi deti.</p>
+<h2>Kaise use karo</h2><ol><li>Neeche wala block copy karo.</li><li>Apne project ke root mein <code>CLAUDE.md</code> (Claude Code) ya <code>AGENTS.md</code> (Codex / Cursor / doosre agents) naam se save karo.</li><li>Section 5 mein apni language, test command aur run command bharo.</li><li>Jab bhi AI galti kare, us galti ki ek line "Galtiyan jo dobara nahi" mein jod do (Mitchell Hashimoto ka formula).</li></ol>
+<h2>Copy this file</h2><pre># Project rules for the AI agent
+
+## 1. Shuru karne se pehle (folder ka naksha)
+- Pehle folder structure dekho (ls / tree) aur ye file poori padho.
+- Kaam shuru karne se pehle 3-5 line ka plan likho: kya badlega, kaunsi files, kaise test hoga.
+
+## 2. Kaam karte waqt
+- Ek baar mein ek chhota badlaav. Har badlaav ke baad test chalao.
+- Jo command chalate ho, uska output padho. Error ho toh pehle samjho, phir fix karo.
+- Bina pooche files delete mat karo, git history rewrite mat karo, secrets ko print mat karo.
+
+## 3. Khatam karne se pehle (checklist)
+- [ ] Tests chalaye aur pass hue (command + result likho).
+- [ ] Jo maanga tha wahi kiya, us se zyada nahi.
+- [ ] Koi debug code / commented code reh toh nahi gaya.
+- [ ] Short summary: kya badla, kya test hua, kya baaki hai.
+- &quot;Code dekh ke sahi lag raha hai&quot; = done NAHI hai. Test = done.
+
+## 4. Ek hi galti baar-baar (alarm)
+- Agar ek hi file ko 3 baar edit kar chuke ho aur problem wahi hai: RUKO.
+  Approach badlo, ya user se poocho. Wahi tareeka thoda badal ke 10 baar try mat karo.
+
+## 5. Project ki jaankari
+- Language / framework: &lt;yahan likho&gt;
+- Test command: &lt;npm test / pytest / ...&gt;
+- Run command: &lt;npm run dev / python main.py / ...&gt;
+- Style: &lt;formatter, naming rules&gt;
+
+## 6. Galtiyan jo dobara nahi (har galti ke baad ek line jodo)
+- &lt;example&gt; API keys kabhi code mein mat likho, .env use karo.
+- &lt;example&gt; UI badalne ke baad screenshot lekar check karo.
+</pre>
+<h2>Saaz ke 6 hisse (reel wala map)</h2><table class="tbl"><tr><th>saaz</th><th>AI mein</th><th>Claude Code mein kahan</th></tr><tr><td>lagaam (disha)</td><td>system prompt</td><td>tool khud deta hai; tum CLAUDE.md se add karte ho</td></tr><tr><td>aankhon ke patte (focus)</td><td>rules file</td><td><code>CLAUDE.md</code> / <code>AGENTS.md</code> (ye file)</td></tr><tr><td>gaadi (kaam)</td><td>tools</td><td>Read, Edit, Bash, Web… (built-in)</td></tr><tr><td>rassi (bahar ke apps)</td><td>MCP</td><td><code>claude mcp add …</code> (Gmail, Blender, GitHub…)</td></tr><tr><td>kartab (sikha hua tareeka)</td><td>skills</td><td><code>.claude/skills/&lt;naam&gt;/SKILL.md</code></td></tr><tr><td>brake (check)</td><td>hooks</td><td><code>.claude/settings.json</code> → <code>hooks</code> (jaise har edit ke baad test)</td></tr></table>
+<h2>Sources</h2><p class="m">LangChain, "Improving Deep Agents with harness engineering" (17 Feb 2026) — same model, Terminal Bench 2.0 52.8% → 66.5%, outside Top 30 → Top 5.<br>Mitchell Hashimoto, "My AI Adoption Journey" (5 Feb 2026) — "Engineer the Harness".</p>
+<p class="m">Follow @shashikant.ai for more free AI tools.</p></div></body></html>
