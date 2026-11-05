@@ -5,8 +5,8 @@ b{background:var(--lime);color:#111;padding:0 4px;border-radius:4px}ol{padding-l
 button{background:var(--lime);color:#111;border:0;border-radius:10px;padding:10px 16px;font-weight:700;font-size:15px;cursor:pointer;margin-top:8px}table{border-collapse:collapse;width:100%}td{border-bottom:1px solid #2A1F6B;padding:6px}.warn{border:2px solid #FF4A55;border-radius:12px;padding:12px 14px;background:#2a0a14}</style></head><body><main><h1>AI lip sync on your own face: Wav2Lip + LatentSync setup</h1>
 <p>The same 2 free models from my Ramayana reel. <b>Personal use only, on your own face.</b></p>
 <h2>What I measured</h2><p>SyncNet score, higher = better sync:</p>
-<table><tr><td>my lips + wrong (English) audio</td><td>1.0</td></tr><tr><td><b>Wav2Lip</b> (IIIT Hyderabad, 2020)</td><td>3.7</td></tr>
-<tr><td>my real Hindi take</td><td>5.1</td></tr><tr><td><b>LatentSync 1.5</b> (ByteDance, newer)</td><td>5.6</td></tr></table>
+<table><tr><td>my lips + wrong (English) audio</td><td>2.2</td></tr><tr><td><b>Wav2Lip</b> (IIIT Hyderabad, 2020)</td><td>4.1</td></tr>
+<tr><td><b>LatentSync 1.5</b> (ByteDance, newer)</td><td>6.0</td></tr></table>
 <p>Wav2Lip is the classic one to learn how lip sync works. LatentSync looks far more natural. Both run free on your own PC.</p>
 <h2>You need</h2><ol><li>Windows/Linux PC with an NVIDIA GPU (6 GB+ VRAM for Wav2Lip, ~5–8 GB for LatentSync 1.5), Python 3.10–3.12, Git, ffmpeg.</li>
 <li>A 4–10 s video of <b>your</b> face: head steady, looking at the camera, no hands near the mouth, no jump cuts.</li>
