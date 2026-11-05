@@ -1,0 +1,37 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>AI lip sync on your own face: Wav2Lip + LatentSync (shashikant.ai)</title><style>:root{--bg:#0B0820;--lime:#C6F432}body{margin:0;background:radial-gradient(120% 60% at 50% 0%,#2A1F6B,var(--bg) 60%);color:#F5F2FF;font:17px/1.6 system-ui,sans-serif}
+main{max-width:760px;margin:0 auto;padding:28px 16px 60px}h1{color:var(--lime);font-size:30px;line-height:1.2}h2{color:#C9BCFA;border-left:6px solid var(--lime);padding-left:10px;margin-top:30px}
+pre{background:#000;color:var(--lime);padding:14px;border-radius:12px;white-space:pre-wrap;word-break:break-word;border:1px solid #2A1F6B}code{font-family:ui-monospace,monospace}
+b{background:var(--lime);color:#111;padding:0 4px;border-radius:4px}ol{padding-left:22px}.rec{font-family:ui-monospace,monospace;color:#C9BCFA;font-size:13px;letter-spacing:2px}.rec i{display:inline-block;width:10px;height:10px;border-radius:5px;background:#ff4d4d;margin-right:8px}
+button{background:var(--lime);color:#111;border:0;border-radius:10px;padding:10px 16px;font-weight:700;font-size:15px;cursor:pointer;margin-top:8px}table{border-collapse:collapse;width:100%}td{border-bottom:1px solid #2A1F6B;padding:6px}.warn{border:2px solid #FF4A55;border-radius:12px;padding:12px 14px;background:#2a0a14}</style></head><body><main><h1>AI lip sync on your own face: Wav2Lip + LatentSync setup</h1>
+<p>The same 2 free models from my Ramayana reel. <b>Personal use only, on your own face.</b></p>
+<h2>What I measured</h2><p>SyncNet score, higher = better sync:</p>
+<table><tr><td>my lips + wrong (English) audio</td><td>1.0</td></tr><tr><td><b>Wav2Lip</b> (IIIT Hyderabad, 2020)</td><td>3.7</td></tr>
+<tr><td>my real Hindi take</td><td>5.1</td></tr><tr><td><b>LatentSync 1.5</b> (ByteDance, newer)</td><td>5.6</td></tr></table>
+<p>Wav2Lip is the classic one to learn how lip sync works. LatentSync looks far more natural. Both run free on your own PC.</p>
+<h2>You need</h2><ol><li>Windows/Linux PC with an NVIDIA GPU (6 GB+ VRAM for Wav2Lip, ~5–8 GB for LatentSync 1.5), Python 3.10–3.12, Git, ffmpeg.</li>
+<li>A 4–10 s video of <b>your</b> face: head steady, looking at the camera, no hands near the mouth, no jump cuts.</li>
+<li>The new audio line (wav). Keep it no longer than the video.</li></ol>
+<h2>Option A: Wav2Lip (lightest)</h2><ol>
+<li>Get the code (<a style="color:var(--lime)" href="https://github.com/Rudrabha/Wav2Lip">github.com/Rudrabha/Wav2Lip</a>):<pre id="c1"><code>git clone https://github.com/Rudrabha/Wav2Lip
+cd Wav2Lip
+python -m venv .venv
+.venv\Scripts\activate
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+pip install librosa opencv-python numpy scipy tqdm numba</code></pre><button onclick="navigator.clipboard.writeText(document.getElementById('c1').innerText);this.textContent='Copied ✓'">Copy</button></li>
+<li>Weights: download <b>wav2lip_gan.pth</b> from the "Getting the weights" table in the repo README into <code>checkpoints/</code>, and the face detector <b>s3fd.pth</b> into <code>face_detection/detection/sfd/</code> (link also in the README).</li>
+<li>Two small fixes for new Python versions:<br>· <code>audio.py</code>: use keyword arguments in <code>librosa.filters.mel(sr=hp.sample_rate, n_fft=hp.n_fft, n_mels=hp.num_mels, fmin=hp.fmin, fmax=hp.fmax)</code><br>· <code>face_detection/utils.py</code>: replace <code>np.int</code> with <code>np.int64</code></li>
+<li>Run:<pre id="c2"><code>python inference.py --checkpoint_path checkpoints/wav2lip_gan.pth --face my_face.mp4 --audio line.wav --pads 0 20 0 0</code></pre><button onclick="navigator.clipboard.writeText(document.getElementById('c2').innerText);this.textContent='Copied ✓'">Copy</button>Output: <code>results/result_voice.mp4</code>. The mouth is drawn at 96 px, so it looks soft; that is the model's limit.</li></ol>
+<h2>Option B: LatentSync 1.5 (most natural)</h2><ol>
+<li>Get the code and weights (<a style="color:var(--lime)" href="https://github.com/bytedance/LatentSync">github.com/bytedance/LatentSync</a>; Linux or WSL2 is easiest):<pre id="c3"><code>git clone https://github.com/bytedance/LatentSync
+cd LatentSync
+source setup_env.sh</code></pre><button onclick="navigator.clipboard.writeText(document.getElementById('c3').innerText);this.textContent='Copied ✓'">Copy</button></li>
+<li>Put your video and audio paths in <code>inference.sh</code> (<code>--video_path</code>, <code>--audio_path</code>), then run <code>./inference.sh</code>.</li>
+<li>Settings that worked best in my test: <b>25 inference steps, guidance scale 2.0</b>.</li>
+<li>On plain Windows two packages (insightface, decord) have no ready installer for new Python; use WSL2 or the LatentSync node for ComfyUI instead.</li></ol>
+<h2>Tips from my test</h2><ol><li>Steady, front-facing head = much better lips. Hands moving in front of the face confuse both models.</li>
+<li>If the audio is longer than the video, the tools play the video back and forth and your head visibly reverses. Trim the silence instead.</li>
+<li>Only the mouth area should change. If eyes or skin look plastic, paste back the mouth region only.</li></ol>
+<h2>Rules (read this)</h2><div class="warn">Use it <b>only on your own face</b>, or with clear written permission. Never on actors, politicians or anyone who did not agree.<br><br>
+Label the result <b>"AI-generated"</b> everywhere you post it (India's IT Rules 2026 require synthetic content to be declared).<br><br>
+Wav2Lip's licence is non-commercial (personal and research use). Check each repo's licence before any paid work.</div>
+<p style="margin-top:40px;color:#C9BCFA">shashikant.ai · @shashikant.ai</p></main></body></html>
