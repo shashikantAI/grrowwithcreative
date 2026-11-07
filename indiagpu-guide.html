@@ -1,0 +1,58 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Chip Design Roadmap: zero to your first chip, free</title><style>:root{--bg:#0B0820;--card:#151033;--ink:#f1f0fa;--mute:#a9a4c8;--lime:#C6F432;--vio:#7C6CF0;--line:#2a2350;--red:#ff6b74}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(120% 70% at 50% 0%,#2A1F6B,#0B0820 70%);color:var(--ink);font:17px/1.6 system-ui,Segoe UI,sans-serif}
+.w{max-width:720px;margin:0 auto;padding:28px 16px 60px}h1{font-size:30px;line-height:1.2;margin:10px 0}
+h2{margin:30px 0 8px;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--lime)}
+.tag{display:inline-block;background:var(--lime);color:#111;font-weight:800;padding:3px 10px;border-radius:6px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:10px 0}
+.card b{font-size:19px}.n{color:var(--mute);margin-right:6px}
+.paid{display:inline-block;margin-left:6px;background:var(--red);color:#111;font-weight:800;font-size:12px;padding:1px 8px;border-radius:5px;vertical-align:middle}
+.job{display:flex;gap:10px;align-items:flex-start}.job b{min-width:150px;font-size:17px;color:var(--lime)}
+.m{color:var(--mute);font-size:14px}a{color:var(--lime);word-break:break-all}p{margin:4px 0}
+.honest{border:2px solid var(--lime)}.honest li{margin:6px 0}</style></head><body><div class="w"><span class="tag">@shashikant.ai</span><h1>Chip Design Roadmap: from zero to your first chip, free (keyword CHIP)</h1><p class="m">India already has about 1 in 5 of the world's chip design engineers (MeitY, Sept 2026) and the government's Chips to Startup programme wants to train 85,000 more. This is the order I would learn it in. Every link below was checked live on 2026-11-07. Learning is free at every step; the only paid items are marked PAID.</p>
+
+<h2>Step 0 — know the 3 jobs (2 minutes)</h2>
+<div class="card"><p>A chip team has three kinds of "recipe" engineers. Pick one later, start with the first.</p>
+<p class="job"><b>RTL design</b><span>You write the chip's logic in Verilog / SystemVerilog. The "recipe".</span></p>
+<p class="job"><b>Verification (DV)</b><span>You prove the recipe has no bugs. Most open jobs in India are here.</span></p>
+<p class="job"><b>Physical design (PD)</b><span>You turn the logic into the actual layout that a fab like TSMC prints.</span></p></div>
+
+<h2>Step 1 — digital logic + Verilog (2–4 weeks, free)</h2>
+<div class="card"><b><span class="n">1.</span>HDLBits</b><p><a href="https://hdlbits.01xz.net/wiki/Main_Page" target="_blank" rel="noopener">https://hdlbits.01xz.net/wiki/Main_Page</a></p><p>180+ small Verilog problems, checked in the browser. Do 3 a day; nothing to install.</p></div>
+<div class="card"><b><span class="n">2.</span>EDA Playground</b><p><a href="https://www.edaplayground.com/" target="_blank" rel="noopener">https://www.edaplayground.com/</a></p><p>Run Verilog and a testbench in the browser with real simulators. Use it with HDLBits.</p></div>
+<div class="card"><b><span class="n">3.</span>NPTEL: Digital IC Design (IIT Madras)</b><p><a href="https://onlinecourses.nptel.ac.in/noc23_ee11/preview" target="_blank" rel="noopener">https://onlinecourses.nptel.ac.in/noc23_ee11/preview</a></p><p>Free to watch and learn. <span class="paid">PAID</span> only if you want the certificate exam (about ₹1,000).</p></div>
+<div class="card"><b><span class="n">4.</span>Tiny Tapeout digital design lessons</b><p><a href="https://tinytapeout.com/digital_design/" target="_blank" rel="noopener">https://tinytapeout.com/digital_design/</a></p><p>Beginner lessons from logic gates to a working design, written for people with zero background.</p></div>
+
+<h2>Step 2 — design a real (tiny) chip in the browser (1 weekend)</h2>
+<div class="card"><b><span class="n">5.</span>Tiny Tapeout + Wokwi template</b><p><a href="https://wokwi.com/projects/354858054593504257" target="_blank" rel="noopener">https://wokwi.com/projects/354858054593504257</a></p><p>Draw a circuit with gates in the browser, simulate it, and it is already in the format a real chip shuttle accepts. Designing is free. <span class="paid">PAID</span> getting it printed on a shared chip (Tiny Tapeout shuttle slot, price on tinytapeout.com).</p></div>
+
+<h2>Step 3 — the real flow, RTL to GDS (2–3 months, free, open source)</h2>
+<p class="m">This is the exact flow the reel calls "recipe → print": your Verilog becomes a layout file (GDS) a fab can manufacture.</p>
+<div class="card"><b><span class="n">6.</span>NPTEL: VLSI Design Flow, RTL to GDS (IIIT Delhi)</b><p><a href="https://onlinecourses.nptel.ac.in/noc24_ee102/preview" target="_blank" rel="noopener">https://onlinecourses.nptel.ac.in/noc24_ee102/preview</a></p><p>The whole pipeline in one course: synthesis, verification, physical design, testing. Free to learn.</p></div>
+<div class="card"><b><span class="n">7.</span>OpenLane</b><p><a href="https://github.com/The-OpenROAD-Project/OpenLane" target="_blank" rel="noopener">https://github.com/The-OpenROAD-Project/OpenLane</a></p><p>Open-source tool that takes Verilog to GDS automatically. Run it on your own laptop.</p></div>
+<div class="card"><b><span class="n">8.</span>SkyWater SKY130 PDK</b><p><a href="https://github.com/google/skywater-pdk" target="_blank" rel="noopener">https://github.com/google/skywater-pdk</a></p><p>A real, open 130 nm fab process kit. The same one Tiny Tapeout chips are made on.</p></div>
+<div class="card"><b><span class="n">9.</span>Yosys</b><p><a href="https://github.com/YosysHQ/yosys" target="_blank" rel="noopener">https://github.com/YosysHQ/yosys</a></p><p>The open-source synthesis engine inside OpenLane. Read its docs to understand what "synthesis" does.</p></div>
+<div class="card"><b><span class="n">10.</span>OpenROAD flow scripts</b><p><a href="https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts" target="_blank" rel="noopener">https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts</a></p><p>Place-and-route flow with tutorials; this is the open version of what Cadence / Synopsys tools do.</p></div>
+
+<h2>Step 4 — build a CPU (1–2 months)</h2>
+<div class="card"><b><span class="n">11.</span>RISC-V MYTH workshop material</b><p><a href="https://github.com/stevehoover/RISC-V_MYTH_Workshop" target="_blank" rel="noopener">https://github.com/stevehoover/RISC-V_MYTH_Workshop</a></p><p>Build your own RISC-V CPU core step by step. The GitHub material is free; the guided cohort by VSD is <span class="paid">PAID</span>.</p></div>
+<div class="card"><b><span class="n">12.</span>lowRISC Ibex</b><p><a href="https://github.com/lowRISC/ibex" target="_blank" rel="noopener">https://github.com/lowRISC/ibex</a></p><p>A small, production-quality open RISC-V core. Read the code after MYTH to see how industry writes RTL.</p></div>
+<div class="card"><b><span class="n">13.</span>OpenHW CV32E40P</b><p><a href="https://github.com/openhwgroup/cv32e40p" target="_blank" rel="noopener">https://github.com/openhwgroup/cv32e40p</a></p><p>Another open 32-bit RISC-V core with a full verification setup, good for learning DV.</p></div>
+
+<h2>Step 5 — the government doors in India (free)</h2>
+<div class="card"><b><span class="n">14.</span>C2S registration (Chips to Startup, MeitY)</b><p><a href="https://c2s.gov.in/form_loginindex_reg.jsp" target="_blank" rel="noopener">https://c2s.gov.in/form_loginindex_reg.jsp</a></p><p>Register as a student. Your college must be in the programme; 315 institutes are, 500 planned under India Semiconductor Mission 2.0.</p></div>
+<div class="card"><b><span class="n">15.</span>C2S EDA tool support</b><p><a href="https://c2s.gov.in/EDA_Tool_Support.jsp" target="_blank" rel="noopener">https://c2s.gov.in/EDA_Tool_Support.jsp</a></p><p>Through C2S, students at enrolled colleges get the paid professional tools (Synopsys, Cadence, Siemens) free, plus fabrication of student designs at SCL Mohali.</p></div>
+<div class="card"><b><span class="n">16.</span>C2S internships</b><p><a href="https://c2s.gov.in/internship.jsp" target="_blank" rel="noopener">https://c2s.gov.in/internship.jsp</a></p><p>Internship listings tied to the programme.</p></div>
+<div class="card"><b><span class="n">17.</span>ChipIN Connect forum</b><p><a href="https://chipinconnect.cdacb.in/" target="_blank" rel="noopener">https://chipinconnect.cdacb.in/</a></p><p>C-DAC's forum where students and chip startups in India ask questions and share designs.</p></div>
+<div class="card"><b><span class="n">18.</span>India Semiconductor Mission</b><p><a href="https://www.ism.gov.in/" target="_blank" rel="noopener">https://www.ism.gov.in/</a></p><p>Official site: schemes, approved fabs, and the design-linked incentive for startups.</p></div>
+
+<h2>Step 6 — when you are ready to go deeper (PAID, optional)</h2>
+<div class="card"><b>Zero to ASIC</b> <span class="paid">PAID</span><p><a href="https://zerotoasiccourse.com/" target="_blank" rel="noopener">https://zerotoasiccourse.com/</a></p><p>The next step after Tiny Tapeout, ends in a real chip.</p></div>
+<div class="card"><b>VLSI System Design (VSD)</b> <span class="paid">PAID</span><p><a href="https://www.vlsisystemdesign.com/" target="_blank" rel="noopener">https://www.vlsisystemdesign.com/</a></p><p>Indian cohorts on OpenLane / SKY130 / RISC-V; some free install guides, workshops are paid.</p></div>
+
+<h2>The honest part</h2>
+<div class="card honest"><ul style="margin:0;padding-left:20px">
+<li>Nobody becomes a chip designer in 24 months of videos. HDLBits → Tiny Tapeout → OpenLane is about 6 months of evenings, and it gives you a GitHub you can show in an interview.</li>
+<li>The 3 nm "kitchen" is not in India yet (Dholera starts at 90 nm / 28 nm). Design jobs are here; fabrication jobs mostly are not, yet.</li>
+<li>Free means free to learn. Certificates, chip slots and cohorts cost money and none of them are required to get hired.</li></ul></div>
+
+<p class="m" style="margin-top:30px">Made by @shashikant.ai · comment CHIP on the reel and I will DM you this page</p></div></body></html>
