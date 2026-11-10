@@ -1,0 +1,84 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>The exact prompt: Claude Fable 5.2 built this AI video editor in 1 shot (keyword PROMPT)</title><style>:root{--bg:#0B0820;--card:#151033;--ink:#f1f0fa;--mute:#a9a4c8;--lime:#C6F432;--line:#2a2350}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(120% 70% at 50% 0%,#2A1F6B,#0B0820 70%);color:var(--ink);font:17px/1.6 system-ui,Segoe UI,sans-serif}
+.w{max-width:760px;margin:0 auto;padding:28px 16px 60px}h1{font-size:29px;line-height:1.2;margin:10px 0}
+h2{margin:30px 0 8px;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--lime)}
+.tag{display:inline-block;background:var(--lime);color:#111;font-weight:800;padding:3px 10px;border-radius:6px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:10px 0}
+.step{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--line)}.step:last-child{border-bottom:0}.step .k{color:var(--lime);font-weight:800;min-width:22px}
+pre{background:#060412;border:1px solid var(--line);border-radius:12px;padding:14px;white-space:pre-wrap;word-break:break-word;font:13.5px/1.55 ui-monospace,Consolas,monospace;color:#e8e6f0;margin:8px 0}
+code{font:15px/1.4 ui-monospace,Consolas,monospace;background:#060412;padding:2px 6px;border-radius:6px;color:var(--lime)}
+.m{color:var(--mute);font-size:14px}.honest{border:2px solid var(--lime)}.honest li{margin:6px 0}
+button{background:var(--lime);color:#111;font-weight:800;border:0;border-radius:10px;padding:10px 16px;font-size:15px;cursor:pointer}
+@media print{button{display:none}body{background:#0B0820;-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style></head><body><div class="w"><span class="tag">@shashikant.ai</span><h1>The exact prompt: Claude Fable 5.2 built this AI video editor in 1 shot (keyword PROMPT)</h1>
+<p class="m">Model: Claude Fable 5.2 (released 2026-11-09). One prompt, no follow-ups. Result: a single HTML file that looks like a pro video editor with 6 AI agents working at once.</p>
+<h2>How to use it</h2><div class="card"><div class="step"><span class="k">1</span><div><b>Open Claude.</b> claude.ai or Claude Code. Pick the model <b>Fable 5.2</b> (I used Medium effort).</div></div><div class="step"><span class="k">2</span><div><b>Paste the prompt below.</b> Send it once. Do not add follow-up messages if you want a true one-shot.</div></div><div class="step"><span class="k">3</span><div><b>Wait.</b> My run took about <b>20 minutes</b>, including Claude testing the page in its own browser.</div></div><div class="step"><span class="k">4</span><div><b>Save the file.</b> Copy the result into a folder as <code>editor.html</code>.</div></div><div class="step"><span class="k">5</span><div><b>Add your video.</b> Put any vertical 9:16 clip in the same folder and name it <code>reel.mp4</code>.</div></div><div class="step"><span class="k">6</span><div><b>Open it.</b> In that folder run <code>python -m http.server</code>, then open <code>http://localhost:8000/editor.html</code> in Chrome.</div></div></div>
+<h2>The prompt (copy all of it)</h2><button onclick="navigator.clipboard.writeText(document.getElementById('p').innerText).then(()=>this.textContent='Copied')">Copy prompt</button>
+<pre id="p">Build a single self-contained HTML file called editor.html: a fictional, cinematic desktop app called &quot;REEL AGENTS&quot;,
+an AI video editor where 6 AI agents edit a vertical reel live, all at the same time. It will be filmed on a monitor
+for a social media video, so it must look like a real, premium, professional editing app (think DaVinci Resolve meets
+a mission-control dashboard), dense with detail but clean.
+
+CANVAS
+- Exactly 1920 x 1080, dark UI (#0B0B0F base, #15151C panels, 1px #26262F borders), one accent colour #C6F432 (lime),
+  small secondary colours only for track types. Font: Inter / system sans for UI, JetBrains Mono / monospace for numbers.
+- No external libraries, no network requests. Everything in one file (HTML + CSS + vanilla JS + inline SVG).
+- The only external files sit in the same folder: reel.mp4 (a vertical 9:16 video, sound off) and an optional
+  captions.json ([{&quot;start&quot;:0.0,&quot;end&quot;:0.4,&quot;word&quot;:&quot;this&quot;}, ...]). Read the video path from the URL parameter ?src=
+  (default reel.mp4). If captions.json is missing, show built-in demo captions. ?fx=0 turns the wild edits off.
+- If the video cannot load (for example in a sandboxed preview), the program monitor plays a built-in animated
+  stand-in (a neon SVG talking-head with a moving mouth and the same wild edits) on a 30-second clock, so the app
+  NEVER shows an empty or broken monitor.
+- Everything is driven by ONE clock: the loop time equals the video&#x27;s currentTime, so the same URL always shows the
+  same frame at the same second (it will be screen-recorded several times and must line up).
+
+LAYOUT (all panels visible at once)
+- Top bar: app name, menu (File, Edit, Clip, Color, Captions, Audio, Agents), project name &quot;reel_v1&quot;, a live pill
+  &quot;6 AGENTS LIVE&quot; with a pulsing dot, and an &quot;Export&quot; button.
+- Left: Media pool (grid of 12 clip thumbnails with filenames and durations, plus an audio section with music and SFX files).
+- Centre: Program monitor showing reel.mp4 playing in a 9:16 frame, with live captions burned on top
+  (2-3 words at a time, bold condensed uppercase, the key word in lime), a timecode counter above it.
+- Right of centre: a live audio waveform meter, a vectorscope with a moving trace, and a loudness meter reading toward -14 LUFS.
+- Far right: Color panel with 3 colour wheels (Lift, Gamma, Gain) and sliders (Temp, Tint, Contrast, Saturation, Exposure);
+  below it a Captions style picker (4 preset chips) and colour swatches.
+- Bottom: a multi-track timeline (TEXT, SFX, B-ROLL, A-ROLL, GRADE, VOICE, MUSIC) with a playhead, a time ruler,
+  and clips that appear on the tracks as the agents work.
+- Bottom-left panel &quot;AGENT ACTIVITY&quot;: a scrolling log, one line per action, e.g. &quot;00:04  cutter-01  removed 0.6s silence  ✓&quot;.
+- Status bar: &quot;6 agents · 142 edits · GPU 61% · render ready&quot;.
+
+THE SHOW (a scripted animation that lasts exactly as long as reel.mp4, then loops)
+- 6 agent cursors (cutter-01, grade-01, caption-01, broll-01, sfx-01, mix-01), each a mouse pointer with a small
+  coloured name tag. They glide with smooth eased motion (never teleport) and work at the same time in different panels:
+  - cutter-01 slices clips on the A-ROLL track (a blade line flashes, the gap closes).
+  - grade-01 drags the colour wheels and sliders; the program monitor&#x27;s grade visibly shifts (CSS filters on the video).
+  - caption-01 clicks a caption preset; the captions on the video change style.
+  - broll-01 drags thumbnails from the media pool onto the B-ROLL track.
+  - sfx-01 drops small SFX blocks on the SFX track (whoosh, pop) with a tiny waveform each.
+  - mix-01 pulls the music fader; the loudness meter settles at -14.0 LUFS.
+- Every agent action writes a line to AGENT ACTIVITY and adds to the edit counter.
+- The timeline fills up from empty (0 %) to a complete, colourful edit (85 % of the video). At 85 % an
+  &quot;EXPORT COMPLETE ✓&quot; toast slides in; at 100 % everything resets with the video and the loop starts again.
+- Subtle life everywhere: meters bounce, the playhead moves, numbers tick, hover glows. Nothing is ever fully still.
+
+WILD EDITS INSIDE THE PROGRAM MONITOR (the reel being edited must look heavily, boldly edited, changing every 1-2 s)
+- Punch-in zooms on the face (alternating in/out), with a quick motion blur on each punch.
+- Split-screen moments: top half a neon B-roll card (phone UI mock, glowing hourglass, chat bubbles drawn in SVG), bottom half the face.
+- Neon shapes: pink hexagons and lime rings that pop in on the beat, a glitch/RGB-split flash on hard cuts.
+- Big caption slams: one huge word fills the frame with a blur-in (e.g. &quot;ZERO&quot;, &quot;10X&quot;), then shrinks back to normal captions.
+- Grade jumps: neon purple → teal → warm, driven by grade-01&#x27;s colour wheels.
+
+BIZARRE TOUCHES (make it unforgettable, not just pretty)
+- The agents talk: small chat bubbles pop above the cursors and argue about the edit
+  (&quot;grade-01: too orange&quot;, &quot;caption-01: make it lime&quot;, &quot;cutter-01: cut the &#x27;umm&#x27;&quot;, &quot;mix-01: louder!&quot;), max 1 bubble every 2 s.
+- Agent swarm: at 60 % of the video, a &quot;SPAWN 12 MORE AGENTS&quot; button is clicked and 12 extra cursors burst out of it like a flock,
+  zip across the timeline finishing the edit in 3 seconds, then disappear one by one.
+- The playhead is physical: when it hits a cut, the clip edges spark (tiny lime particles).
+
+QUALITY BAR
+- It must hold up to a close-up camera shot: crisp 1px lines, aligned grid, consistent spacing, real-looking labels and
+  numbers (timecodes, dB, file names), no lorem ipsum, no overlapping text, no empty panels.
+- Smooth 60 fps animation (requestAnimationFrame), no layout jumps.
+
+Before you finish, walk through the loop at 0 %, 30 %, 60 % and 90 % in your head against your code, fix anything
+broken or ugly, then give me the complete file.</pre>
+<h2>Honest notes</h2><div class="card honest"><ul><li>The editor is an <b>animation</b>. The agents and the timeline are scripted; it does not really edit your video.</li><li>Fable 5.2 built the editor only. The dark room, the monitor and the camera dive in my post were made in <b>Blender</b>.</li><li>The result was one file of about <b>87 KB</b> with no libraries. Your result will look different each run.</li><li>The colour grade is strong: skin turns teal or purple when the grade agent works.</li><li>It is a long run. Mine used a visible part of my weekly limit on a paid plan.</li><li>Tricks: <code>editor.html?fx=0</code> turns the wild edits off, <code>?src=other.mp4</code> plays another file, Space pauses.</li></ul></div>
+<p class="m">Follow @shashikant.ai for more free AI and dev tools.</p></div></body></html>
