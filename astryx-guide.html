@@ -1,0 +1,42 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Meta Astryx with Claude Code: install + prompt + 7 themes (free)</title><style>:root{--bg:#0B0820;--card:#151033;--ink:#f1f0fa;--mute:#a9a4c8;--lime:#C6F432;--vio:#7C6CF0;--line:#2a2350;--red:#ff6b74}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(120% 70% at 50% 0%,#2A1F6B,#0B0820 70%);color:var(--ink);font:17px/1.6 system-ui,Segoe UI,sans-serif}
+.w{max-width:720px;margin:0 auto;padding:28px 16px 60px}h1{font-size:30px;line-height:1.2;margin:10px 0}
+h2{margin:30px 0 8px;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--lime)}
+.tag{display:inline-block;background:var(--lime);color:#111;font-weight:800;padding:3px 10px;border-radius:6px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:10px 0}
+.card b{font-size:19px}.n{color:var(--mute);margin-right:6px}
+pre{background:#060412;border:1px solid var(--line);border-radius:12px;padding:14px;overflow:auto;font:15px/1.5 ui-monospace,Consolas,monospace;color:var(--lime);margin:8px 0}
+code{font:15px/1.4 ui-monospace,Consolas,monospace;background:#060412;padding:2px 6px;border-radius:6px;color:#e8e6f0}
+.cmd{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}.cmd:last-child{border-bottom:0}
+.cmd .k{color:var(--lime);min-width:26px;font-weight:800}.cmd code{color:var(--lime);display:inline-block;margin-bottom:4px}
+.m{color:var(--mute);font-size:14px}a{color:var(--lime);word-break:break-all}p{margin:4px 0}
+.honest{border:2px solid var(--lime)}.honest li{margin:6px 0}
+.ladder{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.ladder span{background:#060412;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-weight:700}.ladder span.best{background:var(--lime);color:#111}</style></head><body><div class="w"><span class="tag">@shashikant.ai</span><h1>Meta Astryx with Claude Code: install lines + the prompt + 7 themes (keyword THEME)</h1>
+<p class="m">Repo: <a href="https://github.com/meta/astryx" target="_blank" rel="noopener">github.com/meta/astryx</a> (MIT, free, beta) · Docs: <a href="https://astryx.atmeta.com" target="_blank" rel="noopener">astryx.atmeta.com</a>. Meta's own design system, opened to everyone. It needs React 19 or later. All commands below were run on 2026-11-12 with Astryx 0.7.14.</p>
+
+<h2>1. Install (in your React project)</h2>
+<div class="card"><pre>npm install @astryxdesign/core @astryxdesign/theme-neutral @stylexjs/stylex
+npm install -D @astryxdesign/cli</pre></div>
+
+<h2>2. Tell Claude Code about it</h2>
+<div class="card"><pre>npx astryx init --agent claude</pre></div>
+
+<h2>3. The prompt I used (paste in Claude Code)</h2>
+<div class="card"><pre style="white-space:pre-wrap">Build an admin dashboard for &quot;ChaiDaily&quot;, a chai delivery startup in Mumbai, as the home page of this Vite React app (replace the starter App). It needs: a left sidebar with navigation, a top bar with search and a dark mode toggle that works, 4 KPI cards (orders today, revenue in rupees, active riders, average delivery time), a weekly orders chart, and a recent orders table with status badges. Use realistic sample data. Make it look like a professional product. When you are done, make sure `npm run build` passes.</pre></div>
+
+<h2>4. Change the whole design with one word</h2>
+<div class="card"><pre>npm install @astryxdesign/theme-matcha
+npx astryx theme add matcha
+npx astryx theme use matcha</pre>
+<div class="ladder"><span>neutral</span><span>butter</span><span>chocolate</span><span class="best">matcha</span><span>stone</span><span>gothic</span><span>y2k</span></div>
+<p class="m">The 7 theme names. Put any name in place of matcha.</p></div>
+
+<h2>5. Honest notes from my own test (same prompt, with and without Astryx)</h2>
+<div class="card honest"><ul>
+<li>With Astryx: 595 lines of code and 0 CSS files. Without: 1,184 lines, 749 of them CSS.</li>
+<li>It did not look better than the plain build. Both dashboards looked professional.</li>
+<li>It took longer to build, and the JS file was bigger (1.24 MB vs 231 kB).</li>
+<li>Worth it when the design will change often. For one small page you do not need it.</li>
+</ul></div>
+<p class="m">Follow <a href="https://www.instagram.com/shashikant.ai" target="_blank" rel="noopener">@shashikant.ai</a> for more free AI + dev tools.</p>
+</div></body></html>
