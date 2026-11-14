@@ -1,0 +1,43 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Free offline AI on your PC: which model + setup (keyword OFFLINE)</title><style>:root{--bg:#0B0820;--card:#151033;--ink:#f1f0fa;--mute:#a9a4c8;--lime:#C6F432;--vio:#7C6CF0;--line:#2a2350;--red:#ff6b74}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(120% 70% at 50% 0%,#2A1F6B,#0B0820 70%);color:var(--ink);font:17px/1.6 system-ui,Segoe UI,sans-serif}
+.w{max-width:720px;margin:0 auto;padding:28px 16px 60px}h1{font-size:30px;line-height:1.2;margin:10px 0}
+h2{margin:30px 0 8px;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--lime)}
+.tag{display:inline-block;background:var(--lime);color:#111;font-weight:800;padding:3px 10px;border-radius:6px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:10px 0}
+pre{background:#060412;border:1px solid var(--line);border-radius:12px;padding:14px;overflow:auto;font:15px/1.5 ui-monospace,Consolas,monospace;color:var(--lime);margin:8px 0;white-space:pre-wrap}
+code{font:15px/1.4 ui-monospace,Consolas,monospace;background:#060412;padding:2px 6px;border-radius:6px;color:#e8e6f0}
+.m{color:var(--mute);font-size:14px}a{color:var(--lime);word-break:break-all}p{margin:4px 0}
+.honest{border:2px solid var(--lime)}.honest li{margin:6px 0}
+.ladder{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.ladder span{background:#060412;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-weight:700}.ladder span.ok{background:var(--lime);color:#111}.ladder span.no{border-color:var(--red);color:var(--red)}</style>
+</head><body><div class="w"><span class="tag">@shashikant.ai</span><h1>Free offline AI on your PC: which model to pick + setup (keyword OFFLINE)</h1>
+<p class="m">My own test on my PC, 14 Nov 2026 (RTX 5070 Ti 16 GB, i7-14700F, 32 GB RAM). App + model info from <a href="https://llama.app/" target="_blank" rel="noopener">llama.app</a> (free, open source, by the llama.cpp team and Hugging Face).</p>
+
+<h2>1. Download the Llama app (free, no account)</h2>
+<div class="card"><p>Go to <a href="https://llama.app/" target="_blank" rel="noopener">llama.app</a> → <b>Download for Windows 11</b> (Mac: Apple silicon, macOS 15+). It installs without admin rights.</p></div>
+
+<h2>2. Open it</h2>
+<div class="card"><p>Windows: click the Llama icon in the tray near the clock, or press <code>Alt + Space</code>.</p></div>
+
+<h2>3. Pick ONE model for your PC</h2>
+<div class="card">
+<table style="width:100%;border-collapse:collapse;font-size:15px">
+<tr style="color:var(--lime);text-align:left"><th>Model</th><th>File</th><th>Who it is for</th></tr>
+<tr><td><b>gemma-4 E4B</b></td><td>4.59 GB</td><td><b>Start here.</b> My test model: 3–7 s per answer with a graphics card, about 2 min 20 s on CPU only.</td></tr>
+<tr><td>gemma-4 12B</td><td>7.22 GB</td><td>Better answers; llama.app's pick for 16 GB machines.</td></tr>
+<tr><td>gpt-oss 20B</td><td>12.1 GB</td><td>24 GB RAM and up.</td></tr>
+<tr><td>Qwen 3.8 27B</td><td>19.0 GB</td><td>32 GB RAM and up; strongest of the four.</td></tr>
+</table>
+<p class="m">Simple rule (my reading): the model file should fit in your graphics card memory for fast answers. If it only fits in normal RAM, it still works, just slowly. The RAM tiers above are llama.app's own (listed for Mac).</p></div>
+
+<h2>4. Click "Open chat" and ask</h2>
+<div class="card"><pre>Write a polite leave email to my manager for tomorrow, 4 lines.</pre><pre>Mere boss ko Hinglish mein WhatsApp message likho ki main aaj 30 minute late aaunga, traffic ki wajah se.</pre><pre>Summarise this in 3 bullet points: (paste your text)</pre></div>
+
+<h2>Honest notes</h2>
+<div class="card honest"><ul>
+<li>Internet is needed once: to download the app and the model. In my test the app also checked for updates when it started.</li>
+<li>While answering: 954 connection checks in my test, 0 internet connections.</li>
+<li>No graphics card = slow (1–3 minutes per answer on my CPU).</li>
+<li>It is smaller than ChatGPT: great for daily small work, ChatGPT is still better for long, hard tasks.</li>
+</ul></div>
+<p class="m">Follow <a href="https://www.instagram.com/shashikant.ai" target="_blank" rel="noopener">@shashikant.ai</a> for more free AI + dev tools.</p>
+</div></body></html>
