@@ -1,0 +1,115 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>API Key Leak Checklist: scan, block, revoke (free)</title><style>:root{--bg:#0B0820;--card:#151033;--ink:#f1f0fa;--mute:#a9a4c8;--lime:#C6F432;--vio:#7C6CF0;--line:#2a2350;--red:#ff6b74}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(120% 70% at 50% 0%,#2A1F6B,#0B0820 70%);color:var(--ink);font:17px/1.6 system-ui,Segoe UI,sans-serif}
+.w{max-width:720px;margin:0 auto;padding:28px 16px 60px}h1{font-size:30px;line-height:1.2;margin:10px 0}
+h2{margin:30px 0 8px;font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--lime)}
+.tag{display:inline-block;background:var(--lime);color:#111;font-weight:800;padding:3px 10px;border-radius:6px;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin:10px 0}
+.card b{font-size:19px}.n{color:var(--mute);margin-right:6px}
+pre{background:#060412;border:1px solid var(--line);border-radius:12px;padding:14px;overflow:auto;font:15px/1.5 ui-monospace,Consolas,monospace;color:var(--lime);margin:8px 0}
+code{font:15px/1.4 ui-monospace,Consolas,monospace;background:#060412;padding:2px 6px;border-radius:6px;color:#e8e6f0}
+.cmd{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}.cmd:last-child{border-bottom:0}
+.cmd .k{color:var(--lime);min-width:26px;font-weight:800}.cmd code{color:var(--lime);display:inline-block;margin-bottom:4px}
+.m{color:var(--mute);font-size:14px}a{color:var(--lime);word-break:break-all}p{margin:4px 0}
+.honest{border:2px solid var(--lime)}.honest li{margin:6px 0}
+.ladder{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.ladder span{background:#060412;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-weight:700}.ladder span.best{background:var(--lime);color:#111}</style><style>table{width:100%;border-collapse:collapse;margin:8px 0;font-size:15px}td,th{border:1px solid var(--line);padding:8px;text-align:left}th{color:var(--lime)}h2{font-size:17px}h1{font-size:28px}li{margin:4px 0}pre code{background:none;color:var(--lime);padding:0}</style></head><body><div class="w"><span class="tag">@shashikant.ai</span><h1>API Key Leak Checklist — scan, block, revoke (shashikant.ai)</h1>
+<p>Deleting <code>.env</code> does NOT remove your key. Git keeps every old commit, so anyone with the repo can run
+<code>git show &lt;old-commit&gt;:.env</code> and read it. Do these 6 steps once, and you are covered.</p>
+<p>Tested on gitleaks 8.30.1 (Nov 2026). All keys in this guide are fake.</p>
+<h2>1. Install gitleaks (free, open source)</h2>
+<ul>
+<li><strong>Windows:</strong> <code>winget install --id Gitleaks.Gitleaks -e</code></li>
+<li><strong>Mac:</strong> <code>brew install gitleaks</code></li>
+<li><strong>Linux / no package manager:</strong> download from <a target="_blank" rel="noopener" href="https://github.com/gitleaks/gitleaks/releases">https://github.com/gitleaks/gitleaks/releases</a>
+  (for example <code>gitleaks_8.30.1_linux_x64.tar.gz</code> or <code>gitleaks_8.30.1_windows_x64.zip</code>), unzip, put <code>gitleaks</code> on your PATH.</li>
+<li>Check: <code>gitleaks version</code> → prints <code>8.30.1</code> (or newer).</li>
+</ul>
+<h2>2. Run the two scans (inside your project folder)</h2>
+<table>
+<thead>
+<tr>
+<th>command</th>
+<th>what it checks</th>
+<th>catches a deleted <code>.env</code>?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gitleaks dir .</code></td>
+<td>only the files on disk right now</td>
+<td>NO</td>
+</tr>
+<tr>
+<td><code>gitleaks git .</code></td>
+<td>every commit in the history</td>
+<td>YES</td>
+</tr>
+</tbody>
+</table>
+<p>What we saw on our test repo (<code>.env</code> committed, then deleted in the next commit):
+- <code>gitleaks dir .</code> → <code>no leaks found</code>  ← this is why people think they are safe
+- <code>gitleaks git .</code> → <code>leaks found: 2</code> (one OpenAI key, one Claude key, both in the old commit)</p>
+<p>Tip: add <code>-v</code> to see file, line and commit. Add <code>--redact</code> when sharing a screenshot so the key is hidden.
+<strong>Rule:</strong> always run <code>gitleaks git .</code> before you push a repo or make it public.</p>
+<h2>3. Block it before every commit (pre-commit hook)</h2>
+<p>Create the file <code>.git/hooks/pre-commit</code> (no extension) inside your repo with this content:</p>
+<pre><code class="language-sh">#!/bin/sh
+# Block the commit if a secret is in the staged changes.
+gitleaks git --pre-commit --redact --staged --verbose
+</code></pre>
+<p>Then on Mac/Linux/Git Bash: <code>chmod +x .git/hooks/pre-commit</code>
+(Windows: Git for Windows runs this file through its own shell; <code>gitleaks</code> just has to be on your PATH.)</p>
+<p>Tested: committing a file with a fake OpenAI key → the hook printed
+<code>RuleID: openai-api-key</code> … <code>leaks found: 1</code> and the commit was <strong>blocked</strong>. A normal file → <code>no leaks found</code>, commit went through.</p>
+<p>Notes:
+- <code>.git/hooks</code> is not shared when you push. Every teammate must add it, or use the pre-commit framework:
+  <code>yaml
+  # .pre-commit-config.yaml   then run: pre-commit install
+  repos:
+    - repo: <a target="_blank" rel="noopener" href="https://github.com/gitleaks/gitleaks">https://github.com/gitleaks/gitleaks</a>
+      rev: v8.30.1
+      hooks:
+        - id: gitleaks</code>
+- <code>git commit --no-verify</code> skips the hook. Don't.</p>
+<h2>4. Key already leaked? Do this in order</h2>
+<ol>
+<li><strong>Revoke the old key first.</strong> Delete it in the dashboard:</li>
+<li>OpenAI: <a target="_blank" rel="noopener" href="https://platform.openai.com/api-keys">https://platform.openai.com/api-keys</a></li>
+<li>Claude (Anthropic): <a target="_blank" rel="noopener" href="https://platform.claude.com/settings/keys">https://platform.claude.com/settings/keys</a></li>
+<li><strong>Create a new key</strong>, put it only in <code>.env</code> (gitignored) or your host's secret settings.</li>
+<li><strong>Check usage/billing</strong> for calls you did not make.</li>
+<li><strong>Rewriting history is optional.</strong> Tools like <code>git filter-repo</code> can remove the old commit, but copies,
+   forks and bots may already have it. Rewriting does NOT make a leaked key safe. Only revoking does.</li>
+</ol>
+<p>Wrong order = still hacked: new key + old key still active = the leak is still open.</p>
+<h2>5. .gitignore lines (add before your first commit)</h2>
+<pre><code class="language-gitignore">.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets.json
+</code></pre>
+<p>Keep a <code>.env.example</code> with fake values so others know which variables to set:
+<code>OPENAI_API_KEY=sk-proj-XXXXXXXXXXXXXXXX</code> · <code>ANTHROPIC_API_KEY=sk-ant-XXXXXXXXXXXXXXXX</code></p>
+<p>Note: <code>.gitignore</code> only stops NEW files. If <code>.env</code> was already committed, run <code>git rm --cached .env</code>, commit, and still do step 4.</p>
+<h2>6. No key at all: Workload Identity Federation (servers + CI)</h2>
+<p>Your server or GitHub Actions job proves who it is with a short-lived token from its cloud (GitHub, AWS, Google Cloud,
+Azure/Entra, Kubernetes…), and the AI provider gives back a token that expires in minutes. Nothing to store, nothing to leak.</p>
+<ul>
+<li><strong>OpenAI WIF</strong> (launched 26 May 2026): your workload "uses an identity it already has instead of storing an OpenAI API key."
+  Docs: <a target="_blank" rel="noopener" href="https://developers.openai.com/api/docs/guides/workload-identity-federation">https://developers.openai.com/api/docs/guides/workload-identity-federation</a></li>
+<li>
+<p><strong>Claude API WIF:</strong> short-lived OIDC tokens instead of <code>sk-ant-...</code> keys; set up in Console → Settings → Workload identity
+  ("Connect workload"). Docs: <a target="_blank" rel="noopener" href="https://platform.claude.com/docs/en/manage-claude/workload-identity-federation">https://platform.claude.com/docs/en/manage-claude/workload-identity-federation</a></p>
+</li>
+<li>
+<p><strong>Claude Code GitHub Action:</strong> <code>anthropics/claude-code-action</code> has the input <code>anthropic_federation_rule_id</code>. It swaps the workflow's GitHub OIDC token for a Claude token, so no <code>ANTHROPIC_API_KEY</code> secret is needed. The job needs <code>permissions: id-token: write</code>.</p>
+</li>
+</ul>
+<p><strong>The honest catch:</strong> this is for servers and CI pipelines. On your own laptop you still use a normal key,
+so steps 1–5 still matter. And if <code>ANTHROPIC_API_KEY</code> is still set where WIF runs, the SDK uses the key instead —
+remove the old key from CI secrets after switching.</p>
+<h2>Quick recap</h2>
+<p>☐ gitleaks installed · ☐ <code>gitleaks git .</code> clean · ☐ pre-commit hook on · ☐ leaked keys revoked + replaced
+☐ <code>.env</code> in .gitignore · ☐ servers/CI moved to WIF where possible</p>
+<p>— shashikant.ai · Free bhi, sach bhi.</p></div></body></html>
